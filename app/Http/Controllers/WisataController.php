@@ -140,13 +140,58 @@ class WisataController extends Controller
 
     public function nav(Request $request)
     {
-
+        $kategori = Kategori::all();
         $keyword = $request->search;
-        $data = Wisata::where('nama_wisata', 'like', '%' . $keyword . '%')
-            ->orWhere('deskripsi_wisata', 'like', '%' . $keyword . '%')
-            ->paginate(6);
+        // $data = Wisata::where('nama_wisata', 'like', '%' . $keyword . '%')
+        //     ->orWhere('deskripsi_wisata', 'like', '%' . $keyword . '%')
+        //     ->paginate(6);
+        $data = Wisata::filter()->paginate(6);
 
-        return view('wisataWeb', compact('data'));
+
+        return view('wisataWeb', compact('data', 'kategori'));
+    }
+
+    public function urlParamBuilder(Request $request)
+    {
+        $request_filter_kategori = $request->input('kategori');
+        $hargaMinimal = $request->input('harga_minimal') == '' ? 0 : $request->input('harga_minimal');
+        $hargaMaximal = $request->input('harga_maksimal') == '' ? 0 : $request->input('harga_maksimal');
+        $sortAZHarga = $request->input('radioButtonSort') == '' ? '' : $request->input('radioButtonSort');
+        $keyword = $request->search == '' ? '' : $request->search;
+
+        $UrlParam = '?';
+
+        if (isset($request_filter_kategori)) {
+            $UrlParam .= 'in=id_kategori,';
+            for ($i = 0; $i < count($request_filter_kategori); $i++) {
+                $i + 1 < count($request_filter_kategori) ? ($UrlParam .= $request_filter_kategori[$i] . ',') : ($UrlParam .= $request_filter_kategori[$i]);
+            }
+        }
+
+        if ($keyword != '') {
+            $UrlParam .= 'like[0]=nama_wisata,' . $keyword . '&like[1]=deskripsi_wisata,' . $keyword;
+        }
+
+        if ($hargaMaximal != 0 && $hargaMinimal != 0) {
+            $UrlParam .= '&between=harga_tiket,' . $hargaMinimal . ',' . $hargaMaximal;
+        } elseif ($hargaMaximal == 0 && $hargaMinimal == 0) {
+        } elseif ($hargaMinimal == 0) {
+            $UrlParam .= '&less_or_equal=harga_tiket,' . $hargaMaximal;
+        } elseif ($hargaMaximal == 0) {
+            $UrlParam .= '&greater_or_equal=harga_tiket,' . $hargaMinimal;
+        }
+
+        if ($sortAZHarga == "asc") {
+            $UrlParam .= '&sort=nama_wisata,asc';
+        } elseif ($sortAZHarga == "desc") {
+            $UrlParam .= '&sort=nama_wisata,desc';
+        } elseif ($sortAZHarga == "harga_desc") {
+            $UrlParam .= '&sort=harga_tiket,desc';
+        } elseif ($sortAZHarga == "harga_asc") {
+            $UrlParam .= '&sort=harga_tiket,asc';
+        }
+
+        return redirect('/wisata/tampil' . $UrlParam);
     }
 
     /**

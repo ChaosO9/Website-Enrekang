@@ -333,19 +333,33 @@
                     </p>
                 </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ul id="portfolio-flters">
+                <div class="row align-items-center justify-content-center mb-5">
+                    <div class="col-auto">
+                        {{-- <ul id="portfolio-flters">
                             {{-- <li data-filter="*" class="filter-active">All</li> --}}
-                            <li data-filter=".filter-wisata">Wisata</li>
+                        {{-- <li data-filter=".filter-wisata">Wisata</li>
                             <li data-filter=".filter-kuliner">Kuliner</li>
                             <li data-filter=".filter-penginapan">Kebudayaan</li>
-                            <li data-filter=".filter-event">Event</Ei>
-                        </ul>
+                            <li data-filter=".filter-event">Event</Ei> --}}
+                        {{-- <li><a href="{{ route('wisata.tampil') }}">Wisata</a></li>
+                            <li><a href="">Kuliner</a></li>
+                            <li><a href="">Kebudayaan</a></li>
+                            <li><a href="">Event</a></li>
+                        </ul> --}}
+                        <a href="{{ route('wisata.tampil') }}" class="btn btn-primary" role="button">Wisata</a>
+                    </div>
+                    <div class="col-auto">
+                        <a href="{{ route('kuliner.tampil') }}" class="btn btn-primary" role="button">Kuliner</a>
+                    </div>
+                    <div class="col-auto">
+                        <a href="#portfolio" class="btn btn-primary" role="button">Kebudayaan</a>
+                    </div>
+                    <div class="col-auto">
+                        <a href="{{ route('event') }}" class="btn btn-primary" role="button">Event</a>
                     </div>
                 </div>
 
-                <div class="row align-items-center align-content-center mb-5">
+                {{-- <div class="row align-items-center align-content-center mb-5">
                     <div class="col-auto">
                         <form class="d-inline-flex" action="{{ route('home.urlParamBuilder') }}" method="post"
                             enctype="multipart/form-data">
@@ -429,7 +443,7 @@
                                     class="fa-solid fa-filter items-center"></i> Filter</button>
                         </form>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="row portfolio-container">
                     @foreach ($wisata as $item)

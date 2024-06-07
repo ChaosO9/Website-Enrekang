@@ -20,7 +20,8 @@ class Wisata extends Model
         'in',
         'greater_or_equal',
         'less_or_equal',
-        'between'
+        'between',
+        'like'
     ];
 
     public function fasilitas()

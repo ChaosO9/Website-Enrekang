@@ -50,6 +50,7 @@ Route::controller(HomeController::class)->prefix('home')->group(function () {
 Route::controller(WisataController::class)->prefix('wisata')->group(function () {
     Route::get('', 'index')->name('wisata');
     Route::get('tampil', 'nav')->name('wisata.tampil');
+    Route::post('tampil', 'urlParamBuilder')->name('wisata.urlParamBuilder');
     Route::get('wisata2', 'index2')->name('wisata2');
     // Route::post('post','store')->name('foto_wisata');
     Route::get('tambah', 'tambah')->name('wisata.tambah');
