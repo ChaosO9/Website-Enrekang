@@ -69,7 +69,7 @@
                             <div class="col form-group">
                                 <label for="deskripsi_wisata">Deskripsi</label>
                                 <textarea type="text" class="form-control" id="deskripsi_wisata" name="deskripsi_wisata"
-                                    placeholder="Masukkan deskripsi" required value="{{ isset($wisata) ? $wisata->deskripsi_wisata : '' }}"></textarea>
+                                    placeholder="Masukkan deskripsi" required>{{ isset($wisata) ? old('deskripsi_wisata', $wisata->deskripsi_wisata) : '' }}</textarea>
                             </div>
                         </div>
                         <div class="row">

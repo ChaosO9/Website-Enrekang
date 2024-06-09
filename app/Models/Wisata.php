@@ -28,4 +28,9 @@ class Wisata extends Model
     {
         return $this->belongsToMany(Fasilitas::class, 'fasilitas_lokasi', 'wisata', 'fasilitas');
     }
+
+    public function gambar()
+    {
+        return $this->hasMany(GambarLokasi::class, 'wisata');
+    }
 }

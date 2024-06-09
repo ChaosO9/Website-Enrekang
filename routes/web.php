@@ -59,6 +59,8 @@ Route::controller(WisataController::class)->prefix('wisata')->group(function () 
     Route::post('edit/{id}', 'update')->name('wisata.tambah.update');
     Route::get('hapus/{id}', 'hapus')->name('wisata.hapus');
     Route::get('show/{id}', 'show')->name('wisata.show');
+    Route::get('/gambar/form/{id}', 'gambar')->name('wisata.gambar');
+    Route::post('/gambar/form/{id}/{from?}', 'tambahGambar')->name('wisata.tambah.gambar');
 });
 
 Route::controller(KulinerController::class)->prefix('kuliner')->group(function () {

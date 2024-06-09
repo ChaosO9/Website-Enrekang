@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Fasilitas;
 use App\Models\FasilitasLokasi as ModelsFasilitasLokasi;
+use App\Models\GambarLokasi;
 use App\Models\Kategori;
 use App\Models\Wisata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Laravel\Ui\Presets\React;
 
 class WisataController extends Controller
 {
@@ -55,30 +57,41 @@ class WisataController extends Controller
 
     public function simpan(Request $request)
     {
-        $imageName = $request->foto->getClientOriginalName();
-        $request->foto->move(public_path('/images'), $imageName);
+        if ($request->hasFile('foto')) {
+            $imageName = $request->foto->getClientOriginalName();
+            $request->foto->move(public_path('/images'), $imageName);
+            $dataGambar = ['foto_wisata' => $imageName];
+        } else {
+            $dataGambar = ['foto_wisata' => 'no-image.png'];
+        }
 
         $data = [
             'nama_wisata' => $request->nama_wisata,
-            'foto_wisata' => $imageName,
             'alamat_wisata' => $request->alamat_wisata,
             'harga_tiket' => $request->harga_tiket,
             'id_kategori' => $request->kategori,
             'deskripsi_wisata' => $request->deskripsi_wisata,
             'maps' => $request->maps,
             'tanggal_upload' => $request->tanggal_upload,
-
         ];
+
+        $data = array_merge($data, $dataGambar);
+
+        // dd($data);
+        // exit();
+
 
         $wisata = Wisata::create($data);
 
         $fasilitas_wisata = $request->input('fasilitas');
 
-        for ($i = 0; $i < count($fasilitas_wisata); $i++) {
-            ModelsFasilitasLokasi::create([
-                'wisata' => $wisata->id,
-                'fasilitas' => $fasilitas_wisata[$i],
-            ]);
+        if (isset($fasilitas_wisata)) {
+            for ($i = 0; $i < count($fasilitas_wisata); $i++) {
+                ModelsFasilitasLokasi::create([
+                    'wisata' => $wisata->id,
+                    'fasilitas' => $fasilitas_wisata[$i],
+                ]);
+            }
         }
 
         return redirect()->route('wisata2');
@@ -100,12 +113,10 @@ class WisataController extends Controller
 
     public function update($id, Request $request)
     {
-        $imageName = $request->foto->getClientOriginalName();
-        $request->foto->move(public_path('/images'), $imageName);
+        $wisata = Wisata::find($id);
 
         $data = [
             'nama_wisata' => $request->nama_wisata,
-            'foto_wisata' => $imageName,
             'alamat_wisata' => $request->alamat_wisata,
             'harga_tiket' => $request->harga_tiket,
             'id_kategori' => $request->kategori,
@@ -115,17 +126,31 @@ class WisataController extends Controller
             'tanggal_upload' => $request->tanggal_upload,
         ];
 
-        Wisata::find($id)->update($data);
+        if ($request->hasFile('foto')) {
+            $imageName = $request->foto->getClientOriginalName();
+            $request->foto->move(public_path('/images'), $imageName);
+            $data['foto_wisata'] = $imageName;
+        } else {
+            isset($wisata->foto_wisata) ? $data['foto_wisata'] = $wisata->foto_wisata : $data['foto_wisata'] = 'no-image.png';
+        }
+
+        // if (isset($data['foto_wisata'])) {
+        //     $data['foto_wisata'] = $imageName;
+        // }
+
+        $wisata->update($data);
 
         ModelsFasilitasLokasi::where('wisata', $id)->delete();
 
         $fasilitas_wisata = $request->input('fasilitas');
 
-        for ($i = 0; $i < count($fasilitas_wisata); $i++) {
-            ModelsFasilitasLokasi::create([
-                'wisata' => $id,
-                'fasilitas' => $fasilitas_wisata[$i],
-            ]);
+        if (isset($fasilitas_wisata)) {
+            for ($i = 0; $i < count($fasilitas_wisata); $i++) {
+                ModelsFasilitasLokasi::create([
+                    'wisata' => $wisata->id,
+                    'fasilitas' => $fasilitas_wisata[$i],
+                ]);
+            }
         }
 
         return redirect()->route('wisata2');
@@ -194,6 +219,33 @@ class WisataController extends Controller
         return redirect('/wisata/tampil' . $UrlParam);
     }
 
+    public function gambar($id)
+    {
+        $wisata = Wisata::find($id);
+        return view('wisata.gambar', compact('wisata'));
+    }
+
+    public function tambahGambar($id, Request $request, $from = null)
+    {
+        $originalName = $request->foto->getClientOriginalName();
+        $uniqueId = time();
+        $fileName = $uniqueId . '_' . $originalName;
+        $request->foto->move(public_path('/images'), $fileName);
+        $deskripsi = $request->input('deskripsi_gambar');
+
+        GambarLokasi::create([
+            'wisata' => $id,
+            'gambar' => $fileName,
+            'deskripsi' => $deskripsi
+        ]);
+
+        if ($from == 'detail_wisata') {
+            return redirect()->route('wisata.show', $id);
+        } else if ($from == null) {
+            return redirect()->route('wisata2');
+        }
+    }
+
     /**
      * show
      *
@@ -202,8 +254,10 @@ class WisataController extends Controller
      */
     public function show($id)
     {
+        $wisata_lain2 = Wisata::all();
         $wisata = Wisata::find($id);
         $fasilitas = $wisata->fasilitas()->pluck('nama')->all();
-        return view('details_wisata', compact('wisata', 'fasilitas'));
+        $galeri = $wisata->gambar;
+        return view('details_wisata', compact('wisata', 'fasilitas', 'wisata_lain2', 'galeri'));
     }
 }
