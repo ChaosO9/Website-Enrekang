@@ -9,6 +9,7 @@ use App\Models\Kategori;
 use App\Models\Wisata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Ui\Presets\React;
 
 class WisataController extends Controller
@@ -39,10 +40,6 @@ class WisataController extends Controller
             //     ->get();
             return $item;
         });
-
-        // dd($wisata);
-        // dd($wisataWithFasilitas);
-        // exit();
 
         return view('wisata.index', ['data' => $wisata]);
     }
@@ -246,6 +243,58 @@ class WisataController extends Controller
         }
     }
 
+    public function wisataGaleri(Request $request)
+    {
+        if (null !== $request->input('wisataRadioButton')) {
+            // $sortAZHarga = $request->input('radioButtonSort') == '' ? '' : $request->input('radioButtonSort');
+            $wisata = Wisata::all();
+            $wisataId = $wisata->find($request->input('wisataRadioButton'));
+            $galeri = $wisataId->gambar;
+            $cari = true;
+            return view('wisata.galeri', compact('wisata', 'wisataId', 'galeri', 'cari'));
+        } else {
+            $wisata = Wisata::all();
+            return view('wisata.galeri', compact('wisata'));
+        }
+    }
+
+    public function editGambar($id, Request $request)
+    {
+        $gambar = GambarLokasi::find($id);
+        $wisata = Wisata::find($gambar->wisata);
+        return view('wisata.edit-gambar', compact('gambar', 'wisata'));
+    }
+
+    public function editGambarSimpan($id, Request $request)
+    {
+        $gambar = GambarLokasi::find($id);
+        if ($request->hasFile('foto')) {
+            $originalName = $request->foto->getClientOriginalName();
+            $uniqueId = time();
+            $fileName = $uniqueId . '_' . $originalName;
+            $request->foto->move(public_path('/images'), $fileName);
+            Storage::delete("/images/" . $gambar->gambar);
+            $data['gambar'] = $fileName;
+        } else {
+            $data['gambar'] = $gambar->gambar;
+        }
+
+        $data['deskripsi'] = $request->input('deskripsi_gambar');
+
+        $gambar->update($data);
+
+        return redirect()->route('wisata.galeri', ['wisataRadioButton' => $gambar->wisata]);
+    }
+
+    public function hapusGambar($id)
+    {
+        $gambar = GambarLokasi::find($id);
+        $wisataId = $gambar->wisata;
+        Storage::delete("/images/" . $gambar->gambar);
+        $gambar->delete();
+        return redirect()->route('wisata.galeri', ['wisataRadioButton' => $wisataId]);
+    }
+
     /**
      * show
      *
@@ -254,10 +303,20 @@ class WisataController extends Controller
      */
     public function show($id)
     {
+        $ikon_fasilitas = [
+            'Toilet' => '<i class="fa-solid fa-toilet"></i>',
+            'Kantin' => '<i class="fa-solid fa-pot-food"></i>',
+            'Area Parkir' => '<i class="fa-solid fa-square-parking"></i>',
+            'Pusat Informasi' => '<i class="fa-sharp fa-solid fa-circle-info"></i>',
+            'Tempat Istirahat' => '<i class="fa-solid fa-bed"></i>',
+            'Tempat Ibadah' => '<i class="fa-solid fa-mosque"></i>',
+            'Wifi' => '<i class="fa-solid fa-wifi"></i>',
+        ];
         $wisata_lain2 = Wisata::all();
         $wisata = Wisata::find($id);
         $fasilitas = $wisata->fasilitas()->pluck('nama')->all();
         $galeri = $wisata->gambar;
-        return view('details_wisata', compact('wisata', 'fasilitas', 'wisata_lain2', 'galeri'));
+
+        return view('details_wisata', compact('wisata', 'fasilitas', 'wisata_lain2', 'galeri', 'ikon_fasilitas'));
     }
 }

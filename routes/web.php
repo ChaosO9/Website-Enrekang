@@ -60,7 +60,11 @@ Route::controller(WisataController::class)->prefix('wisata')->group(function () 
     Route::get('hapus/{id}', 'hapus')->name('wisata.hapus');
     Route::get('show/{id}', 'show')->name('wisata.show');
     Route::get('/gambar/form/{id}', 'gambar')->name('wisata.gambar');
+    Route::get('/gambar/form/hapus/{id}', 'hapusGambar')->name('wisata.hapus.gambar');
+    Route::get('/gambar/form/edit/{id}', 'editGambar')->name('wisata.edit.gambar');
+    Route::post('/gambar/form/edit/{id}', 'editGambarSimpan')->name('wisata.edit.gambar.simpan');
     Route::post('/gambar/form/{id}/{from?}', 'tambahGambar')->name('wisata.tambah.gambar');
+    Route::get('/galeri', 'wisataGaleri')->name('wisata.galeri');
 });
 
 Route::controller(KulinerController::class)->prefix('kuliner')->group(function () {

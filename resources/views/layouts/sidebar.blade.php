@@ -60,6 +60,12 @@
             <span>Fasilitas</span></a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('wisata.galeri') }}">
+            <i class="fas fa-globe"></i>
+            <span>Galeri</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

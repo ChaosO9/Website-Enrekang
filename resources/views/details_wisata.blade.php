@@ -124,13 +124,13 @@
                                 <li><strong>Harga Tiket</strong>:Rp. {{ $wisata->harga_tiket }}</li>
                                 <li><strong>Lokasi</strong>: {{ $wisata->alamat_wisata }}</a></li>
                                 <li><strong>Deskripsi</strong>: <br> {{ $wisata->deskripsi_wisata }}</a></li>
-                                <li><strong>Fasilitas</strong>: <br>
+                                {{-- <li><strong>Fasilitas</strong>: <br>
                                     <ol>
                                         @foreach ($fasilitas as $fasilitas)
                                             <li>{{ $fasilitas }}</li>
                                         @endforeach
                                     </ol></a>
-                                </li>
+                                </li> --}}
                             </ul>
                             {{-- @endforeach --}}
                         </div>
@@ -143,6 +143,29 @@
             </div>
             </div>
         </section><!-- End Portfolio Details Section -->
+
+        <section id="portfolio" class="portfolio mb-4">
+            <div class="container">
+                <div class="section-title ">
+                    <h2>Fasilitas {{ $wisata->nama_wisata }}</h2>
+                    {{-- <img src="{{ asset('kuliner.jpg') }}" alt="Example Image"> --}}
+                    {{-- <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit</p> --}}
+                </div>
+                <div class="row portfolio-container">
+                    @foreach ($fasilitas as $fasilitas)
+                        @if (array_key_exists($fasilitas, $ikon_fasilitas))
+                            <div class="col-lg-3">
+                                <p>{!! $ikon_fasilitas[$fasilitas] !!} {{ $fasilitas }}</p>
+                            </div>
+                        @else
+                            <div class="col-lg-3">
+                                <p><i class="fa-solid fa-square-ellipsis"></i> {{ $fasilitas }}</p>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </section>
 
         <section id="portfolio" class="portfolio">
             <div class="container">
@@ -198,7 +221,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Tambahkan Gambar</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form
