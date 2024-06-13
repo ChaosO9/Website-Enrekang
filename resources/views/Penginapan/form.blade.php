@@ -31,7 +31,7 @@
                             <div class="col form-group">
                                 <label for="harga_tiket">Harga Penginapan</label>
                                 <input type="number" class="form-control" id="harga_tiket" name="harga_penginapan"
-                                    value="{{ isset($penginapan) ? $penginapan->harga_tiket : '' }}">
+                                    value="{{ isset($penginapan) ? $penginapan->harga_penginapan : '' }}">
                             </div>
                             <div class="col form-group">
                                 <label for="maps">Maps</label>
@@ -45,8 +45,26 @@
                         <div class="mt-3 form-group">
                             <div class="form-group">
                                 <label for="deskripsi_penginapan">Deskripsi penginapan</label>
-                                <textarea type="text" class="form-control" id="deskripsi_penginapan" name="deskripsi_penginapan"
-                                    value="{{ isset($penginapan) ? $penginapan->deskripsi_penginapan : '' }}"></textarea>
+                                <textarea type="text" class="form-control" id="deskripsi_penginapan" name="deskripsi_penginapan" value="">{{ isset($penginapan) ? $penginapan->deskripsi_penginapan : '' }}</textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col form-group">
+                                <label for="formFile" class="form-label">Fasilitas</label>
+                                {{-- <input class="form-control" type="file" id="formFile" name="foto"
+                                    value="{{ isset($wisata) ? $wisata->foto_wisata : '' }}"> --}}
+                                @foreach ($fasilitas as $fasil)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value={{ $fasil->id }}
+                                            name="fasilitas[]" id={{ $fasil->id }}
+                                            {{ isset($penginapan) ? (in_array($fasil->id, $fasilitas_penginapan) ? 'checked' : '') : '' }}>
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            {{ $fasil->nama }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="col form-group">
                             </div>
                         </div>
                         <div class="card-footer">

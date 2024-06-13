@@ -16,7 +16,6 @@ class Wisata extends Model
 
     protected $filters = [
         'sort',
-        'between',
         'in',
         'greater_or_equal',
         'less_or_equal',

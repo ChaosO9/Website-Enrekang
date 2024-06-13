@@ -193,7 +193,7 @@
                                     <div class="portfolio-info">
                                         <h4>{{ $item->deskripsi }}</h4>
                                         {{-- <p>{{ $item->deskripsi_wisata }}</p>
-                                    <p>Rp. {{ $item->harga_tiket }}</p> --}}
+                                        <p>Rp. {{ $item->harga_tiket }}</p> --}}
                                     </div>
                                 </div>
                             </div>
@@ -207,9 +207,14 @@
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <i class="fa-solid fa-image"></i><i class="fa-solid fa-plus"></i>Tambah Gambar
                 </button>
-                <div class="col-lg-6 mt-5">
+                {{-- <div class="col-lg-6 mt-5">
                     <iframe class="mb-4 mb-lg-0"
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.104325221181!2d119.77340251025275!3d-3.5634506423397103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d9440637ac94061%3A0x71324d8dabb03f30!2sDinas%20Pemuda%2C%20Olah%20raga%20dan%20Pariwisata%20Kabupaten%20Enrekang!5e0!3m2!1sid!2sid!4v1713149644702!5m2!1sid!2sid"
+                        frameborder="0" style="border:0; width: 140%; height: 400px; " allowfullscreen></iframe>
+                </div> --}}
+                <div class="col-lg-6 mt-5">
+                    <iframe class="mb-4 mb-lg-0"
+                        src="{{ 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCtQdCKUA91HOI2QRMhKMNrZAxOQcOXWXM&q=' . $wisata->maps }}"
                         frameborder="0" style="border:0; width: 140%; height: 400px; " allowfullscreen></iframe>
                 </div>
             </div>

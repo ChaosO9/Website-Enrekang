@@ -23,7 +23,8 @@
                             <th>Nama </th>
                             <th>Tempat </th>
                             <th>Foto </th>
-                            <th>Waktu </th>
+                            <th>Tanggal Mulai </th>
+                            <th>Tanggal Selesai </th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -38,10 +39,13 @@
                                     <img src="{{ asset('images/' . $row->foto_event) }}" alt=""
                                         style="width: 100px;">
                                 </td>
-                                <td>{{ $row->waktu_event }}</td>
+                                <td>{{ date('d-m-Y', strtotime($row->tanggal_pelaksanaan)) }}</td>
+                                <td>{{ date('d-m-Y', strtotime($row->tanggal_selesai)) }}</td>
                                 <td>
                                     <a href="{{ route('event.edit', $row->id) }}" class="btn btn-warning"
                                         style="color: rgb(255, 255, 255)"> <i class="fas fa-edit"></i></a>
+                                    <a href="{{ route('event.gambar', $row->id) }}" class="btn btn-secondary"> <i
+                                            class="fa-regular fa-image"></i></i></a>
                                     <a href="{{ route('event.hapus', $row->id) }}" class="btn btn-danger"> <i
                                             class="fas fa-trash"></i></a>
                                 </td>

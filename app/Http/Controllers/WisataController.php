@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use App\Models\Fasilitas;
 use App\Models\FasilitasLokasi as ModelsFasilitasLokasi;
 use App\Models\GambarLokasi;
 use App\Models\Kategori;
+use App\Models\Kuliner;
+use App\Models\Penginapan;
 use App\Models\Wisata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -241,58 +244,6 @@ class WisataController extends Controller
         } else if ($from == null) {
             return redirect()->route('wisata2');
         }
-    }
-
-    public function wisataGaleri(Request $request)
-    {
-        if (null !== $request->input('wisataRadioButton')) {
-            // $sortAZHarga = $request->input('radioButtonSort') == '' ? '' : $request->input('radioButtonSort');
-            $wisata = Wisata::all();
-            $wisataId = $wisata->find($request->input('wisataRadioButton'));
-            $galeri = $wisataId->gambar;
-            $cari = true;
-            return view('wisata.galeri', compact('wisata', 'wisataId', 'galeri', 'cari'));
-        } else {
-            $wisata = Wisata::all();
-            return view('wisata.galeri', compact('wisata'));
-        }
-    }
-
-    public function editGambar($id, Request $request)
-    {
-        $gambar = GambarLokasi::find($id);
-        $wisata = Wisata::find($gambar->wisata);
-        return view('wisata.edit-gambar', compact('gambar', 'wisata'));
-    }
-
-    public function editGambarSimpan($id, Request $request)
-    {
-        $gambar = GambarLokasi::find($id);
-        if ($request->hasFile('foto')) {
-            $originalName = $request->foto->getClientOriginalName();
-            $uniqueId = time();
-            $fileName = $uniqueId . '_' . $originalName;
-            $request->foto->move(public_path('/images'), $fileName);
-            Storage::delete("/images/" . $gambar->gambar);
-            $data['gambar'] = $fileName;
-        } else {
-            $data['gambar'] = $gambar->gambar;
-        }
-
-        $data['deskripsi'] = $request->input('deskripsi_gambar');
-
-        $gambar->update($data);
-
-        return redirect()->route('wisata.galeri', ['wisataRadioButton' => $gambar->wisata]);
-    }
-
-    public function hapusGambar($id)
-    {
-        $gambar = GambarLokasi::find($id);
-        $wisataId = $gambar->wisata;
-        Storage::delete("/images/" . $gambar->gambar);
-        $gambar->delete();
-        return redirect()->route('wisata.galeri', ['wisataRadioButton' => $wisataId]);
     }
 
     /**

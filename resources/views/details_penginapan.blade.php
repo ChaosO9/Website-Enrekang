@@ -24,6 +24,7 @@
     <link href="{{ url('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
     <link href="{{ url('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ url('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
 
     <!-- Template Main CSS File -->
     <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
@@ -154,17 +155,141 @@
                             </div> --}}
                     </div>
                 </div>
-
-
-                <div class="col-lg-6 mt-5">
-                    <iframe class="mb-4 mb-lg-0"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.104325221181!2d119.77340251025275!3d-3.5634506423397103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d9440637ac94061%3A0x71324d8dabb03f30!2sDinas%20Pemuda%2C%20Olah%20raga%20dan%20Pariwisata%20Kabupaten%20Enrekang!5e0!3m2!1sid!2sid!4v1713149644702!5m2!1sid!2sid"
-                        frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
-                </div>
             </div>
-
             </div>
         </section><!-- End Portfolio Details Section -->
+
+        <section id="portfolio" class="portfolio mb-4">
+            <div class="container">
+                <div class="section-title ">
+                    <h2>Fasilitas {{ $penginapan->nama_penginapan }}</h2>
+                    {{-- <img src="{{ asset('kuliner.jpg') }}" alt="Example Image"> --}}
+                    {{-- <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit</p> --}}
+                </div>
+                <div class="row portfolio-container">
+                    @foreach ($fasilitas as $fasilitas)
+                        @if (array_key_exists($fasilitas, $ikon_fasilitas))
+                            <div class="col-lg-3">
+                                <p>{!! $ikon_fasilitas[$fasilitas] !!} {{ $fasilitas }}</p>
+                            </div>
+                        @else
+                            <div class="col-lg-3">
+                                <p><i class="fa-solid fa-square-ellipsis"></i> {{ $fasilitas }}</p>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="portfolio">
+            <div class="container">
+                <div class="section-title ">
+                    <h2>Galeri Penginapan {{ $penginapan->nama_penginapan }}</h2>
+                    {{-- <img src="{{ asset('kuliner.jpg') }}" alt="Example Image"> --}}
+                    <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit</p>
+                </div>
+
+                <div class="row portfolio-container">
+                    @if (isset($galeri) && !$galeri->isEmpty())
+                        @foreach ($galeri as $item)
+                            <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
+                                <div class="portfolio-wrap">
+                                    <figure>
+                                        <img src="{{ asset('images/' . $item->gambar) }}" class="img-fluid"
+                                            alt="">
+                                        <a href="{{ asset('images/' . $item->gambar) }}"
+                                            data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
+                                            title="{{ $item->nama_wisata }}"><i class="bx bx-plus"></i></a>
+                                        {{-- <a href="/wisata/show/{{ $item->id }}" class="link-details"
+                                        title="More Details"><i class="bx bx-link"></i></a> --}}
+                                    </figure>
+
+                                    <div class="portfolio-info">
+                                        <h4>{{ $item->deskripsi }}</h4>
+                                        {{-- <p>{{ $item->deskripsi_wisata }}</p>
+                                    <p>Rp. {{ $item->harga_tiket }}</p> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="col-lg-6 col-md-6 mx-auto align-items-center justify-content-center">
+                            <h4>Tidak Ada Gambar Untuk Ditampilkan</h4>
+                        </div>
+                    @endif
+                </div>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                    <i class="fa-solid fa-image"></i><i class="fa-solid fa-plus"></i>Tambah Gambar
+                </button>
+                <div class="col-lg-6 mt-5">
+                    {{-- <iframe class="mb-4 mb-lg-0"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.104325221181!2d119.77340251025275!3d-3.5634506423397103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d9440637ac94061%3A0x71324d8dabb03f30!2sDinas%20Pemuda%2C%20Olah%20raga%20dan%20Pariwisata%20Kabupaten%20Enrekang!5e0!3m2!1sid!2sid!4v1713149644702!5m2!1sid!2sid"
+                        frameborder="0" style="border:0; width: 140%; height: 400px; " allowfullscreen></iframe> --}}
+                    <div class="col-lg-6 mt-5">
+                        <iframe class="mb-4 mb-lg-0"
+                            src="{{ 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCtQdCKUA91HOI2QRMhKMNrZAxOQcOXWXM&q=' . $penginapan->maps }}"
+                            frameborder="0" style="border:0; width: 140%; height: 400px; " allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambahkan Gambar</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form
+                            action="{{ route('penginapan.tambah.gambar', ['id' => $penginapan->id, 'from' => 'detail_penginapan']) }}"
+                            method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">
+                                                Tambah Gambar untuk Galeri Kuliner "{{ $penginapan->nama_penginapan }}"
+                                            </h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="mb-3">
+                                                    <label for="formFile" class="form-label">File Gambar</label>
+                                                    <input class="form-control" type="file" id="imageFile"
+                                                        name="foto">
+                                                </div>
+                                                <div class="col form-group">
+                                                    <label for="nama_penginapan">Deskripsi</label>
+                                                    <input type="text" class="form-control" id="deskripsi_gambar"
+                                                        name="deskripsi_gambar">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Tutup</button>
+                                            <button type="submit" class="btn btn-primary">Unggah</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    {{-- <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-primary">Unggah</button>
+                    </div> --}}
+                </div>
+            </div>
+        </div>
 
     </main><!-- End #main -->
 

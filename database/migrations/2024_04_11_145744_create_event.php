@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nama_event')->nullable();
             $table->string('tempat_event')->nullable();
+            $table->date('tanggal_pelaksanaan')->nullable();
+            $table->date('tanggal_selesai')->nullable();
             $table->date('waktu_event')->nullable();
             $table->text('deskripsi_event')->nullable();
             $table->string('foto_event')->nullable();

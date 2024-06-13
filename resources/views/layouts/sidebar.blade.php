@@ -61,7 +61,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('wisata.galeri') }}">
+        <a class="nav-link" href="{{ route('galeri') }}">
             <i class="fas fa-globe"></i>
             <span>Galeri</span></a>
     </li>

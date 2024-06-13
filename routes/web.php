@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FasilitasController;
+use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\SaranController;
@@ -61,8 +62,6 @@ Route::controller(WisataController::class)->prefix('wisata')->group(function () 
     Route::get('show/{id}', 'show')->name('wisata.show');
     Route::get('/gambar/form/{id}', 'gambar')->name('wisata.gambar');
     Route::get('/gambar/form/hapus/{id}', 'hapusGambar')->name('wisata.hapus.gambar');
-    Route::get('/gambar/form/edit/{id}', 'editGambar')->name('wisata.edit.gambar');
-    Route::post('/gambar/form/edit/{id}', 'editGambarSimpan')->name('wisata.edit.gambar.simpan');
     Route::post('/gambar/form/{id}/{from?}', 'tambahGambar')->name('wisata.tambah.gambar');
     Route::get('/galeri', 'wisataGaleri')->name('wisata.galeri');
 });
@@ -70,6 +69,7 @@ Route::controller(WisataController::class)->prefix('wisata')->group(function () 
 Route::controller(KulinerController::class)->prefix('kuliner')->group(function () {
     Route::get('', 'index')->name('kuliner');
     Route::get('tampil', 'nav')->name('kuliner.tampil');
+    Route::post('tampil', 'urlParamBuilder')->name('kuliner.urlParamBuilder');
     Route::get('2', 'index2')->name('kuliner2');
     Route::get('form', 'tambah')->name('kuliner.form');
     Route::post('form', 'simpan')->name('kuliner.form.simpan');
@@ -77,10 +77,13 @@ Route::controller(KulinerController::class)->prefix('kuliner')->group(function (
     Route::post('edit/{id}', 'update')->name('kuliner.form.update');
     Route::get('hapus/{id}', 'hapus')->name('kuliner.hapus');
     Route::get('show/{id}', 'show')->name('kuliner.show');
+    Route::get('/gambar/form/{id}', 'gambar')->name('kuliner.gambar');
+    Route::post('/gambar/form/{id}/{from?}', 'tambahGambar')->name('kuliner.tambah.gambar');
 });
 
 Route::controller(PenginapanController::class)->prefix('penginapan')->group(function () {
     Route::get('', 'index')->name('penginapan');
+    Route::post('', 'urlParamBuilder')->name('penginapan.urlParamBuilder');
     Route::get('', 'nav')->name('tampil');
     Route::get('filter', 'filter')->name('filter');
     Route::get('2', 'index2')->name('penginapan2');
@@ -91,11 +94,14 @@ Route::controller(PenginapanController::class)->prefix('penginapan')->group(func
     Route::post('edit/{id}', 'update')->name('penginapan.form.update');
     Route::get('hapus/{id}', 'hapus')->name('penginapan.hapus');
     Route::get('show/{id}', 'show')->name('penginapan.show');
+    Route::get('/gambar/form/{id}', 'gambar')->name('penginapan.gambar');
+    Route::post('/gambar/form/{id}/{from?}', 'tambahGambar')->name('penginapan.tambah.gambar');
 });
 
 Route::controller(EventController::class)->prefix('event')->group(function () {
     Route::get('', 'index')->name('event');
     Route::get('tampil', 'nav')->name('event');
+    Route::post('tampil', 'urlParamBuilder')->name('event.urlParamBuilder');
     Route::get('2', 'index2')->name('event2');
     Route::get('form', 'tambah')->name('event.form');
     Route::post('form', 'simpan')->name('event.form.simpan');
@@ -103,6 +109,8 @@ Route::controller(EventController::class)->prefix('event')->group(function () {
     Route::post('edit/{id}', 'update')->name('event.form.update');
     Route::get('hapus/{id}', 'hapus')->name('event.hapus');
     Route::get('show/{id}', 'show')->name('event.show');
+    Route::get('/gambar/form/{id}', 'gambar')->name('event.gambar');
+    Route::post('/gambar/form/{id}/{from?}', 'tambahGambar')->name('event.tambah.gambar');
 });
 
 Route::controller(SaranController::class)->prefix('saran')->group(function () {
@@ -133,3 +141,8 @@ Route::get('/wisata', [WisataController::class, 'search'])->name('wisata.search'
 
 
 Route::post('/rating', [RatingController::class, 'store']);
+
+Route::get('/galeri', [GaleriController::class, 'galeri'])->name('galeri');
+Route::get('/gambar/form/edit/{id}', [GaleriController::class, 'editGambar'])->name('edit.gambar');
+Route::post('/gambar/form/edit/{id}', [GaleriController::class, 'editGambarSimpan'])->name('edit.gambar.simpan');
+Route::get('/gambar/form/hapus/{id}', [GaleriController::class, 'hapusGambar'])->name('hapus.gambar');

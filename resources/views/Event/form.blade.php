@@ -28,22 +28,28 @@
                         </div>
                         <div class="row">
                             <div class="col form-group">
-                                <label for="waktu_event">Waktu</label>
-                                <input type="date" class="form-control" id="waktu_event" name="waktu_event"
-                                    value="{{ isset($event) ? $event->waktu_event : '' }}">
+                                <label for="tanggal_pelaksanaan">Tanggal Mulai</label>
+                                <input type="date" class="form-control" id="tanggal_pelaksanaan"
+                                    name="tanggal_pelaksanaan"
+                                    value="{{ isset($event) ? $event->tanggal_pelaksanaan : '' }}">
                             </div>
+                            <div class="col form-group">
+                                <label for="tanggal_selesai">Tanggal Selesai</label>
+                                <input type="date" class="form-control" id="tanggal_selesai" name="tanggal_selesai"
+                                    value="{{ isset($event) ? $event->tanggal_selesai : '' }}">
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col form-group">
                                 <label for="foto_event">Foto</label>
                                 <input type="file" class="form-control" id="foto" name="foto"
                                     value="{{ isset($event) ? $event->foto_event : '' }}">
                             </div>
+                            <div class="col form-group">
+                                <label for="deskripsi_event">Deskripsi</label>
+                                <textarea type="text" class="form-control" id="deskripsi_event" name="deskripsi_event" value="">{{ isset($event) ? $event->deskripsi_event : '' }}</textarea>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="deskripsi_event">Deskripsi</label>
-                            <textarea type="text" class="form-control" id="deskripsi_event" name="deskripsi_event"
-                                value="{{ isset($event) ? $event->deskripsi_event : '' }}"></textarea>
-                        </div>
-
                     </div>
                     <div class="card-footer">
                         <a href="{{ url()->previous() }}" class="btn btn-danger">Kembali</a>

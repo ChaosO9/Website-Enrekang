@@ -3,15 +3,15 @@
 {{-- @section('title', 'Form Penginapan') --}}
 
 @section('contents')
-    <form action="{{ route('edit.gambar.simpan', ['id' => $gambar->id, 'jenisDestinasi' => 'Wisata']) }}" method="post"
-        enctype="multipart/form-data">
+    <form action="{{ route('wisata.edit.gambar.simpan', ['id' => $gambar->id, 'jenisDestinasi' => 'Penginapan']) }}"
+        method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-12">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">
-                            Edit Gambar untuk Galeri Wisata "{{ $wisata->nama_wisata }}"</h6>
+                            Edit Gambar untuk Galeri Penginapan "{{ $penginapan->nama_penginapan }}"</h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
