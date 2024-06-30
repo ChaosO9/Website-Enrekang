@@ -7,93 +7,153 @@
     <form action="{{ route('galeri') }}" class="row pb-3">
         <div class="col-auto">
             <div class="btn-group pe-2">
-                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-                    aria-expanded="false">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                    data-bs-auto-close="outside">
                     <i class="fa-solid fa-location-dot"></i> Lokasi/Kegiatan
                 </button>
                 <ul class="dropdown-menu">
-                    <li>
+                    {{-- <li>
                         <h6 class="dropdown-header">Wisata</h6>
+                    </li> --}}
+                    <li>
+                        <div class="dropdown-item" href="#">
+                            <div class="btn-group dropend full-width-btn">
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false" data-bs-auto-close="outside">
+                                    Wisata
+                                </button>
+                                <ul class="dropdown-menu" class="dropdown-menu">
+                                    <!-- Dropdown menu links -->
+                                    @if (@isset($wisata))
+                                        @foreach ($wisata as $wisataa)
+                                            <li>
+                                                <div class="dropdown-item" href="#">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="wisataRadioButton"
+                                                            id="wisataRadioButton{{ $wisataa->id }}"
+                                                            value="{{ $wisataa->id }}">
+                                                        <label class="form-check-label"
+                                                            for="wisataRadioButton{{ $wisataa->id }}">
+                                                            {{ $wisataa->nama_wisata }}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            </div>
+                        </div>
                     </li>
-                    @if (@isset($wisata))
-                        @foreach ($wisata as $wisataa)
-                            <li>
-                                <div class="dropdown-item" href="#">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="wisataRadioButton"
-                                            id="wisataRadioButton{{ $wisataa->id }}" value="{{ $wisataa->id }}">
-                                        <label class="form-check-label" for="wisataRadioButton{{ $wisataa->id }}">
-                                            {{ $wisataa->nama_wisata }}
-                                        </label>
-                                    </div>
-                                </div>
-                            </li>
-                        @endforeach
-                    @endif
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li>
+                    {{-- <li>
                         <h6 class="dropdown-header">Kuliner</h6>
+                    </li> --}}
+                    <li>
+                        <div class="dropdown-item" href="#">
+                            <div class="btn-group dropend">
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false" data-bs-auto-close="outside">
+                                    Kuliner
+                                </button>
+                                <ul class="dropdown-menu">
+                                    @if (isset($kuliner))
+                                        @foreach ($kuliner as $kulinera)
+                                            <li>
+                                                <div class="dropdown-item" href="#">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="kulinerRadioButton"
+                                                            id="kulinerRadioButton{{ $kulinera->id }}"
+                                                            value="{{ $kulinera->id }}">
+                                                        <label class="form-check-label"
+                                                            for="kulinerRadioButton{{ $kulinera->id }}">
+                                                            {{ $kulinera->nama_kuliner }}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            </div>
+                        </div>
                     </li>
-                    @if (isset($kuliner))
-                        @foreach ($kuliner as $kulinera)
-                            <li>
-                                <div class="dropdown-item" href="#">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="kulinerRadioButton"
-                                            id="kulinerRadioButton{{ $kulinera->id }}" value="{{ $kulinera->id }}">
-                                        <label class="form-check-label" for="kulinerRadioButton{{ $kulinera->id }}">
-                                            {{ $kulinera->nama_kuliner }}
-                                        </label>
-                                    </div>
-                                </div>
-                            </li>
-                        @endforeach
-                    @endif
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li>
+                    {{-- <li>
                         <h6 class="dropdown-header">Penginapan</h6>
+                    </li> --}}
+                    <li>
+                        <div class="dropdown-item" href="#">
+                            <div class="btn-group dropend">
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false" data-bs-auto-close="outside">
+                                    Penginapan
+                                </button>
+                                <ul class="dropdown-menu">
+                                    @if (isset($penginapan))
+                                        @foreach ($penginapan as $penginapana)
+                                            <li>
+                                                <div class="dropdown-item" href="#">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="penginapanRadioButton"
+                                                            id="penginapanRadioButton{{ $penginapana->id }}"
+                                                            value="{{ $penginapana->id }}">
+                                                        <label class="form-check-label"
+                                                            for="penginapanRadioButton{{ $penginapana->id }}">
+                                                            {{ $penginapana->nama_penginapan }}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            </div>
+                        </div>
                     </li>
-                    @if (isset($penginapan))
-                        @foreach ($penginapan as $penginapana)
-                            <li>
-                                <div class="dropdown-item" href="#">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="penginapanRadioButton"
-                                            id="penginapanRadioButton{{ $penginapana->id }}"
-                                            value="{{ $penginapana->id }}">
-                                        <label class="form-check-label" for="penginapanRadioButton{{ $penginapana->id }}">
-                                            {{ $penginapana->nama_penginapan }}
-                                        </label>
-                                    </div>
-                                </div>
-                            </li>
-                        @endforeach
-                    @endif
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li>
+                    {{-- <li>
                         <h6 class="dropdown-header">Event</h6>
+                    </li> --}}
+                    <li>
+                        <div class="dropdown-item" href="#">
+                            <div class="btn-group dropend">
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false" data-bs-auto-close="outside">
+                                    Event
+                                </button>
+                                <ul class="dropdown-menu">
+                                    @if (isset($event))
+                                        @foreach ($event as $eventa)
+                                            <li>
+                                                <div class="dropdown-item" href="#">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="eventRadioButton"
+                                                            id="eventRadioButton{{ $eventa->id }}"
+                                                            value="{{ $eventa->id }}">
+                                                        <label class="form-check-label"
+                                                            for="eventRadioButton{{ $eventa->id }}">
+                                                            {{ $eventa->nama_event }}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            </div>
+                        </div>
                     </li>
-                    @if (isset($event))
-                        @foreach ($event as $eventa)
-                            <li>
-                                <div class="dropdown-item" href="#">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="eventRadioButton"
-                                            id="eventRadioButton{{ $eventa->id }}" value="{{ $eventa->id }}">
-                                        <label class="form-check-label" for="eventRadioButton{{ $eventa->id }}">
-                                            {{ $eventa->nama_event }}
-                                        </label>
-                                    </div>
-                                </div>
-                            </li>
-                        @endforeach
-                    @endif
                 </ul>
             </div>
         </div>

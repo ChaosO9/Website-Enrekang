@@ -15,8 +15,8 @@
     <div class="wrapper">
 
         <div class="form-box login">
-            <h2>Login</h2>
-            <form action="{{ route('login.submit') }}" method="POST">
+            <h2>Login Admin</h2>
+            <form action="{{ route('login.submit.admin') }}" method="POST">
                 @csrf
                 @if (session('success'))
                     <p class="">
@@ -41,9 +41,9 @@
                     <a href="#">Forgot Password?</a>
                 </div> --}}
                 <button type="submit" class="btn">Login</button>
-                <div class="login-register">
+                {{-- <div class="login-register">
                     <p>Belum punya akun? <a href="#" class="register-link">Register</a></p>
-                </div>
+                </div> --}}
             </form>
         </div>
 

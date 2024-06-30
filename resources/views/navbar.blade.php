@@ -30,7 +30,10 @@
                 <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
-            <button class="login-button">Login</button>
+            <form action="{{ Auth::check() ? route('login.logout') : route('login.tampil') }}" method="POST">
+                @csrf
+                <button class="login-button" type="submit">{{ Auth::check() ? 'Logout' : 'Login' }}</button>
+            </form>
         </nav><!-- .navbar -->
 
         {{-- <div class="header-social-links d-flex align-items-center">

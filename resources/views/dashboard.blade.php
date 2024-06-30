@@ -14,7 +14,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Tempat Wisata</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">20</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $jumlahWisata }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-vihara fa-2x text-gray-300"></i>
@@ -32,7 +32,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Kuliner</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $jumlahKuliner }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-utensils fa-2x text-gray-300"></i></a>
@@ -48,7 +48,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Penginapan</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $jumlahPenginapan }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-bed fa-2x text-gray-300"></i>
@@ -64,7 +64,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Event</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $jumlahEvent }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -80,7 +80,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 Saran</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">7</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $jumlahSaran }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>

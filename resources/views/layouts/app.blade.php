@@ -26,9 +26,12 @@
 
 
 
-    @vite([])
+    {{-- @vite([]) --}}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <! Icon feader>
         <script src="https://unpkg.com/feather-icons"></script>
+
+
 
 
 </head>
@@ -216,8 +219,9 @@
             feather.replace();
         </script>
 
-
+        <link rel="stylesheet" href="{{ asset('js/app.js') }}">
 
 </body>
+@include('sweetalert::alert')
 
 </html>

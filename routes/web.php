@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FasilitasController;
@@ -16,15 +18,15 @@ Route::get('/', function () {
     return view('rating');
 });
 
+Route::get('/401', function () {
+    return view('401');
+})->name('401');
 
 Route::get('details', function () {
     return view('portfolio-details');
 });
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard')->middleware('isAdmin');;
 
 Route::get('/services', function () {
     return view('services');
@@ -43,6 +45,15 @@ Route::get('/kontak', function () {
 })->name('kontak');
 
 
+Route::controller(LoginController::class)->prefix('login')->group(function () {
+    Route::get('', 'showLoginForm')->name('login.tampil');
+    Route::get('admin', 'showLoginFormAdmin')->name('login.tampil.admin');
+    Route::post('', 'login')->name('login.submit');
+    Route::post('admin', 'loginAdmin')->name('login.submit.admin');
+});
+Route::post('logout', [LoginController::class, 'logout'])->name('login.logout');
+Route::post('register', [LoginController::class, 'register'])->name('login.register');
+
 Route::controller(HomeController::class)->prefix('home')->group(function () {
     Route::get('', 'home')->name('home');
     Route::post('', 'urlParamBuilder')->name('home.urlParamBuilder');
@@ -52,13 +63,15 @@ Route::controller(WisataController::class)->prefix('wisata')->group(function () 
     Route::get('', 'index')->name('wisata');
     Route::get('tampil', 'nav')->name('wisata.tampil');
     Route::post('tampil', 'urlParamBuilder')->name('wisata.urlParamBuilder');
-    Route::get('wisata2', 'index2')->name('wisata2');
     // Route::post('post','store')->name('foto_wisata');
-    Route::get('tambah', 'tambah')->name('wisata.tambah');
-    Route::post('tambah', 'simpan')->name('wisata.tambah.simpan');
-    Route::get('edit/{id}', 'edit')->name('wisata.edit');
-    Route::post('edit/{id}', 'update')->name('wisata.tambah.update');
-    Route::get('hapus/{id}', 'hapus')->name('wisata.hapus');
+    Route::middleware(['isAdmin'])->group(function () {
+        Route::get('wisata2', 'index2')->name('wisata2');
+        Route::get('tambah', 'tambah')->name('wisata.tambah');
+        Route::post('tambah', 'simpan')->name('wisata.tambah.simpan');
+        Route::get('edit/{id}', 'edit')->name('wisata.edit');
+        Route::post('edit/{id}', 'update')->name('wisata.tambah.update');
+        Route::get('hapus/{id}', 'hapus')->name('wisata.hapus');
+    });
     Route::get('show/{id}', 'show')->name('wisata.show');
     Route::get('/gambar/form/{id}', 'gambar')->name('wisata.gambar');
     Route::get('/gambar/form/hapus/{id}', 'hapusGambar')->name('wisata.hapus.gambar');
@@ -70,12 +83,14 @@ Route::controller(KulinerController::class)->prefix('kuliner')->group(function (
     Route::get('', 'index')->name('kuliner');
     Route::get('tampil', 'nav')->name('kuliner.tampil');
     Route::post('tampil', 'urlParamBuilder')->name('kuliner.urlParamBuilder');
-    Route::get('2', 'index2')->name('kuliner2');
-    Route::get('form', 'tambah')->name('kuliner.form');
-    Route::post('form', 'simpan')->name('kuliner.form.simpan');
-    Route::get('edit/{id}', 'edit')->name('kuliner.edit');
-    Route::post('edit/{id}', 'update')->name('kuliner.form.update');
-    Route::get('hapus/{id}', 'hapus')->name('kuliner.hapus');
+    Route::middleware(['isAdmin'])->group(function () {
+        Route::get('2', 'index2')->name('kuliner2');
+        Route::get('form', 'tambah')->name('kuliner.form');
+        Route::post('form', 'simpan')->name('kuliner.form.simpan');
+        Route::get('edit/{id}', 'edit')->name('kuliner.edit');
+        Route::post('edit/{id}', 'update')->name('kuliner.form.update');
+        Route::get('hapus/{id}', 'hapus')->name('kuliner.hapus');
+    });
     Route::get('show/{id}', 'show')->name('kuliner.show');
     Route::get('/gambar/form/{id}', 'gambar')->name('kuliner.gambar');
     Route::post('/gambar/form/{id}/{from?}', 'tambahGambar')->name('kuliner.tambah.gambar');
@@ -86,13 +101,15 @@ Route::controller(PenginapanController::class)->prefix('penginapan')->group(func
     Route::post('', 'urlParamBuilder')->name('penginapan.urlParamBuilder');
     Route::get('', 'nav')->name('tampil');
     Route::get('filter', 'filter')->name('filter');
-    Route::get('2', 'index2')->name('penginapan2');
-    Route::get('form', 'tambah')->name('penginapan.tambah');
-    Route::get('detail', 'detail')->name('penginapan.detail');
-    Route::post('form', 'simpan')->name('penginapan.form.simpan');
-    Route::get('edit/{id}', 'edit')->name('penginapan.edit');
-    Route::post('edit/{id}', 'update')->name('penginapan.form.update');
-    Route::get('hapus/{id}', 'hapus')->name('penginapan.hapus');
+    Route::middleware(['isAdmin'])->group(function () {
+        Route::get('2', 'index2')->name('penginapan2');
+        Route::get('form', 'tambah')->name('penginapan.tambah');
+        Route::get('detail', 'detail')->name('penginapan.detail');
+        Route::post('form', 'simpan')->name('penginapan.form.simpan');
+        Route::get('edit/{id}', 'edit')->name('penginapan.edit');
+        Route::post('edit/{id}', 'update')->name('penginapan.form.update');
+        Route::get('hapus/{id}', 'hapus')->name('penginapan.hapus');
+    });
     Route::get('show/{id}', 'show')->name('penginapan.show');
     Route::get('/gambar/form/{id}', 'gambar')->name('penginapan.gambar');
     Route::post('/gambar/form/{id}/{from?}', 'tambahGambar')->name('penginapan.tambah.gambar');
@@ -102,12 +119,14 @@ Route::controller(EventController::class)->prefix('event')->group(function () {
     Route::get('', 'index')->name('event');
     Route::get('tampil', 'nav')->name('event');
     Route::post('tampil', 'urlParamBuilder')->name('event.urlParamBuilder');
-    Route::get('2', 'index2')->name('event2');
-    Route::get('form', 'tambah')->name('event.form');
-    Route::post('form', 'simpan')->name('event.form.simpan');
-    Route::get('edit/{id}', 'edit')->name('event.edit');
-    Route::post('edit/{id}', 'update')->name('event.form.update');
-    Route::get('hapus/{id}', 'hapus')->name('event.hapus');
+    Route::middleware(['isAdmin'])->group(function () {
+        Route::get('2', 'index2')->name('event2');
+        Route::get('form', 'tambah')->name('event.form');
+        Route::post('form', 'simpan')->name('event.form.simpan');
+        Route::get('edit/{id}', 'edit')->name('event.edit');
+        Route::post('edit/{id}', 'update')->name('event.form.update');
+        Route::get('hapus/{id}', 'hapus')->name('event.hapus');
+    });
     Route::get('show/{id}', 'show')->name('event.show');
     Route::get('/gambar/form/{id}', 'gambar')->name('event.gambar');
     Route::post('/gambar/form/{id}/{from?}', 'tambahGambar')->name('event.tambah.gambar');
@@ -124,17 +143,21 @@ Route::controller(SaranController::class)->prefix('saran')->group(function () {
 });
 
 Route::controller(KategoriController::class)->prefix('kategori')->group(function () {
-    Route::get('', 'index')->name('kategori');
-    Route::get('form', 'create')->name('kategori.form');
-    Route::post('simpan', 'store')->name('simpan.kategori');
-    Route::get('hapus/{id}', 'hapus')->name('kategori.hapus');
+    Route::middleware(['isAdmin'])->group(function () {
+        Route::get('', 'index')->name('kategori');
+        Route::get('form', 'create')->name('kategori.form');
+        Route::post('simpan', 'store')->name('simpan.kategori');
+        Route::get('hapus/{id}', 'hapus')->name('kategori.hapus');
+    });
 });
 
 Route::controller(FasilitasController::class)->prefix('fasilitas')->group(function () {
-    Route::get('', 'index')->name('fasilitas');
-    Route::get('form', 'create')->name('fasilitas.form');
-    Route::post('simpan', 'store')->name('simpan.fasilitas');
-    Route::get('hapus/{id}', 'hapus')->name('fasilitas.hapus');
+    Route::middleware(['isAdmin'])->group(function () {
+        Route::get('', 'index')->name('fasilitas');
+        Route::get('form', 'create')->name('fasilitas.form');
+        Route::post('simpan', 'store')->name('simpan.fasilitas');
+        Route::get('hapus/{id}', 'hapus')->name('fasilitas.hapus');
+    });
 });
 
 Route::get('/wisata', [WisataController::class, 'search'])->name('wisata.search');
@@ -142,7 +165,9 @@ Route::get('/wisata', [WisataController::class, 'search'])->name('wisata.search'
 
 Route::post('/rating', [RatingController::class, 'store']);
 
-Route::get('/galeri', [GaleriController::class, 'galeri'])->name('galeri');
-Route::get('/gambar/form/edit/{id}', [GaleriController::class, 'editGambar'])->name('edit.gambar');
-Route::post('/gambar/form/edit/{id}', [GaleriController::class, 'editGambarSimpan'])->name('edit.gambar.simpan');
-Route::get('/gambar/form/hapus/{id}', [GaleriController::class, 'hapusGambar'])->name('hapus.gambar');
+Route::middleware(['isAdmin'])->group(function () {
+    Route::get('/galeri', [GaleriController::class, 'galeri'])->name('galeri');
+    Route::get('/gambar/form/edit/{id}', [GaleriController::class, 'editGambar'])->name('edit.gambar');
+    Route::post('/gambar/form/edit/{id}', [GaleriController::class, 'editGambarSimpan'])->name('edit.gambar.simpan');
+    Route::get('/gambar/form/hapus/{id}', [GaleriController::class, 'hapusGambar'])->name('hapus.gambar');
+});

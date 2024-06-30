@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama')->nullable();
             $table->string('email')->nullable();
-            $table->integer('telepon')->nullable();
+            $table->string('telepon', 20)->nullable();
             $table->text('saran')->nullable();
             $table->timestamps();
         });

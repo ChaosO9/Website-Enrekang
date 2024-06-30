@@ -22,14 +22,12 @@ class GaleriController extends Controller
         $penginapan = Penginapan::all();
         $event = Event::all();
         if (null !== $request->input('wisataRadioButton')) {
-            // $sortAZHarga = $request->input('radioButtonSort') == '' ? '' : $request->input('radioButtonSort');
             $destinasiId = $wisata->find($request->input('wisataRadioButton'));
             $galeri = $destinasiId->gambar;
             $jenisDestinasi = "Wisata";
             $namaDestinasi = $destinasiId->nama_wisata;
             return view('galeri', compact('wisata', 'destinasiId', 'galeri', 'jenisDestinasi', 'namaDestinasi', 'kuliner', 'penginapan', 'event'));
         } else if (null !== $request->input('kulinerRadioButton')) {
-            // $sortAZHarga = $request->input('radioButtonSort') == '' ? '' : $request->input('radioButtonSort');
             $destinasiId = $kuliner->find($request->input('kulinerRadioButton'));
             $galeri = $destinasiId->gambar;
             $jenisDestinasi = "Kuliner";

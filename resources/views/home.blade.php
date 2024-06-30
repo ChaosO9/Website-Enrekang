@@ -965,8 +965,8 @@
                             <div class="form-group mt-3">
                                 <textarea class="form-control" name="message" rows="5" placeholder="Saran" required></textarea>
                             </div>
-                            <div class="text-left mt-3"><button class="btn btn-primary" type="submit">Kirim
-                                    Saran</button>
+                            <div class="text-left mt-3"><button class="btn btn-primary" type="submit"
+                                    {{ Auth::check() ? '' : 'disabled' }}>{{ Auth::check() ? 'Kirim Saran' : 'Login untuk Kirim Saran' }}</button>
                             </div>
                         </form>
                     </div>
