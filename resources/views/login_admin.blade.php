@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
     <title>Login</title>
+    @vite([])
 </head>
 
 <body>
@@ -109,7 +110,7 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        background: url('img.png') no-repeat;
+        background: url('../img.png') no-repeat;
         background-size: cover;
         /* background-position: center; */
         /* backdrop-filter: blur(2px); */
@@ -119,7 +120,7 @@
         position: relative;
         width: 350px;
         height: 400px;
-        background: transparent;
+        background: white;
         border: 2px solid rgba(255, 255, 255, .5);
         border-radius: 20px;
         backdrop-filter: blur(10px);

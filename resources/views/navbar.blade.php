@@ -15,7 +15,7 @@
             {{-- <img src="logo.png" alt="logo" width="130" class="img-thumbnail"> --}}
             {{-- <h1><a href="index.html">Lumia</a></h1> --}}
             <!-- Uncomment below if you prefer to use an image logo -->
-            <a href="index.html"><img src="logo.png" alt="" class="img-fluid"></a>
+            <a href="index.html"><img src="{{ url('logo.png') }}" alt="" class="img-fluid"></a>
         </div>
 
         <nav id="navbar" class="navbar order-last order-lg-0">
@@ -30,7 +30,8 @@
                 <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
-            <form action="{{ Auth::check() ? route('login.logout') : route('login.tampil') }}" method="POST">
+            <form action="{{ Auth::check() ? route('login.logout') : route('login.tampil') }}"
+                method="{{ Auth::check() ? 'POST' : 'GET' }}">
                 @csrf
                 <button class="login-button" type="submit">{{ Auth::check() ? 'Logout' : 'Login' }}</button>
             </form>

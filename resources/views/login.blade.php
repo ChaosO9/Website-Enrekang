@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
     <title>Login</title>
+    @vite([])
 </head>
 
 <body>
     <div class="wrapper">
 
         <div class="form-box login">
+            {{-- <img src="{{ url('logo.png') }}" alt=""> --}}
             <h2>Login</h2>
             <form action="{{ route('login.submit') }}" method="POST">
                 @csrf
@@ -85,7 +87,7 @@
                 <button type="submit" class="btn">Register</button>
                 <div class="login-register">
                     <p>Sudah punya akun? <a href="#" class="login-link">Login</a></p>
-
+                </div>
             </form>
         </div>
     </div>
@@ -119,7 +121,7 @@
         position: relative;
         width: 350px;
         height: 400px;
-        background: transparent;
+        background: white;
         border: 2px solid rgba(255, 255, 255, .5);
         border-radius: 20px;
         backdrop-filter: blur(10px);
@@ -134,7 +136,7 @@
     }
 
     .wrapper.active {
-        height: 480px;
+        height: 680px;
     }
 
     .wrapper .form-box {
@@ -150,7 +152,8 @@
     .wrapper.active .form-box.login {
         transition: none;
         transform: translateX(-400px);
-
+        justify-content: center;
+        align-items: center;
     }
 
     .wrapper .form-box.register {
@@ -169,6 +172,13 @@
         font-size: 2.1em;
         color: #030303;
         text-align: center;
+    }
+
+    .form-box img {
+        position: relative;
+        margin: 15px 0px 30px 0px;
+        height: 70px;
+        align-items: center;
     }
 
     .input-box {
