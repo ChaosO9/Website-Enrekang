@@ -24,8 +24,8 @@ class Event extends Model
         'greater_or_equal'
     ];
 
-    public function gambar()
+    public function review()
     {
-        return $this->hasMany(GambarEvent::class, 'event');
+        return $this->hasMany(ReviewEvent::class, 'event');
     }
 }

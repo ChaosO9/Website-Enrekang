@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
 use App\Models\Fasilitas;
-use App\Models\FasilitasLokasi as ModelsFasilitasLokasi;
-use App\Models\GambarLokasi;
+use App\Models\FasilitasWisata;
 use App\Models\Kategori;
-use App\Models\Kuliner;
-use App\Models\Penginapan;
+use App\Models\ReviewWisata;
+use App\Models\User;
 use App\Models\Wisata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Laravel\Ui\Presets\React;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class WisataController extends Controller
 {
@@ -26,21 +25,11 @@ class WisataController extends Controller
 
     public function index2()
     {
-        // // $wisata = Wisata::with('fasilitas')->get();
-        // $wisata = DB::table('wisata')
-        //     ->join('fasilitas_lokasi', 'wisata.id', '=', 'fasilitas_lokasi.wisata') // Joining wisata with the pivot table
-        //     ->join('fasilitas', 'fasilitas_lokasi.fasilitas', '=', 'fasilitas.id') // Joining the pivot table with fasilitas
-        //     ->select('wisata.*', 'fasilitas.nama as fasilitas_nama') // Selecting columns
-        //     ->get();
-
         $wisata = DB::table('wisata')->get();
 
         $wisataWithFasilitas = $wisata->map(function ($item) {
             $wisata = Wisata::find($item->id);
             $item->fasilitas = $wisata->fasilitas()->pluck('nama')->all();
-            // $item->fasilitas = DB::table('fasilitas')
-            //     ->where('wisata_id', $item->id) // Assuming 'wisata_id' is the foreign key in 'fasilitas' table
-            //     ->get();
             return $item;
         });
 
@@ -58,11 +47,13 @@ class WisataController extends Controller
     public function simpan(Request $request)
     {
         if ($request->hasFile('foto')) {
-            $imageName = $request->foto->getClientOriginalName();
-            $request->foto->move(public_path('/images'), $imageName);
+            $manager = new ImageManager(new Driver());
+            $imageName = uniqid('', true) . '_' . time() . '.webp';
+            $image = $manager->read($request->foto)->toWebp(90);
+            $image->save(base_path('public/images/wisata/' . $imageName));
             $dataGambar = ['foto_wisata' => $imageName];
         } else {
-            $dataGambar = ['foto_wisata' => 'no-image.png'];
+            $dataGambar = ['foto_wisata' => 'no-image.webp'];
         }
 
         $data = [
@@ -77,17 +68,13 @@ class WisataController extends Controller
 
         $data = array_merge($data, $dataGambar);
 
-        // dd($data);
-        // exit();
-
-
         $wisata = Wisata::create($data);
 
         $fasilitas_wisata = $request->input('fasilitas');
 
         if (isset($fasilitas_wisata)) {
             for ($i = 0; $i < count($fasilitas_wisata); $i++) {
-                ModelsFasilitasLokasi::create([
+                FasilitasWisata::create([
                     'wisata' => $wisata->id,
                     'fasilitas' => $fasilitas_wisata[$i],
                 ]);
@@ -102,7 +89,7 @@ class WisataController extends Controller
         $wisata = Wisata::where('id', $id)->first();
         $kategori = Kategori::all();
         $fasilitas = Fasilitas::all();
-        $fasilitas_wisata2 = ModelsFasilitasLokasi::where('wisata', $id)->get();
+        $fasilitas_wisata2 = FasilitasWisata::where('wisata', $id)->get();
         $fasilitas_wisata = [];
         foreach ($fasilitas_wisata2 as $fasilitas_wisata2) {
             $fasilitas_wisata[] = $fasilitas_wisata2->fasilitas;
@@ -127,26 +114,25 @@ class WisataController extends Controller
         ];
 
         if ($request->hasFile('foto')) {
-            $imageName = $request->foto->getClientOriginalName();
-            $request->foto->move(public_path('/images'), $imageName);
+            $manager = new ImageManager(new Driver());
+            $imageName = uniqid('', true) . '_' . time() . '.webp';
+            $image = $manager->read($request->foto)->toWebp(90);
+            $image->save(base_path('public/images/wisata/' . $imageName));
+            Storage::delete("/images/wisata/" . $wisata->foto_wisata);
             $data['foto_wisata'] = $imageName;
         } else {
-            isset($wisata->foto_wisata) ? $data['foto_wisata'] = $wisata->foto_wisata : $data['foto_wisata'] = 'no-image.png';
+            isset($wisata->foto_wisata) ? $data['foto_wisata'] = $wisata->foto_wisata : $data['foto_wisata'] = 'no-image.webp';
         }
-
-        // if (isset($data['foto_wisata'])) {
-        //     $data['foto_wisata'] = $imageName;
-        // }
 
         $wisata->update($data);
 
-        ModelsFasilitasLokasi::where('wisata', $id)->delete();
+        FasilitasWisata::where('wisata', $id)->delete();
 
         $fasilitas_wisata = $request->input('fasilitas');
 
         if (isset($fasilitas_wisata)) {
             for ($i = 0; $i < count($fasilitas_wisata); $i++) {
-                ModelsFasilitasLokasi::create([
+                FasilitasWisata::create([
                     'wisata' => $wisata->id,
                     'fasilitas' => $fasilitas_wisata[$i],
                 ]);
@@ -158,7 +144,9 @@ class WisataController extends Controller
 
     public function hapus($id)
     {
-        Wisata::find($id)->delete();
+        $wisata = Wisata::find($id);
+        Storage::delete("/images/wisata/" . $wisata->foto_wisata);
+        $wisata->delete();
 
         return redirect()->route('wisata2');
     }
@@ -167,11 +155,7 @@ class WisataController extends Controller
     {
         $kategori = Kategori::all();
         $keyword = $request->search;
-        // $data = Wisata::where('nama_wisata', 'like', '%' . $keyword . '%')
-        //     ->orWhere('deskripsi_wisata', 'like', '%' . $keyword . '%')
-        //     ->paginate(6);
         $data = Wisata::filter()->paginate(6);
-
 
         return view('wisataWeb', compact('data', 'kategori'));
     }
@@ -230,10 +214,10 @@ class WisataController extends Controller
         $originalName = $request->foto->getClientOriginalName();
         $uniqueId = time();
         $fileName = $uniqueId . '_' . $originalName;
-        $request->foto->move(public_path('/images'), $fileName);
+        $request->foto->move(public_path('/images/wisata'), $fileName);
         $deskripsi = $request->input('deskripsi_gambar');
 
-        GambarLokasi::create([
+        ReviewWisata::create([
             'wisata' => $id,
             'gambar' => $fileName,
             'deskripsi' => $deskripsi
@@ -263,11 +247,29 @@ class WisataController extends Controller
             'Tempat Ibadah' => '<i class="fa-solid fa-mosque"></i>',
             'Wifi' => '<i class="fa-solid fa-wifi"></i>',
         ];
-        $wisata_lain2 = Wisata::all();
+        $wisata_lain2 = Wisata::all()->paginate(1);
         $wisata = Wisata::find($id);
         $fasilitas = $wisata->fasilitas()->pluck('nama')->all();
-        $galeri = $wisata->gambar;
+        $reviews = $wisata->review;
 
-        return view('details_wisata', compact('wisata', 'fasilitas', 'wisata_lain2', 'galeri', 'ikon_fasilitas'));
+        // $reviews = ReviewWisata::where('wisata', $wisata->id)->get();
+        $semua_reviews = $wisata->review()->with('user');
+        $reviews = $semua_reviews->paginate(2)->map(function ($review) {
+            $review->username = $review->user->name;
+            $review->user_created_at = $review->user->created_at;
+            return $review;
+        });
+        $jumlah_ulasan = $wisata->review()->count();
+        if ($jumlah_ulasan > 0) {
+            $jumlah_rating = $wisata->review()->sum('rating_bintang');
+            $rating_rata2 = intval(number_format($jumlah_rating / $jumlah_ulasan));
+        } else {
+            $rating_rata2 = 0;
+        }
+
+        // $reviews = ReviewWisata::where('wisata', $wisata->id)->paginate(1);
+        // $users = User::paginate(3);
+
+        return view('details_wisata', compact('wisata', 'wisata_lain2', 'reviews', 'semua_reviews', 'fasilitas', 'wisata_lain2', 'ikon_fasilitas', 'rating_rata2'));
     }
 }

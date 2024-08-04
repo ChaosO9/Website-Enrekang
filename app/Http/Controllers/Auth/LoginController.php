@@ -55,10 +55,14 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials) && Auth::user()->hasRole('user')) {
             // Authentication passed...
             // return redirect()->intended('home');
             return redirect()->route('home');
+        } else {
+            return back()->withErrors([
+                'email' => 'Akun Anda adalah akun Admin',
+            ]);
         }
 
         // Authentication failed...

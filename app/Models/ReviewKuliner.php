@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Usamamuneerchaudhary\Commentify\Traits\Commentable;
 
-class GambarKuliner extends Model
+class ReviewKuliner extends Model
 {
-    use HasFactory;
+    use HasFactory, Commentable;
 
-    protected $table = 'gambar_kuliner';
+    protected $table = 'review_kuliner';
 
     protected $fillable = ['id', 'kuliner', 'gambar', 'deskripsi', 'created_at', 'updated_at'];
 

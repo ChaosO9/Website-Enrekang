@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gambar_penginapan', function (Blueprint $table) {
+        Schema::create('review_penginapan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('penginapan')->constrained(table: 'penginapan', indexName: 'penginapan_id2')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('gambar')->nullable(false);
-            $table->string('deskripsi')->nullable(true);
+            $table->foreignId('user_id')->constrained(table: 'users', indexName: 'users_id3')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('rating_bintang');
+            $table->text('komentar')->nullable();
+            $table->string('gambar')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gambar_penginapan');
+        Schema::dropIfExists('review_penginapan');
     }
 };

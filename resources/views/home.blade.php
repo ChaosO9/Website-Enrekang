@@ -131,7 +131,7 @@
                                     {{-- {{ $item->foto_wisata }} --}}
 
 
-                                    <img src="{{ asset('images/' . $item->foto_wisata) }}" class="img-fluid"
+                                    <img src="{{ asset('images/wisata/' . $item->foto_wisata) }}" class="img-fluid"
                                         alt="">
                                     <a href="{{ url('assets/img/portfolio/portfolio-1.jpg') }}"
                                         data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
@@ -163,7 +163,7 @@
                                     {{-- {{ $item->foto_kuliner }} --}}
 
 
-                                    <img src="{{ asset('images/' . $item->foto_kuliner) }}" class="img-fluid"
+                                    <img src="{{ asset('images/kuliner/' . $item->foto_kuliner) }}" class="img-fluid"
                                         alt="">
                                     <a href="{{ url('assets/img/portfolio/portfolio-1.jpg') }}"
                                         data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
@@ -189,8 +189,8 @@
                                     {{-- {{ $item->foto_penginapan }} --}}
 
 
-                                    <img src="{{ asset('images/' . $item->foto_penginapan) }}" class="img-fluid"
-                                        alt="">
+                                    <img src="{{ asset('images/penginapan/' . $item->foto_penginapan) }}"
+                                        class="img-fluid" alt="">
                                     <a href="{{ asset('images/' . $item->foto_penginapan) }}"
                                         data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
                                         title="{{ $item->nama_penginapan }}"><i class="fa-regular fa-eye"></i></a>
@@ -211,7 +211,7 @@
                         <div class="col-lg-4 col-md-6 portfolio-item filter-event wow fadeInUp">
                             <div class="portfolio-wrap">
                                 <figure>
-                                    <img src="{{ asset('images/' . $item->foto_event) }}" class="img-fluid"
+                                    <img src="{{ asset('images/event/' . $item->foto_event) }}" class="img-fluid"
                                         alt="">
                                     <a href="{{ url('assets/img/portfolio/portfolio-1.jpg') }}"
                                         data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"

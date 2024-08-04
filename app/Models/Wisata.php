@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Mehradsadeghi\FilterQueryString\FilterQueryString;
+use Usamamuneerchaudhary\Commentify\Traits\Commentable;
 
 class Wisata extends Model
 {
-    use HasFactory, FilterQueryString;
+    use HasFactory, FilterQueryString, Commentable;
 
     protected $table = 'wisata';
 
@@ -25,11 +26,11 @@ class Wisata extends Model
 
     public function fasilitas()
     {
-        return $this->belongsToMany(Fasilitas::class, 'fasilitas_lokasi', 'wisata', 'fasilitas');
+        return $this->belongsToMany(Fasilitas::class, 'fasilitas_wisata', 'wisata', 'fasilitas');
     }
 
-    public function gambar()
+    public function review()
     {
-        return $this->hasMany(GambarLokasi::class, 'wisata');
+        return $this->hasMany(ReviewWisata::class, 'wisata');
     }
 }

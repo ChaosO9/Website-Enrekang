@@ -13,9 +13,14 @@ use App\Http\Controllers\RatingController;
 use App\Http\Controllers\WisataController;
 use App\Http\Controllers\KulinerController;
 use App\Http\Controllers\PenginapanController;
+use App\Http\Controllers\ReviewController;
 
 Route::get('/', function () {
     return view('rating');
+});
+
+Route::get('/test', function () {
+    return view('test');
 });
 
 Route::get('/401', function () {
@@ -77,6 +82,12 @@ Route::controller(WisataController::class)->prefix('wisata')->group(function () 
     Route::get('/gambar/form/hapus/{id}', 'hapusGambar')->name('wisata.hapus.gambar');
     Route::post('/gambar/form/{id}/{from?}', 'tambahGambar')->name('wisata.tambah.gambar');
     Route::get('/galeri', 'wisataGaleri')->name('wisata.galeri');
+});
+
+Route::controller(ReviewController::class)->group(function () {
+    Route::middleware(['isUser'])->group(function () {
+        Route::post('wisata/review/{id}', 'submitReviewWisata')->name('wisata.tambah.review');
+    });
 });
 
 Route::controller(KulinerController::class)->prefix('kuliner')->group(function () {

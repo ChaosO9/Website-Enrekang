@@ -61,7 +61,7 @@
                                 <td>{{ $row->nama_wisata }}</td>
                                 <td>{{ $row->alamat_wisata }}</td>
                                 <td>
-                                    <img src="{{ asset('images/' . $row->foto_wisata) }}" alt=""
+                                    <img src="{{ asset('images/wisata/' . $row->foto_wisata) }}" alt=""
                                         style="width: 100px;">
                                 </td>
                                 <td>{{ $row->harga_tiket }}</td>

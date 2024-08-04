@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FasilitasLokasi extends Model
+class FasilitasWisata extends Model
 {
     use HasFactory;
 
-    protected $table = 'fasilitas_lokasi';
+    protected $table = 'fasilitas_wisata';
 
     protected $fillable = ['id', 'wisata', 'fasilitas', 'created_at', 'updated_at'];
 
@@ -20,6 +20,6 @@ class FasilitasLokasi extends Model
 
     public function fasilitas()
     {
-        return $this->belongsTo(Fasilitas::class);
+        return $this->belongsTo(FasilitasWisata::class);
     }
 }

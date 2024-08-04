@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Laravel\ServiceProvider;
+
 return [
 
     /*
@@ -124,5 +126,7 @@ return [
     ],
 
 
-    
+    'providers' => ServiceProvider::defaultProviders()->merge([
+        Usamamuneerchaudhary\Commentify\Providers\CommentifyServiceProvider::class,
+    ])->toArray(),
 ];

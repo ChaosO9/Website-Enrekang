@@ -12,6 +12,8 @@ use App\Models\Penginapan;
 use App\Models\Wisata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class GaleriController extends Controller
 {
@@ -91,12 +93,12 @@ class GaleriController extends Controller
         }
 
         if ($request->hasFile('foto')) {
-            $originalName = $request->foto->getClientOriginalName();
-            $uniqueId = time();
-            $fileName = $uniqueId . '_' . $originalName;
-            $request->foto->move(public_path('/images'), $fileName);
-            Storage::delete("/images/" . $gambar->gambar);
-            $data['gambar'] = $fileName;
+            $manager = new ImageManager(new Driver());
+            $imageName = uniqid('', true) . '_' . time() . '.webp';
+            $image = $manager->read($request->foto)->toWebp(90);
+            $image->save(base_path('public/images/' . strtolower($jenisDestinasi) . '/' . $imageName));
+            Storage::delete("/images/" . strtolower($jenisDestinasi) . '/' . $gambar->gambar);
+            $data['gambar'] = $imageName;
         } else {
             $data['gambar'] = $gambar->gambar;
         }
@@ -126,7 +128,7 @@ class GaleriController extends Controller
             $param = ['eventRadioButton' => $gambar->event];
         }
 
-        Storage::delete("/images/" . $gambar->gambar);
+        Storage::delete("/images/" . strtolower($jenisDestinasi) . '/' . $gambar->gambar);
         $gambar->delete();
         return redirect()->route('galeri', $param);
     }

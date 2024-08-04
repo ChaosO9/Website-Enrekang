@@ -166,7 +166,8 @@
                 <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
                     <div class="portfolio-wrap">
                         <figure>
-                            <img src="{{ asset('images/' . $item->foto_wisata) }}" class="img-fluid" alt="">
+                            <img src="{{ asset('images/wisata/' . $item->foto_wisata) }}" class="img-fluid"
+                                alt="">
                             <a href="{{ asset('images/' . $item->foto_wisata) }}" data-gallery="portfolioGallery"
                                 class="link-preview portfolio-lightbox" title="{{ $item->nama_wisata }}"><i
                                     class="bx bx-plus"></i></a>
