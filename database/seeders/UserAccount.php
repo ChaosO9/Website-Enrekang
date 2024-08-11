@@ -18,9 +18,9 @@ class UserAccount extends Seeder
         Role::create(['name' => 'user']);
 
         $user = new User([
-            'name' => 'Ahmad',
+            'name' => 'Sukmawati',
             'username' => 'ahmad123',
-            'email' => 'ahmad@example.com',
+            'email' => 'admin@gmail.com',
             'password' => bcrypt('12345678'),
         ]);
         $user->save();

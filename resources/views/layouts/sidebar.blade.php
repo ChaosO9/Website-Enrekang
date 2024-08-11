@@ -2,7 +2,7 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <img id="logo" src="{{ asset('logo.png') }}" alt="logo" width="130">
+        <img id="logo" src="{{ asset('LogoWeb.png') }}" alt="logo" width="130">
         <div class="sidebar-brand-icon">
         </div>
 

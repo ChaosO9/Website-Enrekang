@@ -62,6 +62,7 @@ Route::post('register', [LoginController::class, 'register'])->name('login.regis
 Route::controller(HomeController::class)->prefix('home')->group(function () {
     Route::get('', 'home')->name('home');
     Route::post('', 'urlParamBuilder')->name('home.urlParamBuilder');
+    Route::get('/wisata', 'wisata')->name('wisata'); /*search*/
 });
 
 Route::controller(WisataController::class)->prefix('wisata')->group(function () {

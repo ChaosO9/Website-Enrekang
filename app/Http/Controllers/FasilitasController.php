@@ -25,7 +25,7 @@ class FasilitasController extends Controller
         ];
         Fasilitas::create($data);
 
-        toast('Your Post as been submited!', 'success');
+        toast('Fasilitas berhasil ditambah!', 'success');
         return redirect('fasilitas');
     }
 
@@ -33,6 +33,7 @@ class FasilitasController extends Controller
     {
         Fasilitas::find($id)->delete();
 
+        toast('Fasilitas berhasil dihapus!', 'success');
         return redirect()->route('fasilitas');
     }
 }

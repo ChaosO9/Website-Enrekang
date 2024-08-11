@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('alamat_wisata')->nullable();
             $table->string('harga_tiket')->nullable();
             $table->string('id_kategori')->nullable();
+            $table->decimal('latitude', 10, 7)->nullable();
+            $table->decimal('longitude', 10,7)->nullable();
             $table->string('fasilitas')->nullable();
             $table->text('deskripsi_wisata')->nullable();
             $table->string('foto_wisata')->nullable();
-            $table->text('maps')->nullable();
-            $table->date('tanggal_upload')->nullable();
             $table->timestamps();
         });
     }

@@ -61,9 +61,9 @@ class WisataController extends Controller
             'alamat_wisata' => $request->alamat_wisata,
             'harga_tiket' => $request->harga_tiket,
             'id_kategori' => $request->kategori,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
             'deskripsi_wisata' => $request->deskripsi_wisata,
-            'maps' => $request->maps,
-            'tanggal_upload' => $request->tanggal_upload,
         ];
 
         $data = array_merge($data, $dataGambar);
@@ -107,10 +107,10 @@ class WisataController extends Controller
             'alamat_wisata' => $request->alamat_wisata,
             'harga_tiket' => $request->harga_tiket,
             'id_kategori' => $request->kategori,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
             'fasilitas' => $request->fasilitas,
             'deskripsi_wisata' => $request->deskripsi_wisata,
-            'maps' => $request->maps,
-            'tanggal_upload' => $request->tanggal_upload,
         ];
 
         if ($request->hasFile('foto')) {
@@ -239,15 +239,22 @@ class WisataController extends Controller
     public function show($id)
     {
         $ikon_fasilitas = [
-            'Toilet' => '<i class="fa-solid fa-toilet"></i>',
-            'Kantin' => '<i class="fa-solid fa-pot-food"></i>',
             'Area Parkir' => '<i class="fa-solid fa-square-parking"></i>',
-            'Pusat Informasi' => '<i class="fa-sharp fa-solid fa-circle-info"></i>',
-            'Tempat Istirahat' => '<i class="fa-solid fa-bed"></i>',
-            'Tempat Ibadah' => '<i class="fa-solid fa-mosque"></i>',
+            'Area Camping' => '<i class="fa-solid fa-tents"></i>',
+            'Balai Pertemuan' => '<i class="fa-solid fa-landmark"></i>',
+            'Cafetaria' => '<i class="fa-solid fa-mug-saucer"></i>',
+            'Jungle Tracking' => '<i class="fa-solid fa-person-hiking"></i>',
+            'Kios Souvenir' => '<i class="fa-solid fa-shop"></i>',
+            'Kolam Renang' => '<i class="fa-solid fa-person-swimming"></i>',
+            'Mushollah' => '<i class="fa-solid fa-mosque"></i>',
+            'Outbound' => '<i class="fa-solid fa-tree"></i>',
+            'Ramah Difable' => '<i class="fa-solid fa-wheelchair"></i>',
+            'Spot Foto' => '<i class="fa-solid fa-camera"></i>',
+            'Selfie Area' => '<i class="fa-solid fa-camera-retro"></i>',
+            'Tempat Makan' => '<i class="fa-solid fa-utensils"></i>',
+            'Waterboom' => '<i class="fa-solid fa-water-ladder"></i>',
             'Wifi' => '<i class="fa-solid fa-wifi"></i>',
         ];
-        $wisata_lain2 = Wisata::all()->paginate(1);
         $wisata = Wisata::find($id);
         $fasilitas = $wisata->fasilitas()->pluck('nama')->all();
         $reviews = $wisata->review;
@@ -270,6 +277,6 @@ class WisataController extends Controller
         // $reviews = ReviewWisata::where('wisata', $wisata->id)->paginate(1);
         // $users = User::paginate(3);
 
-        return view('details_wisata', compact('wisata', 'wisata_lain2', 'reviews', 'semua_reviews', 'fasilitas', 'wisata_lain2', 'ikon_fasilitas', 'rating_rata2'));
+        return view('details_wisata', compact('wisata', 'reviews', 'semua_reviews', 'fasilitas', 'ikon_fasilitas', 'rating_rata2'));
     }
 }

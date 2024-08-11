@@ -25,6 +25,9 @@
                             <th>Foto </th>
                             <th>Tanggal Mulai </th>
                             <th>Tanggal Selesai </th>
+                            <th>Latitude </th>
+                            <th>Longitude </th>
+                            <th>Deskripsi </th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -41,6 +44,8 @@
                                 </td>
                                 <td>{{ date('d-m-Y', strtotime($row->tanggal_pelaksanaan)) }}</td>
                                 <td>{{ date('d-m-Y', strtotime($row->tanggal_selesai)) }}</td>
+                                <td>{{ $row->latitude }}</td>
+                                <td>{{ $row->longitude }}</td>
                                 <td>
                                     <a href="{{ route('event.edit', $row->id) }}" class="btn btn-warning"
                                         style="color: rgb(255, 255, 255)"> <i class="fas fa-edit"></i></a>
@@ -49,6 +54,7 @@
                                     <a href="{{ route('event.hapus', $row->id) }}" class="btn btn-danger"> <i
                                             class="fas fa-trash"></i></a>
                                 </td>
+                                <td>{{ $row->deskripsi_event }}</td>
                             </tr>
                         @endforeach
                     </tbody>

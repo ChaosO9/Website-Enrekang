@@ -1,7 +1,4 @@
 @extends('layouts.app')
-
-{{-- @section('title', 'Data Penginapan') --}}
-
 @section('contents')
     <div class="card shadow mb-4">
         <div class="card-header py-3">

@@ -25,7 +25,7 @@ class KategoriController extends Controller
         ];
         Kategori::create($data);
         
-        toast('Your Post as been submited!','success');
+        toast('Kategori berhasil ditambah!','success');
         return redirect('kategori');
     }
 
@@ -33,6 +33,7 @@ class KategoriController extends Controller
     {
         Kategori::find($id)->delete();
     
+        toast('Kategori berhasil dihapus!','success');
         return redirect()->route('kategori');
     }
 }

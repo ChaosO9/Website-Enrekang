@@ -16,13 +16,15 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col form-group">
-                                <label for="nama_event">Nama Event</label>
+                                <label for="nama_event">Nama</label>
                                 <input type="text" class="form-control" id="nama_event" name="nama_event"
+                                    placeholder="Masukkan nama" required
                                     value="{{ isset($event) ? $event->nama_event : '' }}">
                             </div>
                             <div class="col form-group">
                                 <label for="tempat_event">Tempat</label>
                                 <input type="text" class="form-control" id="tempat_event" name="tempat_event"
+                                    placeholder="Masukkan tempat" required
                                     value="{{ isset($event) ? $event->tempat_event : '' }}">
                             </div>
                         </div>
@@ -41,13 +43,28 @@
                         </div>
                         <div class="row">
                             <div class="col form-group">
+                                <label for="latitude">Latitude</label>
+                                <input type="text" class="form-control" id="latitude" name="latitude"
+                                    placeholder="Masukkan titik latitude" required
+                                    value="{{ isset($event) ? $event->latitude : '' }}">
+                            </div>
+                            <div class="col form-group">
+                                <label for="longitude">Longitude</label>
+                                <input type="text" class="form-control" id="longitude" name="longitude"
+                                    placeholder="Masukkan titik longitude" required
+                                    value="{{ isset($event) ? $event->longitude : '' }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col form-group">
                                 <label for="foto_event">Foto</label>
                                 <input type="file" class="form-control" id="foto" name="foto"
                                     value="{{ isset($event) ? $event->foto_event : '' }}">
                             </div>
                             <div class="col form-group">
                                 <label for="deskripsi_event">Deskripsi</label>
-                                <textarea type="text" class="form-control" id="deskripsi_event" name="deskripsi_event" value="">{{ isset($event) ? $event->deskripsi_event : '' }}</textarea>
+                                <textarea type="text" class="form-control" id="deskripsi_event" name="deskripsi_event"
+                                    placeholder="Masukkan deskripsi" required value="">{{ isset($event) ? $event->deskripsi_event : '' }}</textarea>
                             </div>
                         </div>
                     </div>

@@ -24,7 +24,8 @@
                             <th>Foto</th>
                             <th>Alamat</th>
                             <th>Harga</th>
-                            {{-- <th>Maps</th> --}}
+                            <th>Fasilitas</th>
+                            <th>Deskripsi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -39,7 +40,19 @@
                                         style="width: 100px;">
                                 </td>
                                 <td>{{ $row->alamat_penginapan }}</td>
-                                <td>{{ $row->harga_penginapan }}</td>
+                                <td>@currency($row->harga_penginapan)</td>
+                                <td>
+                                    <ol>
+                                        @if ($row->fasilitas && !empty($row->fasilitas))
+                                            @foreach ($row->fasilitas as $facility)
+                                                <li>{{ $facility }}</li>
+                                            @endforeach
+                                        @else
+                                            <li>Tidak ada fasilitas</li>
+                                        @endif
+                                    </ol>
+                                </td>
+                                <td>{{ $row->deskripsi_penginapan }}</td>
                                 {{-- <td>{{ $row->maps }}</td> --}}
                                 <td>
                                     <a href="{{ route('penginapan.edit', $row->id) }}" class="btn btn-warning"

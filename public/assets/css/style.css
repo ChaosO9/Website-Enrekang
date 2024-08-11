@@ -157,7 +157,7 @@ h6 {
     padding: 10px 0 10px 30px;
     font-family: "Poppins", sans-serif;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 550;
     color: #4f5a62;
     white-space: nowrap;
     transition: 0.3s;
@@ -174,7 +174,7 @@ h6 {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover > a {
-    color: #3498db;
+    color: #058d33;
 }
 
 .navbar .dropdown ul {
@@ -577,9 +577,9 @@ section {
     padding: 60px 0;
 }
 
-.section-bg {
+/* .section-bg {
     background-color: #f7fbfe;
-}
+} */
 
 .section-title {
     text-align: center;
@@ -624,7 +624,7 @@ section {
     display: block;
     width: 40px;
     height: 3px;
-    background: #3498db;
+    background: #00832c;
     bottom: 0;
     left: calc(50% - 20px);
 }
@@ -633,6 +633,19 @@ section {
     margin-bottom: 0;
     font-size: 15px;
 }
+
+.btn-custom-green {
+    background-color: #0d5e21; /* ganti dengan kode warna hijau yang diinginkan */
+    color: white;
+}
+
+.btn-custom-green:active,
+.btn-custom-green:focus,
+.btn-custom-green:hover {
+    background-color: #079b2c; /* Warna hijau saat aktif */
+    color: white;
+}
+
 
 /*--------------------------------------------------------------
 # What We Do
@@ -758,131 +771,6 @@ section {
     color: #848484;
 }
 
-/*--------------------------------------------------------------
-# Skills
---------------------------------------------------------------*/
-.skills .progress {
-    height: 60px;
-    display: block;
-    background: none;
-    border-radius: 0;
-}
-
-.skills .progress .skill {
-    padding: 10px 0;
-    margin: 0 0 6px 0;
-    text-transform: uppercase;
-    display: block;
-    font-weight: 600;
-    font-family: "Poppins", sans-serif;
-    color: #384046;
-}
-
-.skills .progress .skill .val {
-    float: right;
-    font-style: normal;
-}
-
-.skills .progress-bar-wrap {
-    background: #e8eaec;
-}
-
-.skills .progress-bar {
-    width: 1px;
-    height: 10px;
-    transition: 0.9s;
-    background-color: #5faee3;
-}
-
-/*--------------------------------------------------------------
-# Counts
---------------------------------------------------------------*/
-.counts {
-    background: white;
-    padding: 30px 0 40px 0;
-}
-
-.counts .count-box {
-    padding: 30px 30px 25px 30px;
-    width: 100%;
-    position: relative;
-    text-align: center;
-    background: #fff;
-}
-
-.counts .count-box i {
-    position: absolute;
-    top: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 20px;
-    background: #3498db;
-    padding: 12px;
-    color: #fff;
-    border-radius: 50px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-}
-
-.counts .count-box span {
-    font-size: 36px;
-    display: block;
-    font-weight: 600;
-    color: #124364;
-}
-
-.counts .count-box p {
-    padding: 0;
-    margin: 0;
-    font-family: "Raleway", sans-serif;
-    font-size: 14px;
-}
-
-/*--------------------------------------------------------------
-# Services
---------------------------------------------------------------*/
-.services .icon-box {
-    padding: 30px;
-    border-radius: 6px;
-    background: #fff;
-    transition: ease-in-out 0.3s;
-}
-
-.services .icon-box i {
-    float: left;
-    color: #3498db;
-    font-size: 40px;
-    line-height: 0;
-}
-
-.services .icon-box h4 {
-    margin-left: 70px;
-    font-weight: 700;
-    margin-bottom: 15px;
-    font-size: 18px;
-}
-
-.services .icon-box h4 a {
-    color: #384046;
-    transition: 0.3s;
-}
-
-.services .icon-box p {
-    margin-left: 70px;
-    line-height: 24px;
-    font-size: 14px;
-}
-
-.services .icon-box:hover {
-    box-shadow: 0px 2px 22px rgba(0, 0, 0, 0.08);
-}
-
-.services .icon-box:hover h4 a {
-    color: #3498db;
-}
 
 /*--------------------------------------------------------------
 # Portfolio
@@ -1242,213 +1130,6 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Breadcrumbs
---------------------------------------------------------------*/
-.breadcrumbs {
-    padding: 40px 0;
-    margin-top: 70px;
-}
-
-.breadcrumbs h2 {
-    font-size: 26px;
-    font-weight: 600;
-}
-
-.breadcrumbs ol {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-size: 15px;
-}
-
-.breadcrumbs ol li + li {
-    padding-left: 10px;
-}
-
-.breadcrumbs ol li + li::before {
-    display: inline-block;
-    padding-right: 10px;
-    color: #4f5a62;
-    content: "/";
-}
-
-@media (max-width: 768px) {
-    .breadcrumbs .d-flex {
-        display: block !important;
-    }
-
-    .breadcrumbs ol {
-        display: block;
-    }
-
-    .breadcrumbs ol li {
-        display: inline-block;
-    }
-}
-
-/*--------------------------------------------------------------
-# Footer
---------------------------------------------------------------*/
-#footer {
-    color: #444444;
-    font-size: 14px;
-    /* background: #f7fbfe; */
-}
-
-#footer .footer-top {
-    padding: 60px 0 30px 0;
-    background: #fff;
-}
-
-#footer .footer-top .footer-contact {
-    margin-bottom: 30px;
-}
-
-#footer .footer-top .footer-contact h4 {
-    font-size: 22px;
-    margin: 0 0 30px 0;
-    padding: 2px 0 2px 0;
-    line-height: 1;
-    font-weight: 700;
-}
-
-#footer .footer-top .footer-contact img {
-    max-height: 55px;
-}
-
-#footer .footer-top .footer-contact p {
-    font-size: 14px;
-    line-height: 24px;
-    margin-bottom: 0;
-    font-family: "Raleway", sans-serif;
-    color: #777777;
-}
-
-#footer .footer-top h4 {
-    font-size: 16px;
-    font-weight: bold;
-    color: #444444;
-    position: relative;
-    padding-bottom: 12px;
-}
-
-#footer .footer-top .footer-links {
-    margin-bottom: 30px;
-}
-
-#footer .footer-top .footer-links ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-#footer .footer-top .footer-links ul i {
-    padding-right: 2px;
-    color: #3498db;
-    font-size: 18px;
-    line-height: 1;
-}
-
-#footer .footer-top .footer-links ul li {
-    padding: 10px 0;
-    display: flex;
-    align-items: center;
-}
-
-#footer .footer-top .footer-links ul li:first-child {
-    padding-top: 0;
-}
-
-#footer .footer-top .footer-links ul a {
-    color: #777777;
-    transition: 0.3s;
-    display: inline-block;
-    line-height: 1;
-}
-
-#footer .footer-top .footer-links ul a:hover {
-    text-decoration: none;
-    color: #3498db;
-}
-
-#footer .footer-newsletter {
-    font-size: 15px;
-}
-
-#footer .footer-newsletter h4 {
-    font-size: 16px;
-    font-weight: bold;
-    color: #444444;
-    position: relative;
-    padding-bottom: 12px;
-}
-
-#footer .footer-newsletter form {
-    margin-top: 30px;
-    background: #fff;
-    padding: 6px 10px;
-    position: relative;
-    border-radius: 4px;
-    text-align: left;
-    border: 1px solid #b6daf2;
-}
-
-#footer .footer-newsletter form input[type="email"] {
-    border: 0;
-    padding: 4px 8px;
-    width: calc(100% - 100px);
-}
-
-#footer .footer-newsletter form input[type="submit"] {
-    position: absolute;
-    top: 0;
-    right: -2px;
-    bottom: 0;
-    border: 0;
-    background: none;
-    font-size: 16px;
-    padding: 0 20px 2px 20px;
-    background: #3498db;
-    color: #fff;
-    transition: 0.3s;
-    border-radius: 0 4px 4px 0;
-    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-}
-
-#footer .footer-newsletter form input[type="submit"]:hover {
-    background: #57aae1;
-}
-
-#footer .credits {
-    padding-top: 5px;
-    font-size: 13px;
-    color: #444444;
-}
-
-#footer .social-links a {
-    font-size: 18px;
-    display: inline-block;
-    background: #3498db;
-    color: #fff;
-    line-height: 1;
-    padding: 8px 0;
-    margin-right: 4px;
-    border-radius: 50%;
-    text-align: center;
-    width: 36px;
-    height: 36px;
-    transition: 0.3s;
-}
-
-#footer .social-links a:hover {
-    background: #5faee3;
-    color: #fff;
-    text-decoration: none;
-}
-
-/*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
 .footer-area {
@@ -1492,7 +1173,7 @@ section {
 .footer-icons ul li a {
     /* border: 1px solid #444; */
     color: #ffffff;
-    background: #3498db;
+    background: #1e5f18;
     display: block;
     font-size: 16px;
     height: 40px;
@@ -1538,7 +1219,7 @@ section {
 
 .popular-tag ul li a:hover,
 .footer-icons ul li a:hover {
-    background: #3ec1d5;
+    background: #2faa23;
     /* border: 1px solid #005461; */
     color: #fff;
 }
@@ -1590,12 +1271,13 @@ section {
 
 .footer-linksweb a {
     font-size: 14px;
-    color: #3ec1d5;
+    font-weight: 500;
+    color: #017201;
 }
 
 .footer-linksweb a:hover {
     font-size: 14px;
-    color: #86c4ec;
+    color: #2faa23;
 }
 
 .footer-head h3 {
@@ -1603,24 +1285,29 @@ section {
     font-weight: 200;
 }
 
+
 /*--------------------------------------------------------------
 # Login
 --------------------------------------------------------------*/
 
 .login-button {
-    background-color: #ffffff; /* Warna latar belakang */
-    border: 2px solid #3498db;
-    color: #7a7979; /* Warna teks */
+    background-color: #0d5e21; /* Warna latar belakang */
+    border: 2px solid #0d5e21;
+    color: #f9fffb; /* Warna teks */
     padding: 4px 20px; /* Padding tombol */
     margin-left: 50px;
-    font-weight: 600;
+    font-weight: 200;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 17px;
+    font-size: 16px;
     margin: 20px 20px;
     cursor: pointer;
     border-radius: 50px; /* Membuat sudut tombol menjadi melengkung */
+}
+.login-button:hover {
+    background-color: #079b2c; /* Warna latar belakang */
+    border: 2px solid  #079b2c;
 }
 
 /*--------------------------------------------------------------
@@ -1630,10 +1317,10 @@ section {
 .wisata {
     position: relative; /* Membuat posisi relatif untuk kontainer */
     width: 1350px; /* Atur lebar kontainer */
-    height: 260px; /* Atur tinggi kontainer */
+    height: 380px; /* Atur tinggi kontainer */
     overflow: hidden; /* Sembunyikan bagian gambar yang melampaui kontainer */
     margin: auto; /* Pusatkan kontainer */
-    margin-bottom: -7rem; /*jarak gambar dengan card*/
+    margin-bottom: -10rem; /*jarak gambar dengan card*/
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -1662,10 +1349,10 @@ section {
 .kuliner {
     position: relative; /* Membuat posisi relatif untuk kontainer */
     width: 1350px; /* Atur lebar kontainer */
-    height: 260px; /* Atur tinggi kontainer */
+    height: 380px; /* Atur tinggi kontainer */
     overflow: hidden; /* Sembunyikan bagian gambar yang melampaui kontainer */
     margin: auto; /* Pusatkan kontainer */
-    margin-bottom: -7rem; /*jarak gambar dengan card*/
+    margin-bottom: -10rem; /*jarak gambar dengan card*/
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -1693,7 +1380,7 @@ section {
 
 .overlay-text {
     position: absolute; /* Membuat posisi absolut untuk teks */
-    top: 70%; /* Atur posisi vertikal */
+    top: 80%; /* Atur posisi vertikal */
     left: 50%; /* Atur posisi horizontal */
     transform: translate(-50%, -50%); /* Pusatkan teks secara absolut */
     color: white; /* Warna teks */
@@ -1706,10 +1393,10 @@ section {
 .penginapan {
     position: relative; /* Membuat posisi relatif untuk kontainer */
     width: 1350px; /* Atur lebar kontainer */
-    height: 260px; /* Atur tinggi kontainer */
+    height: 380px; /* Atur tinggi kontainer */
     overflow: hidden; /* Sembunyikan bagian gambar yang melampaui kontainer */
     margin: auto; /* Pusatkan kontainer */
-    margin-bottom: -7rem; /*jarak gambar dengan card*/
+    margin-bottom: -10rem; /*jarak gambar dengan card*/
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -1738,10 +1425,10 @@ section {
 .event {
     position: relative; /* Membuat posisi relatif untuk kontainer */
     width: 1350px; /* Atur lebar kontainer */
-    height: 260px; /* Atur tinggi kontainer */
+    height: 380px; /* Atur tinggi kontainer */
     overflow: hidden; /* Sembunyikan bagian gambar yang melampaui kontainer */
     margin: auto; /* Pusatkan kontainer */
-    margin-bottom: -7rem; /*jarak gambar dengan card*/
+    margin-bottom: -10rem; /*jarak gambar dengan card*/
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -1767,99 +1454,4 @@ section {
     display: block; /* Hapus spasi di bawah gambar */
 }
 
-/*--------------------------------------------------------------
-# Testimonials
---------------------------------------------------------------*/
-.testimonials .testimonials-carousel,
-.testimonials .testimonials-slider {
-    overflow: hidden;
-}
 
-.testimonials .testimonials-carousel,
-.testimonials .testimonials-slider {
-    overflow: hidden;
-}
-
-.testimonials .testimonial-item {
-    box-sizing: content-box;
-    text-align: center;
-    min-height: 320px;
-}
-
-.testimonials .testimonial-item .testimonial-img {
-    width: 90px;
-    border-radius: 50%;
-    margin: 0 auto;
-}
-
-.testimonials .testimonial-item h3 {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 10px 0 5px 0;
-    color: #111;
-}
-
-.testimonials .testimonial-item h4 {
-    font-size: 14px;
-    color: #999;
-    margin: 0;
-}
-
-.testimonials .testimonial-item .quote-icon-left,
-.testimonials .testimonial-item .quote-icon-right {
-    color: #d5e9f2;
-    font-size: 26px;
-}
-
-.testimonials .testimonial-item .quote-icon-left {
-    display: inline-block;
-    left: -5px;
-    position: relative;
-}
-
-.testimonials .testimonial-item .quote-icon-right {
-    display: inline-block;
-    right: -5px;
-    position: relative;
-    top: 10px;
-}
-
-.testimonials .testimonial-item p {
-    font-style: italic;
-    margin: 0 15px 15px 15px;
-    padding: 20px;
-    background: #fff;
-    position: relative;
-    margin-bottom: 35px;
-    border-radius: 6px;
-    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-}
-
-.testimonials .testimonial-item p::after {
-    content: "";
-    width: 0;
-    height: 0;
-    border-top: 20px solid #fff;
-    border-right: 20px solid transparent;
-    border-left: 20px solid transparent;
-    position: absolute;
-    bottom: -20px;
-    left: calc(50% - 20px);
-}
-
-.testimonials .swiper-pagination {
-    margin-top: 20px;
-    position: relative;
-}
-
-.testimonials .swiper-pagination .swiper-pagination-bullet {
-    width: 12px;
-    height: 12px;
-    background-color: #fff;
-    opacity: 1;
-    border: 1px solid #67b0d1;
-}
-
-.testimonials .swiper-pagination .swiper-pagination-bullet-active {
-    background-color: #67b0d1;
-}

@@ -38,10 +38,10 @@
                             <th>Foto </th>
                             <th>Harga Tiket</th>
                             <th>Kategori</th>
+                            <th>Latitude </th>
+                            <th>Longitude</th>
                             <th>Fasilitas</th>
-                            <th>Tanggal</th>
-
-                            {{-- <th>Maps</th> --}}
+                            <th>Deskripsi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -66,6 +66,8 @@
                                 </td>
                                 <td>{{ $row->harga_tiket }}</td>
                                 <td>{{ $row->id_kategori }}</td>
+                                <td>{{ $row->latitude }}</td>
+                                <td>{{ $row->longitude }}</td>
                                 <td>
                                     <ol>
                                         @if ($row->fasilitas && !empty($row->fasilitas))
@@ -77,7 +79,7 @@
                                         @endif
                                     </ol>
                                 </td>
-                                <td>{{ date('d-m-Y', strtotime($row->tanggal_upload)) }}</td>
+                                <td>{{ $row->deskripsi_wisata }}</td>
                                 <td>
                                     {{-- <a href="{{ route('wisata.edit', $row->id) }}" class="badge bg-warning"><span
                                             data-feather="edit"></span></a> --}}

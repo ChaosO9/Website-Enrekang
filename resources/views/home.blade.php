@@ -55,18 +55,49 @@
                             <h1>Wisata <span>Enrekang</span></h1>
                             <h2>Selamat datang di tempat yang penuh petualangan! Kami siap membantu Anda menjelajahi
                                 destinasi menarik yang tak terlupakan.</h2>
+                            <form action="{{ route('wisata') }}" method="GET">
+                                <div class="col-sm-6 mx-auto">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" class="form-control" placeholder="Search..."
+                                            name="search" value="{{ request('search') }}">
+                                        <button class="btn btn-success" type="submit"><i
+                                                class="bi bi-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="carousel-item" style="background-image: url('img.png'); height: 90vh;">
+                    <div class="carousel-item" style="background-image: url('dangke.webp'); height: 90vh;">
                         <div class="carousel-caption">
-                            <h1>Discover <span>Beautiful Landscapes</span></h1>
-                            <h2>Jelajahi keindahan alam Enrekang yang menakjubkan dan tak terlupakan.</h2>
+                            <h1>Kuliner <span>Enrekang</span></h1>
+                            <h2>Jelajahi dunia rasa di Enrekang dengan kuliner khas yang memikat dan penuh cita rasa
+                            </h2>
+                            <form action="{{ route('wisata') }}" method="GET">
+                                <div class="col-sm-6 mx-auto">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" class="form-control" placeholder="Search..."
+                                            name="search" value="{{ request('search') }}">
+                                        <button class="btn btn-success" type="submit"><i
+                                                class="bi bi-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="carousel-item" style="background-image: url('img.png'); height: 90vh;">
+                    <div class="carousel-item" style="background-image: url('bg2.jpeg'); height: 90vh;">
                         <div class="carousel-caption">
                             <h1>Experience <span>Adventure</span></h1>
-                            <h2>Nikmati berbagai aktivitas petualangan yang seru dan menantang di Enrekang.</h2>
+                            <h2>Jelajahi keindahan alam Enrekang yang menakjubkan dan tak terlupakan</h2>
+                            <form action="{{ route('wisata') }}" method="GET">
+                                <div class="col-sm-6 mx-auto">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" class="form-control" placeholder="Search..."
+                                            name="search" value="{{ request('search') }}">
+                                        <button class="btn btn-success" type="submit"><i
+                                                class="bi bi-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -109,16 +140,17 @@
                             <li><a href="">Kebudayaan</a></li>
                             <li><a href="">Event</a></li>
                         </ul> --}}
-                        <a href="{{ route('wisata.tampil') }}" class="btn btn-primary" role="button">Wisata</a>
+                        <a href="{{ route('wisata.tampil') }}" class="btn btn-custom-green" role="button">Wisata</a>
                     </div>
                     <div class="col-auto">
-                        <a href="{{ route('kuliner.tampil') }}" class="btn btn-primary" role="button">Kuliner</a>
+                        <a href="{{ route('kuliner.tampil') }}" class="btn btn-custom-green"
+                            role="button">Kuliner</a>
                     </div>
                     <div class="col-auto">
-                        <a href="#portfolio" class="btn btn-primary" role="button">Kebudayaan</a>
+                        <a href="#portfolio" class="btn btn-custom-green" role="button">Kebudayaan</a>
                     </div>
                     <div class="col-auto">
-                        <a href="{{ route('event') }}" class="btn btn-primary" role="button">Event</a>
+                        <a href="{{ route('event') }}" class="btn btn-custom-green" role="button">Event</a>
                     </div>
                 </div>
 
@@ -358,7 +390,7 @@
                             <div class="form-group mt-3">
                                 <textarea class="form-control" name="message" rows="5" placeholder="Saran" required></textarea>
                             </div>
-                            <div class="text-left mt-3"><button class="btn btn-primary" type="submit"
+                            <div class="text-left mt-3"><button class="btn btn-secondary" type="submit"
                                     {{ Auth::check() ? '' : 'disabled' }}>{{ Auth::check() ? 'Kirim Saran' : 'Login untuk Kirim Saran' }}</button>
                             </div>
                         </form>

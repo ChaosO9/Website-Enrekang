@@ -20,8 +20,8 @@
                             <th>No</th>
                             <th>Nama</th>
                             <th>Foto </th>
-                            <th>Alamat </th>
-                            <th>Harga Tiket</th>
+                            {{-- <th>Alamat </th> --}}
+                            <th>Harga</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -43,8 +43,7 @@
                                     <img src="{{ asset('images/' . $row->foto_kuliner) }}" alt=""
                                         style="width: 100px;">
                                 </td>
-                                <td>{{ $row->alamat_kuliner }}</td>
-                                <td>{{ $row->harga_kuliner }}</td>
+                                <td>@currency($row->harga_kuliner)</td>
                                 <td>
                                     <a href="{{ route('kuliner.edit', $row->id) }}" class="btn btn-warning"
                                         style="color: rgb(255, 255, 255)"> <i class="fas fa-edit"></i></a>

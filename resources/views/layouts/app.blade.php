@@ -24,7 +24,7 @@
     <!-- Custom styles for this template-->
     <link href="{{ url('asset/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
-
+    <link rel="shortcut icon" href ="{{ asset('LogoWeb.png') }}">
 
     {{-- @vite([]) --}}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -105,25 +105,14 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="{{ url('asset/img/undraw_profile.svg') }}">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small font-weight-bold">{{ auth()->user()->name }}</span>
+                                <i class="fa-solid fa-circle-user fa-2x"></i>
                             </a>
+
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
@@ -171,6 +160,7 @@
     </a>
 
     <!-- Logout Modal-->
+    <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -181,11 +171,17 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Pilih "Logout" di bawah jika anda siap untuk mengakhiri sesi Anda saat ini.
+                </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-danger" href="{{ route('login.logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                 </div>
+
+                <form id="logout-form" action="{{ route('login.logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </div>
         </div>
     </div>

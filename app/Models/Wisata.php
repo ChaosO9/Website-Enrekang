@@ -13,7 +13,7 @@ class Wisata extends Model
 
     protected $table = 'wisata';
 
-    protected $fillable = ['nama_wisata', 'foto_wisata', 'alamat_wisata', 'harga_tiket', 'id_kategori', 'fasilitas', 'deskripsi_wisata', 'maps', 'tanggal_upload'];
+    protected $fillable = ['nama_wisata', 'foto_wisata', 'alamat_wisata', 'harga_tiket', 'id_kategori', 'latitude', 'longitude', 'fasilitas', 'deskripsi_wisata'];
 
     protected $filters = [
         'sort',

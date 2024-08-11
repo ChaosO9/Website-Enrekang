@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
     <title>Login</title>
-    @vite([])
+    {{-- @vite([]) --}}
 </head>
 
 <body>
