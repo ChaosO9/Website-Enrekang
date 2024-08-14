@@ -28,7 +28,7 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
-    @vite([])
+    @vite(['resources/css/app.css'])
 
     <!-- =======================================================
   * Template Name: Lumia
@@ -40,56 +40,7 @@
 </head>
 
 <body>
-
-    <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top d-flex align-items-center">
-        <div class="container d-flex align-items-center">
-
-            <div class="logo me-auto">
-                <h1><a href="index.html">Lumia</a></h1>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-            </div>
-
-            <nav id="navbar" class="navbar order-last order-lg-0">
-                <ul>
-                    <li><a class="nav-link scrollto " href="#hero">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#about">About</a></li>
-                    <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                    <li><a class="nav-link scrollto active" href="#portfolio">Portfolio</a></li>
-                    <li><a class="nav-link scrollto" href="#testimonials">Testimonials</a></li>
-                    <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-                        <ul>
-                            <li><a href="#">Drop Down 1</a></li>
-                            <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i
-                                        class="bi bi-chevron-right"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
-                                    <li><a href="#">Deep Drop Down 2</a></li>
-                                    <li><a href="#">Deep Drop Down 3</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Drop Down 2</a></li>
-                            <li><a href="#">Drop Down 3</a></li>
-                            <li><a href="#">Drop Down 4</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav><!-- .navbar -->
-
-            {{-- <div class="header-social-links d-flex align-items-center">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-            </div> --}}
-
-        </div>
-    </header><!-- End Header -->
+    @include('navbar')
 
     <main id="main">
 
@@ -101,7 +52,7 @@
                     <h2>Portfoio Details</h2>
                     <ol>
                         <li><a href="index.html">Home</a></li>
-                        <li>Portfoio Details</li>
+                        <li>Detail Penginapan</li>
                     </ol>
                 </div>
 
@@ -119,7 +70,8 @@
                             <div class="swiper-wrapper align-items-center">
                                 {{-- @foreach ($data as $item) --}}
                                 {{-- <div class="swiper-slide"> --}}
-                                <img src="{{ asset('images/' . $penginapan->foto_penginapan) }}" alt="">
+                                <img src="{{ asset('images/penginapan/' . $penginapan->foto_penginapan) }}"
+                                    alt="">
                             </div>
                             {{-- <img src="{{ asset('images/' . $item->foto_penginapan) }}" --}}
                             {{--
@@ -139,20 +91,115 @@
                         <div class="portfolio-info">
                             {{-- @foreach ($data as $item) --}}
                             <h3>{{ $penginapan->nama_penginapan }}</h3>
-                            <ul>
 
-                                {{-- <li><strong>Nama penginapan</strong>: {{$penginapan->nama_penginapan }}
-                                        </li> --}}
-                                <li><strong>Harga</strong>: {{ $penginapan->harga_penginapan }}</li>
-                                <li><strong>Lokasi</strong>: {{ $penginapan->alamat_penginapan }}</a></li>
-                                <li><strong>Deskripsi</strong>: <br> {{ $penginapan->deskripsi_penginapan }}</a></li>
+                            <ul>
+                                <li>
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation" style="margin-top: 10px">
+                                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                                data-bs-target="#home-tab-pane" type="button" role="tab"
+                                                aria-controls="home-tab-pane" aria-selected="true">Detail</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link {{ Auth::check() ? '' : 'disabled' }}"
+                                                id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+                                                type="button" role="tab" aria-controls="profile-tab-pane"
+                                                aria-selected="false">Beri
+                                                Ulasan</button>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
-                            {{-- @endforeach --}}
+
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
+                                    aria-labelledby="home-tab" tabindex="0">
+                                    <ul>
+                                        <li>
+                                            <div class="flex items-center mb-3 mt-3">
+                                                @for ($i = 0; $i < $rating_rata2; $i++)
+                                                    <svg class="w-6 h-6 ms-2 text-yellow-300" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                        viewBox="0 0 22 20">
+                                                        <path
+                                                            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                    </svg>
+                                                @endfor
+                                                @for ($i = $rating_rata2; $i < 5; $i++)
+                                                    <svg class="w-6 h-6 ms-2 text-gray-300 dark:text-gray-500"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="currentColor" viewBox="0 0 22 20">
+                                                        <path
+                                                            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                    </svg>
+                                                @endfor
+                                                <p class="ms-4 m-0 text-sm font-semibold text-gray-900 dark:text-white">
+                                                    {{ $rating_rata2 }} dari {{ $semua_reviews->count() }} Ulasan</p>
+                                            </div>
+                                        </li>
+                                        <li><strong>Harga</strong>: {{ $penginapan->harga_penginapan }}</li>
+                                        <li><strong>Lokasi</strong>: {{ $penginapan->alamat_penginapan }}</a></li>
+                                        <li><strong>Deskripsi</strong>: <br>
+                                            {{ $penginapan->deskripsi_penginapan }}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
+                                aria-labelledby="profile-tab" tabindex="0">
+                                <ul>
+                                    <li>
+                                        <div class="container-2">
+                                            <div class="post">
+                                                <div class="text">Terima kasih sudah menilai!</div>
+                                                <div class="edit">EDIT</div>
+                                            </div>
+                                            <div class="star-widget">
+                                                <input type="radio" name="rateBintang" value="5"
+                                                    id="rate-5">
+                                                <label for="rate-5" class="fas fa-star"></label>
+                                                <input type="radio" name="rateBintang" value="4"
+                                                    id="rate-4">
+                                                <label for="rate-4" class="fas fa-star"></label>
+                                                <input type="radio" name="rateBintang" value="3"
+                                                    id="rate-3">
+                                                <label for="rate-3" class="fas fa-star"></label>
+                                                <input type="radio" name="rateBintang" value="2"
+                                                    id="rate-2">
+                                                <label for="rate-2" class="fas fa-star"></label>
+                                                <input type="radio" name="rateBintang" value="1"
+                                                    id="rate-1">
+                                                <label for="rate-1" class="fas fa-star"></label>
+                                                <form
+                                                    action="{{ route('penginapan.tambah.review', ['id' => $penginapan->id]) }}"
+                                                    method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <p></p>
+                                                    <input type="text" name="hiddenRate" id="hiddenText"
+                                                        style="display:none;">
+                                                    <div class="textarea">
+                                                        <textarea name="komentar" cols="30" placeholder="Ceritakan pengalaman Anda (Opsional)..."></textarea>
+                                                    </div>
+                                                    {{-- <div class="btn-2">
+                                                            <button type="submit">Kirim!</button>
+                                                        </div> --}}
+                                            </div>
+                                            <div class="textarea mt-3 invisible">
+                                                <label for="formFileSm" class="form-label">Masukkan gambar
+                                                    (Opsional)</label>
+                                                <input class="form-control form-control-sm" id="formFileSm"
+                                                    type="file" name="gambar_review">
+                                            </div>
+                                            <div class="btn-2 invisible">
+                                                <button type="submit">Kirim!</button>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
                         </div>
-                        {{-- <div class="portfolio-description">
-                                <h2>Deskripsi</h2>
-                                <p>{{ $item->deskripsi_penginapan }}</p>
-                            </div> --}}
                     </div>
                 </div>
             </div>

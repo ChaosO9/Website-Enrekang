@@ -28,8 +28,8 @@ class Penginapan extends Model
         return $this->belongsToMany(Fasilitas::class, 'fasilitas_penginapan', 'penginapan', 'fasilitas');
     }
 
-    public function gambar()
+    public function review()
     {
-        return $this->hasMany(GambarPenginapan::class, 'penginapan');
+        return $this->hasMany(ReviewPenginapan::class, 'penginapan');
     }
 }

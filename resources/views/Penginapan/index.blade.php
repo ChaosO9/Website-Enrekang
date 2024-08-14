@@ -36,7 +36,7 @@
                                 <th>{{ $no++ }}</th>
                                 <td>{{ $row->nama_penginapan }}</td>
                                 <td>
-                                    <img src="{{ asset('images/' . $row->foto_penginapan) }}" alt=""
+                                    <img src="{{ asset('images/penginapan/' . $row->foto_penginapan) }}" alt=""
                                         style="width: 100px;">
                                 </td>
                                 <td>{{ $row->alamat_penginapan }}</td>

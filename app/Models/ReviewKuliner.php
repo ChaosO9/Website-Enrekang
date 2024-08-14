@@ -12,10 +12,15 @@ class ReviewKuliner extends Model
 
     protected $table = 'review_kuliner';
 
-    protected $fillable = ['id', 'kuliner', 'gambar', 'deskripsi', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'rating_bintang', 'kuliner', 'gambar', 'komentar', 'created_at', 'updated_at'];
 
     public function kuliner()
     {
         return $this->belongsTo(Kuliner::class, 'kuliner_id2');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -12,10 +12,15 @@ class ReviewEvent extends Model
 
     protected $table = 'review_event';
 
-    protected $fillable = ['id', 'event', 'gambar', 'deskripsi', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'rating_bintang', 'event', 'gambar', 'komentar', 'created_at', 'updated_at'];
 
     public function event()
     {
         return $this->belongsTo(Event::class, 'event_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

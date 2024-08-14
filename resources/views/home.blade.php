@@ -161,11 +161,9 @@
                             <div class="portfolio-wrap">
                                 <figure>
                                     {{-- {{ $item->foto_wisata }} --}}
-
-
-                                    <img src="{{ asset('images/wisata/' . $item->foto_wisata) }}" class="img-fluid"
-                                        alt="">
-                                    <a href="{{ url('assets/img/portfolio/portfolio-1.jpg') }}"
+                                    <img src="{{ asset('images/wisata/' . $item->foto_wisata) }}"
+                                        style="width: 100%; height: auto;" alt="">
+                                    <a href="{{ asset('images/wisata/' . $item->foto_wisata) }}"
                                         data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
                                         title="Preview"><i class="fa-regular fa-eye"></i></a>
                                     <a href="wisata/show/{{ $item->id }}" class="link-details"
@@ -193,11 +191,9 @@
                             <div class="portfolio-wrap">
                                 <figure>
                                     {{-- {{ $item->foto_kuliner }} --}}
-
-
-                                    <img src="{{ asset('images/kuliner/' . $item->foto_kuliner) }}" class="img-fluid"
-                                        alt="">
-                                    <a href="{{ url('assets/img/portfolio/portfolio-1.jpg') }}"
+                                    <img src="{{ asset('images/kuliner/' . $item->foto_kuliner) }}"
+                                        style="width: 100%; height: auto;" alt="">
+                                    <a href="{{ asset('images/kuliner/' . $item->foto_kuliner) }}"
                                         data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
                                         title="Preview"><i class="fa-regular fa-eye"></i></a>
                                     <a href="kuliner/show/{{ $item->id }}" class="link-details"
@@ -219,11 +215,9 @@
                             <div class="portfolio-wrap">
                                 <figure>
                                     {{-- {{ $item->foto_penginapan }} --}}
-
-
                                     <img src="{{ asset('images/penginapan/' . $item->foto_penginapan) }}"
-                                        class="img-fluid" alt="">
-                                    <a href="{{ asset('images/' . $item->foto_penginapan) }}"
+                                        style="width: 100%; height: auto;" alt="">
+                                    <a href="{{ asset('images/penginapan/' . $item->foto_penginapan) }}"
                                         data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
                                         title="{{ $item->nama_penginapan }}"><i class="fa-regular fa-eye"></i></a>
                                     <a href="penginapan/show/{{ $item->id }}" class="link-details"
@@ -243,9 +237,9 @@
                         <div class="col-lg-4 col-md-6 portfolio-item filter-event wow fadeInUp">
                             <div class="portfolio-wrap">
                                 <figure>
-                                    <img src="{{ asset('images/event/' . $item->foto_event) }}" class="img-fluid"
-                                        alt="">
-                                    <a href="{{ url('assets/img/portfolio/portfolio-1.jpg') }}"
+                                    <img src="{{ asset('images/event/' . $item->foto_event) }}"
+                                        style="width: 100%; height: auto;" alt="">
+                                    <a href="{{ asset('images/event/' . $item->foto_event) }}"
                                         data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
                                         title="Preview"><i class="fa-regular fa-eye"></i></a>
                                     <a href="event/show/{{ $item->id }}" class="link-details"

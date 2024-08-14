@@ -128,5 +128,10 @@ return [
 
     'providers' => ServiceProvider::defaultProviders()->merge([
         Usamamuneerchaudhary\Commentify\Providers\CommentifyServiceProvider::class,
+        // Mews\Captcha\CaptchaServiceProvider::class,
     ])->toArray(),
+
+    // 'aliases' => [
+    //     'Captcha' => Mews\Captcha\Facades\Captcha::class,
+    // ]
 ];

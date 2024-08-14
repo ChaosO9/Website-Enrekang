@@ -22,8 +22,8 @@ class Kuliner extends Model
         'like'
     ];
 
-    public function gambar()
+    public function review()
     {
-        return $this->hasMany(GambarKuliner::class, 'kuliner');
+        return $this->hasMany(ReviewKuliner::class, 'kuliner');
     }
 }

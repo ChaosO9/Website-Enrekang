@@ -6,6 +6,8 @@ use App\Models\Event;
 use App\Models\GambarEvent;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class EventController extends Controller
 {
@@ -28,18 +30,23 @@ class EventController extends Controller
 
     public function simpan(Request $request)
     {
-
-        $imageName = $request->foto->getClientOriginalName();
-        $request->foto->move(public_path('/images'), $imageName);
-
         $data = [
             'nama_event' => $request->nama_event,
-            'foto_event' => $imageName,
             'tempat_event' => $request->tempat_event,
             'tanggal_pelaksanaan' => $request->tanggal_pelaksanaan,
             'tanggal_selesai' => $request->tanggal_selesai,
             'deskripsi_event' => $request->deskripsi_event,
         ];
+
+        if ($request->hasFile('foto')) {
+            $manager = new ImageManager(new Driver());
+            $imageName = uniqid('', true) . '_' . time() . '.webp';
+            $image = $manager->read($request->foto)->toWebp(90);
+            $image->save(base_path('public/images/event/' . $imageName));
+            $data['foto_event'] = $imageName;
+        } else {
+            $data['foto_event'] = 'no-image.webp';
+        }
 
         Event::create($data);
 
@@ -55,17 +62,23 @@ class EventController extends Controller
 
     public function update($id, Request $request)
     {
-        $imageName = $request->foto->getClientOriginalName();
-        $request->foto->move(public_path('/images'), $imageName);
-
         $data = [
             'nama_event' => $request->nama_event,
-            'foto_event' => $imageName,
             'tempat_event' => $request->tempat_event,
             'tanggal_pelaksanaan' => $request->tanggal_pelaksanaan,
             'tanggal_selesai' => $request->tanggal_selesai,
             'deskripsi_event' => $request->deskripsi_event,
         ];
+
+        if ($request->hasFile('foto')) {
+            $manager = new ImageManager(new Driver());
+            $imageName = uniqid('', true) . '_' . time() . '.webp';
+            $image = $manager->read($request->foto)->toWebp(90);
+            $image->save(base_path('public/images/event/' . $imageName));
+            $data['foto_event'] = $imageName;
+        } else {
+            $data['foto_event'] = 'no-image.webp';
+        }
 
         Event::find($id)->update($data);
 
@@ -98,11 +111,23 @@ class EventController extends Controller
     public function show($id)
     {
         //get event by ID
-        $event = Event::find($id);
-        $galeri = $event->gambar;
+        $event = Event::find($id)->get();
 
-        //render view with event
-        return view('details_event', compact('event', 'galeri'));
+        $semua_reviews = $event->review()->with('user');
+        $reviews = $semua_reviews->map(function ($review) {
+            $review->username = $review->user->name;
+            $review->user_created_at = $review->user->created_at;
+            return $review;
+        });
+        $jumlah_ulasan = $event->review()->count();
+        if ($jumlah_ulasan > 0) {
+            $jumlah_rating = $event->review()->sum('rating_bintang');
+            $rating_rata2 = intval(number_format($jumlah_rating / $jumlah_ulasan));
+        } else {
+            $rating_rata2 = 0;
+        }
+
+        return view('details_event', compact('event', 'semua_reviews', 'reviews', 'jumlah_ulasan', 'rating_rata2'));
     }
 
     public function urlParamBuilder(Request $request)
@@ -149,24 +174,24 @@ class EventController extends Controller
         return view('event.gambar', compact('event'));
     }
 
-    public function tambahGambar($id, Request $request, $from = null)
-    {
-        $originalName = $request->foto->getClientOriginalName();
-        $uniqueId = time();
-        $fileName = $uniqueId . '_' . $originalName;
-        $request->foto->move(public_path('/images'), $fileName);
-        $deskripsi = $request->input('deskripsi_gambar');
+    // public function tambahGambar($id, Request $request, $from = null)
+    // {
+    //     $originalName = $request->foto->getClientOriginalName();
+    //     $uniqueId = time();
+    //     $fileName = $uniqueId . '_' . $originalName;
+    //     $request->foto->move(public_path('/images/event/'), $fileName);
+    //     $deskripsi = $request->input('deskripsi_gambar');
 
-        GambarEvent::create([
-            'event' => $id,
-            'gambar' => $fileName,
-            'deskripsi' => $deskripsi
-        ]);
+    //     GambarEvent::create([
+    //         'event' => $id,
+    //         'gambar' => $fileName,
+    //         'deskripsi' => $deskripsi
+    //     ]);
 
-        if ($from == 'detail_event') {
-            return redirect()->route('event.show', $id);
-        } else if ($from == null) {
-            return redirect()->route('event2');
-        }
-    }
+    //     if ($from == 'detail_event') {
+    //         return redirect()->route('event.show', $id);
+    //     } else if ($from == null) {
+    //         return redirect()->route('event2');
+    //     }
+    // }
 }

@@ -40,10 +40,10 @@
                                 <th>{{ $no++ }}</th>
                                 <td>{{ $row->nama_kuliner }}</td>
                                 <td>
-                                    <img src="{{ asset('images/' . $row->foto_kuliner) }}" alt=""
+                                    <img src="{{ asset('images/kuliner/' . $row->foto_kuliner) }}" alt=""
                                         style="width: 100px;">
                                 </td>
-                                <td>@currency($row->harga_kuliner)</td>
+                                <td>{{ $row->harga_kuliner }}</td>
                                 <td>
                                     <a href="{{ route('kuliner.edit', $row->id) }}" class="btn btn-warning"
                                         style="color: rgb(255, 255, 255)"> <i class="fas fa-edit"></i></a>

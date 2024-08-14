@@ -27,183 +27,7 @@
     <link href="{{ url('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    {{-- <link href="{{ url('assets/css/style.css') }}" rel="stylesheet"> --}}
-    <style>
-        .container-2 {
-            /* position: relative; */
-            width: 100%;
-            background: rgba(250, 250, 250, 0.808);
-            padding: 20px 30px;
-            /* border: 1px solid #444; */
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
-        .container-2 .post {
-            display: none;
-        }
-
-        .container-2 .text {
-            font-size: 25px;
-            color: #666;
-            font-weight: 500;
-        }
-
-        .container-2 .edit {
-            position: absolute;
-            right: 10px;
-            top: 5px;
-            font-size: 16px;
-            color: #666;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        .container-2 .edit:hover {
-            text-decoration: underline;
-        }
-
-        .container-2 .star-widget input {
-            display: none;
-        }
-
-        .star-widget label {
-            font-size: 23px;
-            color: #444;
-            padding: 10px;
-            float: right;
-            transition: all 0.2s ease;
-        }
-
-        input:not(:checked)~label:hover,
-        input:not(:checked)~label:hover~label {
-            color: #fd4;
-        }
-
-        input:checked~label {
-            color: #fd4;
-        }
-
-        input#rate-5:checked~label {
-            color: #fe7;
-            text-shadow: 0 0 20px #952;
-        }
-
-        #rate-1:checked~form p:before {
-            content: "Sangat Buruk";
-        }
-
-        #rate-2:checked~form p:before {
-            content: "Buruk";
-        }
-
-        #rate-3:checked~form p:before {
-            content: "Biasa";
-        }
-
-        #rate-4:checked~form p:before {
-            content: "Baik";
-        }
-
-        #rate-5:checked~form p:before {
-            content: "Sangat Baik";
-        }
-
-        .container-2 form {
-            display: none;
-        }
-
-        input:checked~form {
-            display: block;
-        }
-
-        form p {
-            width: 100%;
-            font-size: 20px;
-            color: rgb(0, 0, 0);
-            font-weight: 500;
-            margin: 5px 0 20px 0;
-            text-align: center;
-            transition: all 0.2s ease;
-        }
-
-        form .textarea {
-            height: 100px;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        form .textarea textarea {
-            height: 100%;
-            width: 100%;
-            outline: none;
-            color: #000000;
-            border: 1px solid #333;
-            background: rgba(250, 250, 250, 0.582);
-            padding: 10px;
-            font-size: 15px;
-            resize: none;
-        }
-
-        .textarea textarea:focus {
-            border-color: #444;
-        }
-
-        form .btn-2 {
-            height: 45px;
-            width: 100%;
-            margin: 15px 0;
-        }
-
-        form .btn-2 button {
-            height: 100%;
-            width: 100%;
-            border: 1px solid #444;
-            outline: none;
-            background: #7a3939;
-            color: #999;
-            font-size: 15px;
-            font-weight: 500;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        form .btn-2 button:hover {
-            background: #1b1b1b;
-        }
-
-        .btn-2 {
-            height: 45px;
-            width: 100%;
-            margin: 15px 0;
-        }
-
-        .btn-2 button {
-            height: 100%;
-            width: 100%;
-            /* border: 1px solid #444; */
-            outline: none;
-            background: #016d0f;
-            color: #ebdfdf;
-            font-size: 15px;
-            font-weight: 500;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-2 button:hover {
-            background: #02a818;
-        }
-
-        .invisible {
-            display: none;
-        }
-    </style>
+    <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
     @vite(['resources/css/app.css'])
 
 
@@ -378,7 +202,7 @@
             </div>
         </section>
 
-        <section id="portfolio" class="portfolio">
+        <section id="portfolio" class="portfolio mb-4">
             <div class="container">
                 <div class="section-title ">
                     <h2>Review Wisata {{ $wisata->nama_wisata }}</h2>
@@ -438,20 +262,22 @@
                             </article>
                         @endforeach
                         {{-- <div class="d-flex justify-content-center">
+                        {{-- <div class="d-flex justify-content-center">
                             {{ $wisata_lain2->links() }}
                         </div> --}}
                     </div>
-                </section>
-
-                <div class="section-title ">
-                    <h2>Lokasi</h2>
-                </div>
-                <div class="col-lg-6">
-                    <iframe class="mb-4 mb-lg-0"
-                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtQdCKUA91HOI2QRMhKMNrZAxOQcOXWXM&q={{ $wisata->latitude }},{{ $wisata->longitude }}"
-                        frameborder="0" style="border:0; width: 200%; height: 350px;" allowfullscreen></iframe>
-                </div>
             </div>
+        </section>
+
+        <div class="section-title ">
+            <h2>Lokasi</h2>
+        </div>
+        <div class="col-lg-6">
+            <iframe class="mb-4 mb-lg-0"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtQdCKUA91HOI2QRMhKMNrZAxOQcOXWXM&q={{ $wisata->latitude }},{{ $wisata->longitude }}"
+                frameborder="0" style="border:0; width: 200%; height: 350px;" allowfullscreen></iframe>
+        </div>
+        </div>
         </section>
 
         <!-- Modal -->

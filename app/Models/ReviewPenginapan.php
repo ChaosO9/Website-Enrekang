@@ -12,10 +12,15 @@ class ReviewPenginapan extends Model
 
     protected $table = 'review_penginapan';
 
-    protected $fillable = ['id', 'penginapan', 'gambar', 'deskripsi', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'rating_bintang', 'penginapan', 'gambar', 'komentar', 'created_at', 'updated_at'];
 
     public function penginapan()
     {
         return $this->belongsTo(Penginapan::class, 'penginapan_id2');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

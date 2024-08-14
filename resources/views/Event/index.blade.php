@@ -25,8 +25,8 @@
                             <th>Foto </th>
                             <th>Tanggal Mulai </th>
                             <th>Tanggal Selesai </th>
-                            <th>Latitude </th>
-                            <th>Longitude </th>
+                            {{-- <th>Latitude </th>
+                            <th>Longitude </th> --}}
                             <th>Deskripsi </th>
                             <th>Aksi</th>
                         </tr>
@@ -39,13 +39,14 @@
                                 <td>{{ $row->nama_event }}</td>
                                 <td>{{ $row->tempat_event }}</td>
                                 <td>
-                                    <img src="{{ asset('images/' . $row->foto_event) }}" alt=""
+                                    <img src="{{ asset('images/event/' . $row->foto_event) }}" alt=""
                                         style="width: 100px;">
                                 </td>
                                 <td>{{ date('d-m-Y', strtotime($row->tanggal_pelaksanaan)) }}</td>
                                 <td>{{ date('d-m-Y', strtotime($row->tanggal_selesai)) }}</td>
-                                <td>{{ $row->latitude }}</td>
-                                <td>{{ $row->longitude }}</td>
+                                {{-- <td>{{ $row->latitude }}</td>
+                                <td>{{ $row->longitude }}</td> --}}
+                                <td>{{ $row->deskripsi_event }}</td>
                                 <td>
                                     <a href="{{ route('event.edit', $row->id) }}" class="btn btn-warning"
                                         style="color: rgb(255, 255, 255)"> <i class="fas fa-edit"></i></a>
@@ -54,7 +55,6 @@
                                     <a href="{{ route('event.hapus', $row->id) }}" class="btn btn-danger"> <i
                                             class="fas fa-trash"></i></a>
                                 </td>
-                                <td>{{ $row->deskripsi_event }}</td>
                             </tr>
                         @endforeach
                     </tbody>

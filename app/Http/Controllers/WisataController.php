@@ -257,11 +257,10 @@ class WisataController extends Controller
         ];
         $wisata = Wisata::find($id);
         $fasilitas = $wisata->fasilitas()->pluck('nama')->all();
-        $reviews = $wisata->review;
 
         // $reviews = ReviewWisata::where('wisata', $wisata->id)->get();
         $semua_reviews = $wisata->review()->with('user');
-        $reviews = $semua_reviews->paginate(2)->map(function ($review) {
+        $reviews = $semua_reviews->get()->map(function ($review) {
             $review->username = $review->user->name;
             $review->user_created_at = $review->user->created_at;
             return $review;

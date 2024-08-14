@@ -29,7 +29,7 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
-    @vite([])
+    @vite(['resources/css/app.css'])
 
     <!-- =======================================================
   * Template Name: Lumia
@@ -42,55 +42,7 @@
 
 <body>
 
-    <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top d-flex align-items-center">
-        <div class="container d-flex align-items-center">
-
-            <div class="logo me-auto">
-                <h1><a href="index.html">Lumia</a></h1>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-            </div>
-
-            <nav id="navbar" class="navbar order-last order-lg-0">
-                <ul>
-                    <li><a class="nav-link scrollto " href="#hero">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#about">About</a></li>
-                    <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                    <li><a class="nav-link scrollto active" href="#portfolio">Portfolio</a></li>
-                    <li><a class="nav-link scrollto" href="#testimonials">Testimonials</a></li>
-                    <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-                        <ul>
-                            <li><a href="#">Drop Down 1</a></li>
-                            <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i
-                                        class="bi bi-chevron-right"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
-                                    <li><a href="#">Deep Drop Down 2</a></li>
-                                    <li><a href="#">Deep Drop Down 3</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Drop Down 2</a></li>
-                            <li><a href="#">Drop Down 3</a></li>
-                            <li><a href="#">Drop Down 4</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav><!-- .navbar -->
-
-            {{-- <div class="header-social-links d-flex align-items-center">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-            </div> --}}
-
-        </div>
-    </header><!-- End Header -->
+    @include('navbar')
 
     <main id="main">
 
@@ -99,11 +51,11 @@
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Portfoio Details</h2>
-                    <ol>
+                    <h2>Event</h2>
+                    {{-- <ol>
                         <li><a href="index.html">Home</a></li>
                         <li>Portfoio Details</li>
-                    </ol>
+                    </ol> --}}
                 </div>
 
             </div>
@@ -120,7 +72,7 @@
                             <div class="swiper-wrapper align-items-center">
                                 {{-- @foreach ($data as $item) --}}
                                 {{-- <div class="swiper-slide"> --}}
-                                <img src="{{ asset('images/' . $event->foto_event) }}" alt="">
+                                <img src="{{ asset('images/event/' . $event->foto_event) }}" alt="">
                             </div>
                             {{-- <img src="{{ asset('images/' . $item->foto_event) }}" --}}
                             {{--
@@ -140,20 +92,115 @@
                         <div class="portfolio-info">
                             {{-- @foreach ($data as $item) --}}
                             <h3>{{ $event->nama_event }}</h3>
-                            <ul>
 
-                                {{-- <li><strong>Nama event</strong>: {{$event->nama_event }}
-                                        </li> --}}
-                                {{-- <li><strong>Harga</strong>: {{ $event->harga_tiket }}</li> --}}
-                                <li><strong>Lokasi</strong>: {{ $event->tempat_event }}</a></li>
-                                <li><strong>Deskripsi</strong>: <br> {{ $event->deskripsi_event }}</a></li>
+                            <ul>
+                                <li>
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation" style="margin-top: 10px">
+                                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                                data-bs-target="#home-tab-pane" type="button" role="tab"
+                                                aria-controls="home-tab-pane" aria-selected="true">Detail</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link {{ Auth::check() ? '' : 'disabled' }}"
+                                                id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+                                                type="button" role="tab" aria-controls="profile-tab-pane"
+                                                aria-selected="false">Beri
+                                                Ulasan</button>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
-                            {{-- @endforeach --}}
+
+
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
+                                    aria-labelledby="home-tab" tabindex="0">
+                                    <ul>
+                                        <li>
+                                            <div class="flex items-center  mb-3">
+                                                @for ($i = 0; $i < $rating_rata2; $i++)
+                                                    <svg class="w-6 h-6 ms-2 text-yellow-300" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                        viewBox="0 0 22 20">
+                                                        <path
+                                                            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                    </svg>
+                                                @endfor
+                                                @for ($i = $rating_rata2; $i < 5; $i++)
+                                                    <svg class="w-6 h-6 ms-2 text-gray-300 dark:text-gray-500"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="currentColor" viewBox="0 0 22 20">
+                                                        <path
+                                                            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                    </svg>
+                                                @endfor
+                                                <p class="ms-4 m-0 text-sm font-semibold text-gray-900 dark:text-white">
+                                                    {{ $rating_rata2 }} dari {{ $semua_reviews->count() }} Ulasan</p>
+                                            </div>
+                                        </li>
+                                        {{-- <li><strong>Nama event</strong>: {{$event->nama_event }}
+                                                </li> --}}
+                                        {{-- <li><strong>Harga</strong>: {{ $event->harga_tiket }}</li> --}}
+                                        <li><strong>Lokasi</strong>: {{ $event->tempat_event }}</a></li>
+                                        <li><strong>Deskripsi</strong>: <br> {{ $event->deskripsi_event }}</a></li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
+                                    aria-labelledby="profile-tab" tabindex="0">
+                                    <ul>
+                                        <li>
+                                            <div class="container-2">
+                                                <div class="post">
+                                                    <div class="text">Terima kasih sudah menilai!</div>
+                                                    <div class="edit">EDIT</div>
+                                                </div>
+                                                <div class="star-widget">
+                                                    <input type="radio" name="rateBintang" value="5"
+                                                        id="rate-5">
+                                                    <label for="rate-5" class="fas fa-star"></label>
+                                                    <input type="radio" name="rateBintang" value="4"
+                                                        id="rate-4">
+                                                    <label for="rate-4" class="fas fa-star"></label>
+                                                    <input type="radio" name="rateBintang" value="3"
+                                                        id="rate-3">
+                                                    <label for="rate-3" class="fas fa-star"></label>
+                                                    <input type="radio" name="rateBintang" value="2"
+                                                        id="rate-2">
+                                                    <label for="rate-2" class="fas fa-star"></label>
+                                                    <input type="radio" name="rateBintang" value="1"
+                                                        id="rate-1">
+                                                    <label for="rate-1" class="fas fa-star"></label>
+                                                    <form
+                                                        action="{{ route('event.tambah.review', ['id' => $event->id]) }}"
+                                                        method="POST" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <p></p>
+                                                        <input type="text" name="hiddenRate" id="hiddenText"
+                                                            style="display:none;">
+                                                        <div class="textarea">
+                                                            <textarea name="komentar" cols="30" placeholder="Ceritakan pengalaman Anda (Opsional)..."></textarea>
+                                                        </div>
+                                                        {{-- <div class="btn-2">
+                                                            <button type="submit">Kirim!</button>
+                                                        </div> --}}
+                                                </div>
+                                                <div class="textarea mt-3 invisible">
+                                                    <label for="formFileSm" class="form-label">Masukkan gambar
+                                                        (Opsional)</label>
+                                                    <input class="form-control form-control-sm" id="formFileSm"
+                                                        type="file" name="gambar_review">
+                                                </div>
+                                                <div class="btn-2 invisible">
+                                                    <button type="submit">Kirim!</button>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        {{-- <div class="portfolio-description">
-                                <h2>Deskripsi</h2>
-                                <p>{{ $item->deskripsi_event }}</p>
-                            </div> --}}
                     </div>
                 </div>
             </div>
@@ -164,54 +211,69 @@
         <section id="portfolio" class="portfolio">
             <div class="container">
                 <div class="section-title ">
-                    <h2>Galeri Event {{ $event->nama_event }}</h2>
+                    <h2>Review Event {{ $event->nama_event }}</h2>
                     {{-- <img src="{{ asset('kuliner.jpg') }}" alt="Example Image"> --}}
-                    <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit</p>
+                    {{-- <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit</p> --}}
                 </div>
 
-                <div class="row portfolio-container">
-                    @if (isset($galeri) && !$galeri->isEmpty())
-                        @foreach ($galeri as $item)
-                            <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
-                                <div class="portfolio-wrap">
-                                    <figure>
-                                        <img src="{{ asset('images/' . $item->gambar) }}" class="img-fluid"
-                                            alt="">
-                                        <a href="{{ asset('images/' . $item->gambar) }}"
-                                            data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
-                                            title="{{ $item->nama_wisata }}"><i class="bx bx-plus"></i></a>
-                                        {{-- <a href="/wisata/show/{{ $item->id }}" class="link-details"
-                                        title="More Details"><i class="bx bx-link"></i></a> --}}
-                                    </figure>
-
-                                    <div class="portfolio-info">
-                                        <h4>{{ $item->deskripsi }}</h4>
-                                        {{-- <p>{{ $item->deskripsi_wisata }}</p>
-                                    <p>Rp. {{ $item->harga_tiket }}</p> --}}
+                <section class="bg-white dark:bg-gray-900 py-2 lg:py-4">
+                    <div class="max-w-3xl mx-auto px-4">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Ulasan
+                                ({{ $reviews->count() }})</h2>
+                        </div>
+                        @foreach ($reviews as $ulasan)
+                            <article class="mb-10">
+                                <div class="flex items-center mb-4">
+                                    <img class="w-10 h-10 me-4 rounded-full"
+                                        src="https://gravatar.com/avatar/83f6c134ed8c2503aed7355d1bdb8bd1?s=80&d=mp"
+                                        alt="">
+                                    <div class="font-medium dark:text-white conten">
+                                        <p class="m-0 p-0">{{ $ulasan->username }} </p>
+                                        <time datetime="2014-08-16 19:00"
+                                            class="block text-sm text-gray-500 dark:text-gray-400">Bergabung pada
+                                            {{ \Carbon\Carbon::parse($ulasan->user_created_at)->format('d F Y') }}</time>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
+                                    @for ($i = 0; $i < $ulasan->rating_bintang; $i++)
+                                        <svg class="w-4 h-4 text-yellow-300" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                            viewBox="0 0 22 20">
+                                            <path
+                                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                        </svg>
+                                    @endfor
+                                    @for ($i = $ulasan->rating_bintang; $i < 5; $i++)
+                                        <svg class="w-4 h-4 text-gray-300 dark:text-gray-500" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                            viewBox="0 0 22 20">
+                                            <path
+                                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                        </svg>
+                                    @endfor
+                                    {{-- <h3 class="ms-2 text-sm font-semibold text-gray-900 dark:text-white">Thinking to buy another one!</h3> --}}
+                                </div>
+                                <footer class="mb-1 text-sm text-gray-500 dark:text-gray-400">
+                                    <p>Diulas pada <time datetime="2017-03-03 19:00">
+                                            {{ \Carbon\Carbon::parse($ulasan->created_at)->format('d F Y, H:i') }}</time>
+                                    </p>
+                                </footer>
+                                <p class="mb-2 text-gray-500 dark:text-gray-400">{{ $ulasan->komentar }}</p>
+                                @if (isset($ulasan->gambar))
+                                    <img src="{{ asset('images/event/' . $ulasan->gambar) }}" alt="Description"
+                                        class="max-w-56 object-cover rounded-lg shadow-md border border-gray-200">
+                                @endif
+                                <livewire:comments :model="$ulasan" :ulasan="$ulasan" />
+                            </article>
                         @endforeach
-                    @else
-                        <div class="col-lg-6 col-md-6 mx-auto align-items-center justify-content-center">
-                            <h4>Tidak Ada Gambar Untuk Ditampilkan</h4>
-                        </div>
-                    @endif
-                </div>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">
-                    <i class="fa-solid fa-image"></i><i class="fa-solid fa-plus"></i>Tambah Gambar
-                </button>
-                <div class="col-lg-6 mt-5">
-                    {{-- <iframe class="mb-4 mb-lg-0"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.104325221181!2d119.77340251025275!3d-3.5634506423397103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d9440637ac94061%3A0x71324d8dabb03f30!2sDinas%20Pemuda%2C%20Olah%20raga%20dan%20Pariwisata%20Kabupaten%20Enrekang!5e0!3m2!1sid!2sid!4v1713149644702!5m2!1sid!2sid"
-                        frameborder="0" style="border:0; width: 140%; height: 400px; " allowfullscreen></iframe> --}}
+                    </div>
                     <div class="col-lg-6 mt-5">
                         <iframe class="mb-4 mb-lg-0"
                             src="{{ 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCtQdCKUA91HOI2QRMhKMNrZAxOQcOXWXM&q=' . $event->maps }}"
                             frameborder="0" style="border:0; width: 140%; height: 400px; " allowfullscreen></iframe>
                     </div>
-                </div>
+                </section>
             </div>
         </section>
 
@@ -272,80 +334,9 @@
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <footer id="footer">
+    @include('footer')
 
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-3 col-md-6 footer-contact">
-                        <h3>Lumia</h3>
-                        <p>
-                            A108 Adam Street <br>
-                            New York, NY 535022<br>
-                            United States <br><br>
-                            <strong>Phone:</strong> +1 5589 55488 55<br>
-                            <strong>Email:</strong> info@example.com<br>
-                        </p>
-                    </div>
-
-                    <div class="col-lg-2 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Our Services</h4>
-                        <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 footer-newsletter">
-                        <h4>Join Our Newsletter</h4>
-                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="Subscribe">
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="container d-md-flex py-4">
-
-            <div class="me-md-auto text-center text-md-start">
-                <div class="copyright">
-                    &copy; Copyright <strong><span>Lumia</span></strong>. All Rights Reserved
-                </div>
-                <div class="credits">
-                    <!-- All the links in the footer should remain intact. -->
-                    <!-- You can delete the links only if you purchased the pro version. -->
-                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/lumia-bootstrap-business-template/ -->
-                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                </div>
-            </div>
-            <div class="social-links text-center text-md-right pt-3 pt-md-0">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-            </div>
-        </div>
-    </footer><!-- End Footer -->
+    @include('sweetalert::alert')
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
@@ -359,9 +350,32 @@
     <script src="{{ url('assets/vendor/waypoints/noframework.waypoints.js') }}"></script>
     <script src="{{ url('assets/vendor/php-email-form/validate.js') }}"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+
     <!-- Template Main JS File -->
     <script src="{{ url('assets/js/main.js') }}"></script>
 
+    <script>
+        document.querySelectorAll('input[name="rateBintang"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                document.getElementById('hiddenText').value = this.value;
+                document.querySelector('.btn-2').classList.remove('invisible');
+                document.querySelectorAll('.textarea.invisible').forEach(function(el) {
+                    el.classList.remove('invisible');
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.location.hash === '#review-tab') {
+                const reviewTabButton = document.querySelector('#review-tab');
+                reviewTabButton.click();
+            }
+            // console.log("Hash:", window.location.hash);
+        });
+    </script>
 </body>
 
 </html>

@@ -130,10 +130,11 @@
                     <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
                         <div class="portfolio-wrap">
                             <figure>
-                                <img src="{{ asset('images/' . $item->foto_event) }}" class="img-fluid" alt="">
-                                <a href="{{ asset('images/' . $item->foto_event) }}" data-gallery="portfolioGallery"
-                                    class="link-preview portfolio-lightbox" title="{{ $item->nama_event }}"><i
-                                        class="bx bx-plus"></i></a>
+                                <img src="{{ asset('images/event/' . $item->foto_event) }}" class="img-fluid"
+                                    alt="">
+                                <a href="{{ asset('images/event/' . $item->foto_event) }}"
+                                    data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
+                                    title="{{ $item->nama_event }}"><i class="bx bx-plus"></i></a>
                                 <a href="/event/show/{{ $item->id }}" class="link-details"
                                     title="More Details"><i class="bx bx-link"></i></a>
                             </figure>

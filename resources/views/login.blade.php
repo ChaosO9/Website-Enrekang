@@ -8,8 +8,10 @@
     <link href="{{ url('asset/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <title>Login</title>
-    {{-- @vite([]) --}}
+    @vite([])
 </head>
 
 <body>
@@ -38,6 +40,22 @@
                     <input type="password" id="password" name="password" required>
                     <label>Password</label>
                 </div>
+                <div class="g-recaptcha" style="padding-bottom: 10px"
+                    data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
+                {{-- <div class="form-group mt-4 mb-4">
+                    <div class="captcha">
+                        <span>{!! captcha_img() !!}</span>
+                        <img src="{{ captcha_src() }}" alt="captcha">
+                        <button type="button" class="btn btn-danger" class="reload" id="reload">
+                            &#x21bb;
+                        </button>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <span class="icon"> <i class="fa-solid fa-lock"></i></span>
+                    <input type="text" id="captcha" name="captcha" required>
+                    <label>Captcha</label>
+                </div> --}}
                 {{-- <div class="remember-forgot">
                     <label><input type="checkbox">Remember me</label>
                     <a href="#">Forgot Password?</a>
@@ -119,8 +137,8 @@
 
     .wrapper {
         position: relative;
-        width: 350px;
-        height: 400px;
+        width: 380px;
+        height: 480px;
         background: white;
         border: 2px solid rgba(255, 255, 255, .5);
         border-radius: 20px;
@@ -141,7 +159,7 @@
 
     .wrapper .form-box {
         width: 100%;
-        padding: 40px;
+        padding: 25px;
     }
 
     .wrapper .form-box.login {
@@ -187,6 +205,10 @@
         height: 50px;
         border-bottom: 2px solid #162938;
         margin: 30px 0;
+    }
+
+    .input-box input:focus {
+        outline: none;
     }
 
     .input-box label {

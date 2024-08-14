@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\GambarKuliner;
 use App\Models\Kuliner;
 use Illuminate\Http\Request;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class KulinerController extends Controller
 {
@@ -28,17 +30,22 @@ class KulinerController extends Controller
 
     public function simpan(Request $request)
     {
-
-        $imageName = $request->foto->getClientOriginalName();
-        $request->foto->move(public_path('/images'), $imageName);
-
         $data = [
             'nama_kuliner' => $request->nama_kuliner,
-            'foto_kuliner' => $imageName,
             'alamat_kuliner' => $request->alamat_kuliner,
             'harga_kuliner' => $request->harga_kuliner,
             'deskripsi_kuliner' => $request->deskripsi_kuliner,
         ];
+
+        if ($request->hasFile('foto')) {
+            $manager = new ImageManager(new Driver());
+            $imageName = uniqid('', true) . '_' . time() . '.webp';
+            $image = $manager->read($request->foto)->toWebp(90);
+            $image->save(base_path('public/images/kuliner/' . $imageName));
+            $data['foto_kuliner'] = $imageName;
+        } else {
+            $data['foto_kuliner'] = 'no-image.webp';
+        }
 
         Kuliner::create($data);
 
@@ -54,16 +61,24 @@ class KulinerController extends Controller
 
     public function update($id, Request $request)
     {
-        $imageName = $request->foto->getClientOriginalName();
-        $request->foto->move(public_path('/images'), $imageName);
+        $kuliner = Kuliner::find($id);
 
         $data = [
             'nama_kuliner' => $request->nama_kuliner,
-            'foto_kuliner' => $imageName,
             'alamat_kuliner' => $request->alamat_kuliner,
             'harga_kuliner' => $request->harga_kuliner,
             'deskripsi_kuliner' => $request->deskripsi_kuliner,
         ];
+
+        if ($request->hasFile('foto')) {
+            $manager = new ImageManager(new Driver());
+            $imageName = uniqid('', true) . '_' . time() . '.webp';
+            $image = $manager->read($request->foto)->toWebp(90);
+            $image->save(base_path('public/images/kuliner/' . $imageName));
+            $data['foto_kuliner'] = $imageName;
+        } else {
+            isset($kuliner->foto_kuliner) ? $data['foto_kuliner'] = $kuliner->foto_kuliner : $data['foto_kuliner'] = 'no-image.webp';
+        }
 
         Kuliner::find($id)->update($data);
 
@@ -94,12 +109,24 @@ class KulinerController extends Controller
      */
     public function show($id)
     {
-        //get wisata by ID
-        $kuliner = Kuliner::find($id);
-        $galeri = $kuliner->gambar;
+        $kuliner = Kuliner::find($id)->get();
+
+        $semua_reviews = $kuliner->review()->with('user');
+        $reviews = $semua_reviews->map(function ($review) {
+            $review->username = $review->user->name;
+            $review->user_created_at = $review->user->created_at;
+            return $review;
+        });
+        $jumlah_ulasan = $kuliner->review()->count();
+        if ($jumlah_ulasan > 0) {
+            $jumlah_rating = $kuliner->review()->sum('rating_bintang');
+            $rating_rata2 = intval(number_format($jumlah_rating / $jumlah_ulasan));
+        } else {
+            $rating_rata2 = 0;
+        }
 
         //render view with wisata
-        return view('details_kuliner', compact('kuliner', 'galeri'));
+        return view('details_kuliner', compact('kuliner', 'reviews', 'semua_reviews', 'jumlah_ulasan', 'rating_rata2'));
     }
 
     public function urlParamBuilder(Request $request)
@@ -143,24 +170,24 @@ class KulinerController extends Controller
         return view('kuliner.gambar', compact('kuliner'));
     }
 
-    public function tambahGambar($id, Request $request, $from = null)
-    {
-        $originalName = $request->foto->getClientOriginalName();
-        $uniqueId = time();
-        $fileName = $uniqueId . '_' . $originalName;
-        $request->foto->move(public_path('/images'), $fileName);
-        $deskripsi = $request->input('deskripsi_gambar');
+    // public function tambahGambar($id, Request $request, $from = null)
+    // {
+    //     $originalName = $request->foto->getClientOriginalName();
+    //     $uniqueId = time();
+    //     $fileName = $uniqueId . '_' . $originalName;
+    //     $request->foto->move(public_path('/images'), $fileName);
+    //     $deskripsi = $request->input('deskripsi_gambar');
 
-        GambarKuliner::create([
-            'kuliner' => $id,
-            'gambar' => $fileName,
-            'deskripsi' => $deskripsi
-        ]);
+    //     GambarKuliner::create([
+    //         'kuliner' => $id,
+    //         'gambar' => $fileName,
+    //         'deskripsi' => $deskripsi
+    //     ]);
 
-        if ($from == 'detail_kuliner') {
-            return redirect()->route('kuliner.show', $id);
-        } else if ($from == null) {
-            return redirect()->route('kuliner2');
-        }
-    }
+    //     if ($from == 'detail_kuliner') {
+    //         return redirect()->route('kuliner.show', $id);
+    //     } else if ($from == null) {
+    //         return redirect()->route('kuliner2');
+    //     }
+    // }
 }

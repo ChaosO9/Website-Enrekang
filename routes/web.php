@@ -52,9 +52,9 @@ Route::get('/kontak', function () {
 
 Route::controller(LoginController::class)->prefix('login')->group(function () {
     Route::get('', 'showLoginForm')->name('login.tampil');
-    Route::get('admin', 'showLoginFormAdmin')->name('login.tampil.admin');
+    // Route::get('admin', 'showLoginFormAdmin')->name('login.tampil.admin');
     Route::post('', 'login')->name('login.submit');
-    Route::post('admin', 'loginAdmin')->name('login.submit.admin');
+    // Route::post('admin', 'loginAdmin')->name('login.submit.admin');
 });
 Route::post('logout', [LoginController::class, 'logout'])->name('login.logout');
 Route::post('register', [LoginController::class, 'register'])->name('login.register');
@@ -88,6 +88,9 @@ Route::controller(WisataController::class)->prefix('wisata')->group(function () 
 Route::controller(ReviewController::class)->group(function () {
     Route::middleware(['isUser'])->group(function () {
         Route::post('wisata/review/{id}', 'submitReviewWisata')->name('wisata.tambah.review');
+        Route::post('kuliner/review/{id}', 'submitReviewKuliner')->name('kuliner.tambah.review');
+        Route::post('penginapan/review/{id}', 'submitReviewPenginapan')->name('penginapan.tambah.review');
+        Route::post('event/review/{id}', 'submitReviewEvent')->name('event.tambah.review');
     });
 });
 

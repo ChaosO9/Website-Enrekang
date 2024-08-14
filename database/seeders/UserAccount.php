@@ -25,6 +25,7 @@ class UserAccount extends Seeder
         ]);
         $user->save();
         $user->assignRole('admin');
+        $user->assignRole('user');
 
         $user = new User([
             'name' => 'Akram',

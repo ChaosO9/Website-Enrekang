@@ -8,6 +8,8 @@ use App\Models\GambarPenginapan;
 use App\Models\Penginapan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 use Psy\TabCompletion\Matcher\FunctionsMatcher;
 
 class PenginapanController extends Controller
@@ -35,17 +37,23 @@ class PenginapanController extends Controller
 
     public function simpan(Request $request)
     {
-        $imageName = $request->foto->getClientOriginalName();
-        $request->foto->move(public_path('/images'), $imageName);
-
         $data = [
             'nama_penginapan' => $request->nama_penginapan,
-            'foto_penginapan' => $imageName,
             'alamat_penginapan' => $request->alamat_penginapan,
             'harga_penginapan' => $request->harga_penginapan,
             'deskripsi_penginapan' => $request->deskripsi_penginapan,
             'maps' => $request->maps,
         ];
+
+        if ($request->hasFile('foto')) {
+            $manager = new ImageManager(new Driver());
+            $imageName = uniqid('', true) . '_' . time() . '.webp';
+            $image = $manager->read($request->foto)->toWebp(90);
+            $image->save(base_path('public/images/penginapan/' . $imageName));
+            $data['foto_penginapan'] = $imageName;
+        } else {
+            $data['foto_penginapan'] = 'no-image.webp';
+        }
 
         $penginapan = Penginapan::create($data);
 
@@ -89,14 +97,13 @@ class PenginapanController extends Controller
         ];
 
         if ($request->hasFile('foto')) {
-            $originalName = $request->foto->getClientOriginalName();
-            $uniqueId = time();
-            $fileName = $uniqueId . '_' . $originalName;
-            $request->foto->move(public_path('/images'), $fileName);
-            Storage::delete("/images/" . $penginapan->foto_penginapan);
-            $data['foto_penginapan'] = $fileName;
+            $manager = new ImageManager(new Driver());
+            $imageName = uniqid('', true) . '_' . time() . '.webp';
+            $image = $manager->read($request->foto)->toWebp(90);
+            $image->save(base_path('public/images/penginapan/' . $imageName));
+            $data['foto_penginapan'] = $imageName;
         } else {
-            isset($penginapan->foto_penginapan) ? $data['foto_penginapan'] = $penginapan->foto_penginapan : $data['foto_penginapan'] = 'no-image.png';
+            isset($penginapan->foto_penginapan) ? $data['foto_penginapan'] = $penginapan->foto_penginapan : $data['foto_penginapan'] = 'no-image.webp';
         }
 
         Penginapan::find($id)->update($data);
@@ -161,10 +168,23 @@ class PenginapanController extends Controller
         //get penginapan by ID
         $penginapan = Penginapan::find($id);
         $fasilitas = $penginapan->fasilitas()->pluck('nama')->all();
-        $galeri = $penginapan->gambar;
+
+        $semua_reviews = $penginapan->review()->with('user');
+        $reviews = $semua_reviews->get()->map(function ($review) {
+            $review->username = $review->user->name;
+            $review->user_created_at = $review->user->created_at;
+            return $review;
+        });
+        $jumlah_ulasan = $penginapan->review()->count();
+        if ($jumlah_ulasan > 0) {
+            $jumlah_rating = $penginapan->review()->sum('rating_bintang');
+            $rating_rata2 = intval(number_format($jumlah_rating / $jumlah_ulasan));
+        } else {
+            $rating_rata2 = 0;
+        }
 
         //render view with penginapan
-        return view('details_penginapan', compact('penginapan', 'fasilitas', 'ikon_fasilitas', 'galeri'));
+        return view('details_penginapan', compact('penginapan', 'fasilitas', 'ikon_fasilitas', 'semua_reviews', 'jumlah_ulasan', 'reviews', 'rating_rata2'));
     }
 
     public function urlParamBuilder(Request $request)
@@ -208,24 +228,24 @@ class PenginapanController extends Controller
         return view('penginapan.gambar', compact('penginapan'));
     }
 
-    public function tambahGambar($id, Request $request, $from = null)
-    {
-        $originalName = $request->foto->getClientOriginalName();
-        $uniqueId = time();
-        $fileName = $uniqueId . '_' . $originalName;
-        $request->foto->move(public_path('/images'), $fileName);
-        $deskripsi = $request->input('deskripsi_gambar');
+    // public function tambahGambar($id, Request $request, $from = null)
+    // {
+    //     $originalName = $request->foto->getClientOriginalName();
+    //     $uniqueId = time();
+    //     $fileName = $uniqueId . '_' . $originalName;
+    //     $request->foto->move(public_path('/images'), $fileName);
+    //     $deskripsi = $request->input('deskripsi_gambar');
 
-        GambarPenginapan::create([
-            'penginapan' => $id,
-            'gambar' => $fileName,
-            'deskripsi' => $deskripsi
-        ]);
+    //     GambarPenginapan::create([
+    //         'penginapan' => $id,
+    //         'gambar' => $fileName,
+    //         'deskripsi' => $deskripsi
+    //     ]);
 
-        if ($from == 'detail_penginapan') {
-            return redirect()->route('penginapan.show', $id);
-        } else if ($from == null) {
-            return redirect()->route('penginapan2');
-        }
-    }
+    //     if ($from == 'detail_penginapan') {
+    //         return redirect()->route('penginapan.show', $id);
+    //     } else if ($from == null) {
+    //         return redirect()->route('penginapan2');
+    //     }
+    // }
 }

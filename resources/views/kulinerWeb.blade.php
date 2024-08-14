@@ -120,9 +120,9 @@
                     <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
                         <div class="portfolio-wrap">
                             <figure>
-                                <img src="{{ asset('images/' . $item->foto_kuliner) }}" class="img-fluid"
+                                <img src="{{ asset('images/kuliner/' . $item->foto_kuliner) }}" class="img-fluid"
                                     alt="">
-                                <a href="{{ url('assets/img/portfolio/portfolio-1.jpg') }}"
+                                <a href="{{ url(asset('images/kuliner/' . $item->foto_kuliner)) }}"
                                     data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
                                     title="Preview"><i class="bx bx-plus"></i></a>
                                 <a href="/kuliner/show/{{ $item->id }}" class="link-details"

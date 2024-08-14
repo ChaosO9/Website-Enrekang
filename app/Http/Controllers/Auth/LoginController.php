@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Closure;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
@@ -53,16 +55,36 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        $error_messages = [
+            'email.required' => 'Form email tidak boleh kosong',
+            'password.required' => 'Form password tidak boleh kosong',
+            'captcha.required' => 'Form captcha tidak boleh kosong',
+        ];
+
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'g-recaptcha-response' => ['required', function (string $attribute, mixed $value, Closure $fail) {
+                $g_response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                    'secret' => config('services.recaptcha.secret_key'),
+                    'response' => $value,
+                    'remoteIp' => \request()->ip()
+                ]);
+
+                if (!$g_response->json('success')) {
+                    $fail('The {$attribute} is invalid');
+                }
+            },]
+        ], $error_messages);
+
         $credentials = $request->only('email', 'password');
 
+        if (Auth::attempt($credentials) && Auth::user()->hasRole('admin')) {
+            return redirect()->route('dashboard');
+        }
+
         if (Auth::attempt($credentials) && Auth::user()->hasRole('user')) {
-            // Authentication passed...
-            // return redirect()->intended('home');
             return redirect()->route('home');
-        } else {
-            return back()->withErrors([
-                'email' => 'Akun Anda adalah akun Admin',
-            ]);
         }
 
         // Authentication failed...
