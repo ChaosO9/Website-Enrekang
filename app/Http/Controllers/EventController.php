@@ -36,6 +36,8 @@ class EventController extends Controller
             'tanggal_pelaksanaan' => $request->tanggal_pelaksanaan,
             'tanggal_selesai' => $request->tanggal_selesai,
             'deskripsi_event' => $request->deskripsi_event,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
         ];
 
         if ($request->hasFile('foto')) {
@@ -62,12 +64,16 @@ class EventController extends Controller
 
     public function update($id, Request $request)
     {
+        $event = Event::find($id);
+
         $data = [
             'nama_event' => $request->nama_event,
             'tempat_event' => $request->tempat_event,
             'tanggal_pelaksanaan' => $request->tanggal_pelaksanaan,
             'tanggal_selesai' => $request->tanggal_selesai,
             'deskripsi_event' => $request->deskripsi_event,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
         ];
 
         if ($request->hasFile('foto')) {
@@ -77,7 +83,7 @@ class EventController extends Controller
             $image->save(base_path('public/images/event/' . $imageName));
             $data['foto_event'] = $imageName;
         } else {
-            $data['foto_event'] = 'no-image.webp';
+            isset($event->foto_event) ? $data['foto_event'] = $event->foto_event : $data['foto_event'] = 'no-image.webp';
         }
 
         Event::find($id)->update($data);
@@ -111,10 +117,10 @@ class EventController extends Controller
     public function show($id)
     {
         //get event by ID
-        $event = Event::find($id)->get();
+        $event = Event::find($id);
 
         $semua_reviews = $event->review()->with('user');
-        $reviews = $semua_reviews->map(function ($review) {
+        $reviews = $semua_reviews->get()->map(function ($review) {
             $review->username = $review->user->name;
             $review->user_created_at = $review->user->created_at;
             return $review;

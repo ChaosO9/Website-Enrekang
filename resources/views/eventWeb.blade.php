@@ -35,7 +35,6 @@
 
     <section id="portfolio" class="portfolio">
         <div class="container">
-
             <div class="event">
                 <img src="{{ asset('kuliner.jpg') }}" alt="Example Image">
                 <div class="overlay-text">Event</div>

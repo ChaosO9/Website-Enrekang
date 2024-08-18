@@ -268,12 +268,20 @@
                             </article>
                         @endforeach
                     </div>
-                    <div class="col-lg-6 mt-5">
+                    {{-- <div class="col-lg-6 mt-5">
                         <iframe class="mb-4 mb-lg-0"
                             src="{{ 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCtQdCKUA91HOI2QRMhKMNrZAxOQcOXWXM&q=' . $event->maps }}"
                             frameborder="0" style="border:0; width: 140%; height: 400px; " allowfullscreen></iframe>
-                    </div>
+                    </div> --}}
                 </section>
+                <div class="section-title">
+                    <h2>Lokasi</h2>
+                </div>
+                <div class="col-lg-6">
+                    <iframe class="mb-4 mb-lg-0"
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtQdCKUA91HOI2QRMhKMNrZAxOQcOXWXM&q={{ $event->latitude }},{{ $event->longitude }}"
+                        frameborder="0" style="border:0; width: 200%; height: 350px;" allowfullscreen></iframe>
+                </div>
             </div>
         </section>
 

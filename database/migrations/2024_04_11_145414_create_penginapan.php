@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('harga_penginapan')->nullable();
             $table->text('deskripsi_penginapan')->nullable();
             $table->string('foto_penginapan')->nullable();
-            $table->text('maps')->nullable();
+            $table->decimal('latitude', 10, 7)->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();
             $table->timestamps();
         });
     }

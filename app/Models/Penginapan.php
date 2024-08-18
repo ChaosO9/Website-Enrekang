@@ -12,7 +12,7 @@ class Penginapan extends Model
 
     protected $table = 'penginapan';
 
-    protected $fillable = ['nama_penginapan', 'foto_penginapan', 'alamat_penginapan', 'harga_penginapan', 'deskripsi_penginapan', 'maps'];
+    protected $fillable = ['nama_penginapan', 'foto_penginapan', 'alamat_penginapan', 'harga_penginapan', 'deskripsi_penginapan', 'maps', 'latitude', 'longitude'];
 
     protected $filters = [
         'sort',

@@ -42,7 +42,8 @@ class PenginapanController extends Controller
             'alamat_penginapan' => $request->alamat_penginapan,
             'harga_penginapan' => $request->harga_penginapan,
             'deskripsi_penginapan' => $request->deskripsi_penginapan,
-            'maps' => $request->maps,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
         ];
 
         if ($request->hasFile('foto')) {
@@ -93,7 +94,8 @@ class PenginapanController extends Controller
             'alamat_penginapan' => $request->alamat_penginapan,
             'harga_penginapan' => $request->harga_penginapan,
             'deskripsi_penginapan' => $request->deskripsi_penginapan,
-            'maps' => $request->maps,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
         ];
 
         if ($request->hasFile('foto')) {

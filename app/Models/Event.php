@@ -12,7 +12,7 @@ class Event extends Model
 
     protected $table = 'event';
 
-    protected $fillable = ['nama_event', 'tempat_event', 'tanggal_pelaksanaan', 'tanggal_selesai', 'deskripsi_event', 'foto_event'];
+    protected $fillable = ['nama_event', 'tempat_event', 'tanggal_pelaksanaan', 'tanggal_selesai', 'deskripsi_event', 'foto_event', 'latitude', 'longitude'];
 
     protected $filters = [
         'sort',

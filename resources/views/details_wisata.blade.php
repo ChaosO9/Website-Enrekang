@@ -262,22 +262,22 @@
                             </article>
                         @endforeach
                         {{-- <div class="d-flex justify-content-center">
-                        {{-- <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center">
                             {{ $wisata_lain2->links() }}
-                        </div> --}}
+                        </div>
+                    </div> --}}
                     </div>
+                </section>
+                <div class="section-title">
+                    <h2>Lokasi</h2>
+                </div>
+                <div class="col-lg-6">
+                    <iframe class="mb-4 mb-lg-0"
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtQdCKUA91HOI2QRMhKMNrZAxOQcOXWXM&q={{ $wisata->latitude }},{{ $wisata->longitude }}"
+                        frameborder="0" style="border:0; width: 200%; height: 350px;" allowfullscreen></iframe>
+                </div>
             </div>
-        </section>
 
-        <div class="section-title ">
-            <h2>Lokasi</h2>
-        </div>
-        <div class="col-lg-6">
-            <iframe class="mb-4 mb-lg-0"
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtQdCKUA91HOI2QRMhKMNrZAxOQcOXWXM&q={{ $wisata->latitude }},{{ $wisata->longitude }}"
-                frameborder="0" style="border:0; width: 200%; height: 350px;" allowfullscreen></iframe>
-        </div>
-        </div>
         </section>
 
         <!-- Modal -->

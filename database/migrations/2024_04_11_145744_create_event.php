@@ -20,6 +20,8 @@ return new class extends Migration
             $table->date('waktu_event')->nullable();
             $table->text('deskripsi_event')->nullable();
             $table->string('foto_event')->nullable();
+            $table->decimal('latitude', 10, 7)->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();
             $table->timestamps();
         });
     }
