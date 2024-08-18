@@ -43,7 +43,7 @@
                                     <img src="{{ asset('images/kuliner/' . $row->foto_kuliner) }}" alt=""
                                         style="width: 100px;">
                                 </td>
-                                <td>{{ $row->harga_kuliner }}</td>
+                                <td>@money($row->harga_kuliner, 'IDR')</td>
                                 <td>
                                     <a href="{{ route('kuliner.edit', $row->id) }}" class="btn btn-warning"
                                         style="color: rgb(255, 255, 255)"> <i class="fas fa-edit"></i></a>

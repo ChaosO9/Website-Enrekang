@@ -40,12 +40,12 @@
                                         style="width: 100px;">
                                 </td>
                                 <td>{{ $row->alamat_penginapan }}</td>
-                                <td>@currency($row->harga_penginapan)</td>
+                                <td>@money($row->harga_penginapan, 'IDR')</td>
                                 <td>
                                     <ol>
                                         @if ($row->fasilitas && !empty($row->fasilitas))
                                             @foreach ($row->fasilitas as $facility)
-                                                <li>{{ $facility }}</li>
+                                                <li>{{ $facility->nama }}</li>
                                             @endforeach
                                         @else
                                             <li>Tidak ada fasilitas</li>

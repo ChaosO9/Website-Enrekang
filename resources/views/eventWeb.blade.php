@@ -2,7 +2,31 @@
 <html lang="en">
 
 <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
+    <title>Wisata Enrekang</title>
+    {{-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> --}}
+
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ url('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
+
+    <!-- Template Main CSS File -->
+    <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
+    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
+    @vite([])
 </head>
 
 <body>
@@ -64,21 +88,6 @@
                                 <i class="fa-solid fa-filter items-center"></i> Filter
                             </button>
                             <ul class="dropdown-menu">
-                                {{-- <li>
-                                <h6 class="dropdown-header">Range Harga</h6>
-                            </li>
-                            <li>
-                                <div class="dropdown-item">
-                                    <input type="number" class="form-control" id="harga_minimal" name="harga_minimal"
-                                        placeholder="Harga Min" value="">
-                                </div>
-                            </li>
-                            <li>
-                                <div class="dropdown-item">
-                                    <input type="number" class="form-control" id="harga_maksimal" name="harga_maksimal"
-                                        placeholder="Harga Max" value="">
-                                </div>
-                            </li> --}}
                                 <li>
                                     <h6 class="dropdown-header">Status Event</h6>
                                 </li>
@@ -124,42 +133,51 @@
                     </div>
                 </div>
             </form>
-
             <div class="row portfolio-container">
-                @foreach ($data as $item)
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
-                        <div class="portfolio-wrap">
-                            <figure>
-                                <img src="{{ asset('images/event/' . $item->foto_event) }}" class="img-fluid"
-                                    alt="">
-                                <a href="{{ asset('images/event/' . $item->foto_event) }}"
-                                    data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
-                                    title="{{ $item->nama_event }}"><i class="bx bx-plus"></i></a>
-                                <a href="/event/show/{{ $item->id }}" class="link-details"
-                                    title="More Details"><i class="bx bx-link"></i></a>
-                            </figure>
+                @if ($data->isNotEmpty())
+                    @foreach ($data as $item)
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
+                            <div class="portfolio-wrap">
+                                <figure>
+                                    <img src="{{ asset('images/event/' . $item->foto_event) }}" class="img-fluid"
+                                        alt="">
+                                    <a href="{{ asset('images/event/' . $item->foto_event) }}"
+                                        data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
+                                        title="{{ $item->nama_event }}"><i class="bx bx-plus"></i></a>
+                                    <a href="/event/show/{{ $item->id }}" class="link-details"
+                                        title="More Details"><i class="bx bx-link"></i></a>
+                                </figure>
 
-                            <div class="portfolio-info">
-                                <h4>{{ $item->nama_event }}</h4>
-                                <p>{{ $item->deskripsi_event }}</p>
+                                <div class="portfolio-info">
+                                    <h4>{{ $item->nama_event }}</h4>
+                                    <p>{{ $item->deskripsi_event }}</p>
 
-                                <!-- Tambahkan tombol status event di sini -->
-                                <div class="status-buttons d-flex justify-content-end">
-                                    @if (\Carbon\Carbon::now()->lt(\Carbon\Carbon::parse($item->tanggal_pelaksanaan)))
-                                        <!-- Jika belum mulai -->
-                                        <span class="badge text-bg-warning">Belum Mulai</span>
-                                    @elseif(\Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($item->tanggal_selesai)))
-                                        <!-- Jika telah selesai -->
-                                        <span class="badge text-bg-secondary">Telah Selesai</span>
-                                    @else
-                                        <!-- Jika sedang berlangsung -->
-                                        <span class="badge text-bg-success">Berlangsung</span>
-                                    @endif
+                                    <!-- Tambahkan tombol status event di sini -->
+                                    <div class="status-buttons d-flex justify-content-end">
+                                        @if (\Carbon\Carbon::now()->lt(\Carbon\Carbon::parse($item->tanggal_pelaksanaan)))
+                                            <!-- Jika belum mulai -->
+                                            <span class="badge text-bg-warning">Belum Mulai</span>
+                                        @elseif(\Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($item->tanggal_selesai)))
+                                            <!-- Jika telah selesai -->
+                                            <span class="badge text-bg-secondary">Telah Selesai</span>
+                                        @else
+                                            <!-- Jika sedang berlangsung -->
+                                            <span class="badge text-bg-success">Berlangsung</span>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    @endforeach
+                @else
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
+                        <div class="portfolio-wrap">
+                            <div class="portfolio-info">
+                                <h4>Event tidak ditemukan!</h4>
+                            </div>
+                        </div>
                     </div>
-                @endforeach
+                @endif
             </div>
 
             <div class="pagination justify-content-center ">

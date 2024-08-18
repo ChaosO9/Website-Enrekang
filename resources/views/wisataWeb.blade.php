@@ -133,26 +133,36 @@
             </form>
 
             <div class="row portfolio-container">
-                @foreach ($data as $item)
+                @if ($data->isNotEmpty())
+                    @foreach ($data as $item)
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
+                            <div class="portfolio-wrap">
+                                <figure>
+                                    <img src="{{ asset('images/wisata/' . $item->foto_wisata) }}" class="img-fluid"
+                                        alt="">
+                                    <a href="{{ asset('images/wisata/' . $item->foto_wisata) }}"
+                                        data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
+                                        title="{{ $item->nama_wisata }}"><i class="bx bx-plus"></i></a>
+                                    <a href="/wisata/show/{{ $item->id }}" class="link-details"
+                                        title="More Details"><i class="bx bx-link"></i></a>
+                                </figure>
+                                <div class="portfolio-info">
+                                    <h4>{{ $item->nama_wisata }}</h4>
+                                    <p>{{ $item->deskripsi_wisata }}</p>
+                                    <p>@money($item->harga_tiket, 'IDR')</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
                     <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
                         <div class="portfolio-wrap">
-                            <figure>
-                                <img src="{{ asset('images/wisata/' . $item->foto_wisata) }}" class="img-fluid"
-                                    alt="">
-                                <a href="{{ asset('images/wisata/' . $item->foto_wisata) }}"
-                                    data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
-                                    title="{{ $item->nama_wisata }}"><i class="bx bx-plus"></i></a>
-                                <a href="/wisata/show/{{ $item->id }}" class="link-details"
-                                    title="More Details"><i class="bx bx-link"></i></a>
-                            </figure>
                             <div class="portfolio-info">
-                                <h4>{{ $item->nama_wisata }}</h4>
-                                <p>{{ $item->deskripsi_wisata }}</p>
-                                <p>Rp. {{ $item->harga_tiket }}</p>
+                                <h4>Wisata tidak ditemukan!</h4>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @endif
             </div>
 
             <div class="pagination justify-content-center ">

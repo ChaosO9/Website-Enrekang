@@ -1402,6 +1402,14 @@ section {
     justify-content: center; /* Pusatkan secara horizontal */
 }
 
+@media only screen and (max-width: 768px) {
+    .penginapan {
+        width: 100%; /* Take up full width */
+        margin: 10px; /* Reduce margin */
+        /* Adjust other properties as needed */
+    }
+}
+
 .penginapan:before {
     content: "";
     background: rgba(160, 176, 189, 0.473);
@@ -1432,6 +1440,17 @@ section {
     display: flex; /* Gunakan flexbox untuk pemusatan */
     align-items: center; /* Pusatkan secara vertikal */
     justify-content: center; /* Pusatkan secara horizontal */
+}
+
+@media only screen and (max-width: 768px) {
+    .event {
+        width: 100%; /* Take up full width */
+        display: inline-flexbox;
+        /* height: auto; */
+        margin: 0px;
+        margin-bottom: 10px; /*jarak gambar dengan card*/
+        /* Adjust other properties as needed */
+    }
 }
 
 .event:before {

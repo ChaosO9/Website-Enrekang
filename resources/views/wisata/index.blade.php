@@ -64,7 +64,7 @@
                                     <img src="{{ asset('images/wisata/' . $row->foto_wisata) }}" alt=""
                                         style="width: 100px;">
                                 </td>
-                                <td>{{ $row->harga_tiket }}</td>
+                                <td>@money($row->harga_tiket, 'IDR')</td>
                                 <td>{{ $row->id_kategori }}</td>
                                 <td>{{ $row->latitude }}</td>
                                 <td>{{ $row->longitude }}</td>

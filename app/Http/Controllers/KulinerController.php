@@ -109,10 +109,10 @@ class KulinerController extends Controller
      */
     public function show($id)
     {
-        $kuliner = Kuliner::find($id)->get();
+        $kuliner = Kuliner::find($id);
 
         $semua_reviews = $kuliner->review()->with('user');
-        $reviews = $semua_reviews->map(function ($review) {
+        $reviews = $semua_reviews->get()->map(function ($review) {
             $review->username = $review->user->name;
             $review->user_created_at = $review->user->created_at;
             return $review;

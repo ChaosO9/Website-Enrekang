@@ -2,7 +2,31 @@
 <html lang="en">
 
 <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
+    <title>Wisata Enrekang</title>
+    {{-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> --}}
+
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ url('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
+
+    <!-- Template Main CSS File -->
+    <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
+    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
+    @vite([])
 </head>
 
 <body>
@@ -116,29 +140,39 @@
             </form>
 
             <div class="row portfolio-container">
-                @foreach ($data as $item)
+                @if ($data->isNotEmpty())
+                    @foreach ($data as $item)
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
+                            <div class="portfolio-wrap">
+                                <figure>
+
+
+                                    <img src="{{ asset('images/' . $item->foto_penginapan) }}" class="img-fluid"
+                                        alt="">
+                                    <a href="{{ asset('images/' . $item->foto_penginapan) }}"
+                                        data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
+                                        title="{{ $item->nama_penginapan }}"><i class="bx bx-plus"></i></a>
+                                    <a href="penginapan/show/{{ $item->id }}" class="link-details"
+                                        title="More Details"><i class="bx bx-link"></i></a>
+                                </figure>
+
+                                <div class="portfolio-info">
+                                    <h4>{{ $item->nama_penginapan }}</h4>
+                                    <p>{{ $item->deskripsi_penginapan }}</p>
+                                    <p>@money($item->harga_penginapan, 'IDR')</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
                     <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
                         <div class="portfolio-wrap">
-                            <figure>
-
-
-                                <img src="{{ asset('images/' . $item->foto_penginapan) }}" class="img-fluid"
-                                    alt="">
-                                <a href="{{ asset('images/' . $item->foto_penginapan) }}"
-                                    data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
-                                    title="{{ $item->nama_penginapan }}"><i class="bx bx-plus"></i></a>
-                                <a href="penginapan/show/{{ $item->id }}" class="link-details"
-                                    title="More Details"><i class="bx bx-link"></i></a>
-                            </figure>
-
                             <div class="portfolio-info">
-                                <h4>{{ $item->nama_penginapan }}</h4>
-                                <p>{{ $item->deskripsi_penginapan }}</p>
-                                <p>Rp. {{ $item->harga_penginapan }}</p>
+                                <h4>Penginapan tidak ditemukan!</h4>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @endif
             </div>
 
             <div class="pagination justify-content-center ">
