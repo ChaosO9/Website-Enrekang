@@ -16,7 +16,7 @@ use App\Http\Controllers\PenginapanController;
 use App\Http\Controllers\ReviewController;
 
 Route::get('/', function () {
-    return view('rating');
+    return redirect()->route('home');
 });
 
 Route::get('/test', function () {
@@ -114,7 +114,7 @@ Route::controller(KulinerController::class)->prefix('kuliner')->group(function (
 Route::controller(PenginapanController::class)->prefix('penginapan')->group(function () {
     Route::get('', 'index')->name('penginapan');
     Route::post('', 'urlParamBuilder')->name('penginapan.urlParamBuilder');
-    Route::get('', 'nav')->name('tampil');
+    Route::get('tampil', 'nav')->name('penginapan.tampil');
     Route::get('filter', 'filter')->name('filter');
     Route::middleware(['isAdmin'])->group(function () {
         Route::get('2', 'index2')->name('penginapan2');

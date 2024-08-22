@@ -43,7 +43,7 @@
         <section id="breadcrumbs" class="breadcrumbs">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center" style="margin-top: 40px;">
-                    <h2>Wisata {{ $wisata->nama_wisata }}</h2>
+                    <h2 class="text-4xl">Wisata {{ $wisata->nama_wisata }}</h2>
                     {{-- <ol>
                         <li><a href="index.html">Home</a></li>
                         <li>Detail Wisata </li>
@@ -91,7 +91,7 @@
                                     aria-labelledby="home-tab" tabindex="0">
                                     <ul>
                                         <li>
-                                            <div class="flex items-center  mb-3">
+                                            <div class="flex items-center mb-3 pt-4">
                                                 @for ($i = 0; $i < $rating_rata2; $i++)
                                                     <svg class="w-6 h-6 ms-2 text-yellow-300" aria-hidden="true"
                                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -108,7 +108,7 @@
                                                             d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                                                     </svg>
                                                 @endfor
-                                                <p class="ms-4 m-0 text-sm font-semibold text-gray-900 dark:text-white">
+                                                <p class="ms-4 m-0 font-semibold text-gray-900 dark:text-white">
                                                     {{ $rating_rata2 }} dari {{ $semua_reviews->count() }} Ulasan</p>
                                             </div>
                                         </li>
@@ -186,15 +186,18 @@
                     {{-- <img src="{{ asset('kuliner.jpg') }}" alt="Example Image"> --}}
                     {{-- <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit</p> --}}
                 </div>
-                <div class="row portfolio-container">
+                <div class="row px-3 portfolio-container">
                     @foreach ($fasilitas as $fasilitas)
                         @if (array_key_exists($fasilitas, $ikon_fasilitas))
-                            <div class="col-lg-3">
-                                <p>{!! $ikon_fasilitas[$fasilitas] !!} {{ $fasilitas }}</p>
+                            <div class="col-lg-3 col-6">
+                                <p class="text-3xl lg:text-2xl">
+                                    <span>{!! $ikon_fasilitas[$fasilitas] !!}</span> {{ $fasilitas }}
+                                </p>
                             </div>
                         @else
-                            <div class="col-lg-3">
-                                <p><i class="fa-solid fa-square-ellipsis"></i> {{ $fasilitas }}</p>
+                            <div class="col-lg-3 col-6">
+                                <p class="text-3xl lg:text-2xl"><i class="fa-solid fa-square-ellipsis"></i>
+                                    {{ $fasilitas }}</p>
                             </div>
                         @endif
                     @endforeach
@@ -213,7 +216,7 @@
                 <section class="bg-white dark:bg-gray-900 py-2 lg:py-4">
                     <div class="max-w-3xl mx-auto px-4">
                         <div class="flex justify-between items-center mb-6">
-                            <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Ulasan
+                            <h2 class="text-3xl lg:text-2xl font-bold text-gray-900 dark:text-white">Ulasan
                                 ({{ $reviews->count() }})</h2>
                         </div>
                         @foreach ($reviews as $ulasan)
@@ -271,10 +274,10 @@
                 <div class="section-title">
                     <h2>Lokasi</h2>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <iframe class="mb-4 mb-lg-0"
                         src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtQdCKUA91HOI2QRMhKMNrZAxOQcOXWXM&q={{ $wisata->latitude }},{{ $wisata->longitude }}"
-                        frameborder="0" style="border:0; width: 200%; height: 350px;" allowfullscreen></iframe>
+                        frameborder="0" style="border:0; width: 100%; height: 350px;" allowfullscreen></iframe>
                 </div>
             </div>
 

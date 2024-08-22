@@ -29,7 +29,7 @@
     @vite([])
 </head>
 
-<body>
+<body class="index-page">
 
     <!-- ======= Header ======= -->
     @include('navbar')
@@ -140,7 +140,8 @@
                             <li><a href="">Kebudayaan</a></li>
                             <li><a href="">Event</a></li>
                         </ul> --}}
-                        <a href="{{ route('wisata.tampil') }}" class="btn btn-custom-green" role="button">Wisata</a>
+                        <a href="{{ route('wisata.tampil') }}" class="btn btn-custom-green"
+                            role="button">Wisata</a>
                     </div>
                     <div class="col-auto">
                         <a href="{{ route('kuliner.tampil') }}" class="btn btn-custom-green"
@@ -163,9 +164,13 @@
                                     {{-- {{ $item->foto_wisata }} --}}
                                     <img src="{{ asset('images/wisata/' . $item->foto_wisata) }}"
                                         style="width: 100%; height: auto;" alt="">
-                                    <a href="{{ asset('images/wisata/' . $item->foto_wisata) }}"
+                                    <a href="{{ url('images/wisata/' . $item->foto_wisata) }}"
+                                        data-gallery="portfolio-gallery-product"
+                                        class="link-preview portfolio-lightbox" title="Preview"><i
+                                            class="fa-regular fa-eye"></i></a>
+                                    {{-- <a href="{{ url('assets/img/portfolio/portfolio-1.jpg') }}"
                                         data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
-                                        title="Preview"><i class="fa-regular fa-eye"></i></a>
+                                        title="Preview"><i class="bx bx-plus"></i></a> --}}
                                     <a href="wisata/show/{{ $item->id }}" class="link-details"
                                         title="More Details"><i class="bx bx-link"></i></a>
                                 </figure>
@@ -194,8 +199,9 @@
                                     <img src="{{ asset('images/kuliner/' . $item->foto_kuliner) }}"
                                         style="width: 100%; height: auto;" alt="">
                                     <a href="{{ asset('images/kuliner/' . $item->foto_kuliner) }}"
-                                        data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
-                                        title="Preview"><i class="fa-regular fa-eye"></i></a>
+                                        data-gallery="portfolio-gallery-product"
+                                        class="link-preview portfolio-lightbox" title="Preview"><i
+                                            class="fa-regular fa-eye"></i></a>
                                     <a href="kuliner/show/{{ $item->id }}" class="link-details"
                                         title="More Details"><i class="bx bx-link"></i></a>
                                 </figure>
@@ -218,7 +224,8 @@
                                     <img src="{{ asset('images/penginapan/' . $item->foto_penginapan) }}"
                                         style="width: 100%; height: auto;" alt="">
                                     <a href="{{ asset('images/penginapan/' . $item->foto_penginapan) }}"
-                                        data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
+                                        data-gallery="portfolio-gallery-product"
+                                        class="link-preview portfolio-lightbox"
                                         title="{{ $item->nama_penginapan }}"><i class="fa-regular fa-eye"></i></a>
                                     <a href="penginapan/show/{{ $item->id }}" class="link-details"
                                         title="More Details"><i class="bx bx-link"></i></a>
@@ -240,8 +247,9 @@
                                     <img src="{{ asset('images/event/' . $item->foto_event) }}"
                                         style="width: 100%; height: auto;" alt="">
                                     <a href="{{ asset('images/event/' . $item->foto_event) }}"
-                                        data-gallery="portfolioGallery" class="link-preview portfolio-lightbox"
-                                        title="Preview"><i class="fa-regular fa-eye"></i></a>
+                                        data-gallery="portfolio-gallery-product"
+                                        class="link-preview portfolio-lightbox" title="Preview"><i
+                                            class="fa-regular fa-eye"></i></a>
                                     <a href="event/show/{{ $item->id }}" class="link-details"
                                         title="More Details"><i class="bx bx-link"></i></a>
                                 </figure>
@@ -412,6 +420,8 @@
     <script src="{{ url('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ url('assets/vendor/waypoints/noframework.waypoints.js') }}"></script>
     <script src="{{ url('assets/vendor/php-email-form/validate.js') }}"></script>
+    <script src="{{ url('assets/vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ url('assets/vendor/aos/aos.js') }}"></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>

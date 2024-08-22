@@ -155,13 +155,19 @@
                                     <div class="status-buttons d-flex justify-content-end">
                                         @if (\Carbon\Carbon::now()->lt(\Carbon\Carbon::parse($item->tanggal_pelaksanaan)))
                                             <!-- Jika belum mulai -->
-                                            <span class="badge text-bg-warning">Belum Mulai</span>
+                                            <span class="badge text-bg-warning">
+                                                <p class="md:text-2xl text-white">Belum Mulai</p>
+                                            </span>
                                         @elseif(\Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($item->tanggal_selesai)))
                                             <!-- Jika telah selesai -->
-                                            <span class="badge text-bg-secondary">Telah Selesai</span>
+                                            <span class="badge text-bg-secondary">
+                                                <p class="md:text-2xl text-white">Telah Selesai</p>
+                                            </span>
                                         @else
                                             <!-- Jika sedang berlangsung -->
-                                            <span class="badge text-bg-success">Berlangsung</span>
+                                            <span class="badge text-bg-success">
+                                                <p class="md:text-2xl text-white">Berlangsung</p>
+                                            </span>
                                         @endif
                                     </div>
                                 </div>

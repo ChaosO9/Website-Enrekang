@@ -2,32 +2,67 @@
 <html lang="en">
 
 <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
+    <title>Wisata Enrekang</title>
+    {{-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> --}}
+
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ url('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
+
+    <!-- Template Main CSS File -->
+    <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @vite([])
 </head>
 
 <body>
     <!-- ======= Header ======= -->
     @include('navbar')
 
+    {{-- <div class="wisata">
+            <img src="{{ asset('image2.png') }}" alt="Example Image">
+            <div class="overlay-text">Objek Wisata</div>
+        </div> --}}
+    <div class="container" style="margin-top: 70px">
+        <div class="row">
+            <div class="col-12">
+                <div class="banner-container">
+                    <img src="{{ asset('image2.png') }}" alt="Banner Image" class="img-fluid banner-image">
+                    <div class="banner-text">
+                        <h1 style="background: rgba(160, 176, 189, 0.473)">Objek Wisata</h1>
+                        {{-- <p>This is your banner description.</p> --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section id="portfolio" class="portfolio">
         <div class="container">
-
-            <div class="wisata">
-                <img src="{{ asset('image2.png') }}" alt="Example Image">
-                <div class="overlay-text">Objek Wisata</div>
-            </div>
-
             <form action="{{ route('wisata.urlParamBuilder') }}" method="POST">
                 @csrf
                 <div class="row justify-content-end mb-4 align-items-center">
-                    <div class="col-sm-3 align-content-center ">
+                    <div class="col-8 align-content-center ">
                         <div class="input-group input-group-xm">
                             <input type="text" class="form-control" placeholder="Cari wisata" name="search">
                             <button class="btn btn-success" type="submit"><i class="bi bi-search"></i></button>
                         </div>
                     </div>
-                    <div class="col-auto align-content-center">
+                    <div class="col-2 col-md-auto align-content-center">
                         <div class="btn-group pe-1">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
                                 aria-expanded="false">
@@ -84,10 +119,10 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-auto align-content-center">
+                    <div class="col-2 col-md-auto align-content-center">
                         <div class="btn-group pe-2">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-                                aria-expanded="false">
+                            <button type="button" class="btn btn-secondary dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-filter items-center"></i> Filter
                             </button>
                             <ul class="dropdown-menu">

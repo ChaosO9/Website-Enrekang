@@ -1,12 +1,4 @@
 <!-- Vendor CSS Files -->
-<link href="{{ url('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-<link href="{{ url('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-<link href="{{ url('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-<link href="{{ url('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
-<link href="{{ url('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
-
-<!-- Template Main CSS File -->
-<link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
 
 <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center">
@@ -14,7 +6,8 @@
         <div class="logo me-auto">
             <img src="{{ url('LogoWeb.png') }}" alt="" class="img-fluid">
         </div>
-        <nav id="navbar" class="navbar order-last order-lg-0">
+        {{-- <nav id="navbar" class="navbar order-lg-0"> --}}
+        <nav id="navbar" class="navbar order-last order-lg-0 ">
             <ul>
                 <li>
                     <a class="nav-link scrollto {{ request()->routeIs('home') ? 'active' : '' }}"
@@ -29,17 +22,15 @@
                         href="{{ route('kuliner.tampil') }}">Kuliner</a>
                 </li>
                 <li>
-                    <a class="nav-link scrollto {{ request()->routeIs('tampil') ? 'active' : '' }}"
-                        href="{{ route('tampil') }}">Penginapan</a>
+                    <a class="nav-link scrollto {{ request()->routeIs('penginapan.tampil') ? 'active' : '' }}"
+                        href="{{ route('penginapan.tampil') }}">Penginapan</a>
                 </li>
                 <li>
                     <a class="nav-link scrollto {{ request()->routeIs('event') ? 'active' : '' }}"
                         href="{{ route('event') }}">Event</a>
                 </li>
-                {{-- <li><a class="nav-link scrollto" href="#contact">Kontak</a></li> --}}
             </ul>
-
-            <i class="bi bi-list mobile-nav-toggle"></i>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             <form action="{{ Auth::check() ? route('login.logout') : route('login.tampil') }}"
                 method="{{ Auth::check() ? 'POST' : 'GET' }}">
                 @csrf
@@ -48,3 +39,10 @@
         </nav><!-- .navbar -->
     </div>
 </header><!-- End Header -->
+<script>
+    // Event listener untuk menambahkan atau menghapus kelas "navbar-mobile"
+    document.querySelector('.mobile-nav-toggle').addEventListener('click', function() {
+        var navbar = document.querySelector('#navbar');
+        navbar.classList.toggle('navbar-mobile');
+    });
+</script>

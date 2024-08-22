@@ -1345,7 +1345,7 @@ section {
 
 .kuliner {
     position: relative; /* Membuat posisi relatif untuk kontainer */
-    width: 1350px; /* Atur lebar kontainer */
+    width: 100vw; /* Atur lebar kontainer */
     height: 380px; /* Atur tinggi kontainer */
     overflow: hidden; /* Sembunyikan bagian gambar yang melampaui kontainer */
     margin: auto; /* Pusatkan kontainer */
@@ -1389,7 +1389,7 @@ section {
 
 .penginapan {
     position: relative; /* Membuat posisi relatif untuk kontainer */
-    width: 1350px; /* Atur lebar kontainer */
+    width: 100vw; /* Atur lebar kontainer */
     height: 380px; /* Atur tinggi kontainer */
     overflow: hidden; /* Sembunyikan bagian gambar yang melampaui kontainer */
     margin: auto; /* Pusatkan kontainer */
@@ -1400,14 +1400,6 @@ section {
     display: flex; /* Gunakan flexbox untuk pemusatan */
     align-items: center; /* Pusatkan secara vertikal */
     justify-content: center; /* Pusatkan secara horizontal */
-}
-
-@media only screen and (max-width: 768px) {
-    .penginapan {
-        width: 100%; /* Take up full width */
-        margin: 10px; /* Reduce margin */
-        /* Adjust other properties as needed */
-    }
 }
 
 .penginapan:before {
@@ -1429,7 +1421,7 @@ section {
 
 .event {
     position: relative; /* Membuat posisi relatif untuk kontainer */
-    width: 1350px; /* Atur lebar kontainer */
+    width: 100vw; /* Atur lebar kontainer */
     height: 380px; /* Atur tinggi kontainer */
     overflow: hidden; /* Sembunyikan bagian gambar yang melampaui kontainer */
     margin: auto; /* Pusatkan kontainer */
@@ -1440,17 +1432,6 @@ section {
     display: flex; /* Gunakan flexbox untuk pemusatan */
     align-items: center; /* Pusatkan secara vertikal */
     justify-content: center; /* Pusatkan secara horizontal */
-}
-
-@media only screen and (max-width: 768px) {
-    .event {
-        width: 100%; /* Take up full width */
-        display: inline-flexbox;
-        /* height: auto; */
-        margin: 0px;
-        margin-bottom: 10px; /*jarak gambar dengan card*/
-        /* Adjust other properties as needed */
-    }
 }
 
 .event:before {
@@ -1739,4 +1720,31 @@ form .btn-2 button:hover {
 
 .invisible {
     display: none;
+}
+
+/* Banner Wisata */
+.banner-container {
+    position: relative;
+    max-height: 200px; /* Set the maximum height */
+    overflow: hidden; /* Prevent image overflow */
+}
+
+@media only screen and (max-width: 768px) {
+    .banner-container {
+        max-height: 100px; /* Set the maximum height */
+    }
+}
+
+.banner-image {
+    width: 100%;
+    height: auto;
+}
+
+.banner-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white; /* Adjust color as needed */
 }
