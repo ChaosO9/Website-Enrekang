@@ -155,7 +155,6 @@
                     </div>
                 </div>
 
-
                 <div class="row portfolio-container">
                     @foreach ($wisata as $item)
                         <div class="col-lg-4 col-md-6 portfolio-item filter-wisata wow fadeInUp">
@@ -178,14 +177,14 @@
                                 <div class="portfolio-info">
                                     <h4>{{ $item->nama_wisata }}</h4>
                                     <p>{{ $item->alamat_wisata }}</p>
-                                    <table width="100%">
+                                    {{-- <table width="100%">
                                         <tr>
                                             <td align="right">
                                                 <p>Rp. {{ $item->harga_tiket }}</p>
                                             </td>
                                         </tr>
-                                    </table>
-                                    {{-- <p>Rp. {{ $item->harga_tiket }}</p> --}}
+                                    </table> --}}
+                                    <p>@money($item->harga_tiket, 'IDR')</p>
                                 </div>
                             </div>
                         </div>
@@ -208,9 +207,7 @@
 
                                 <div class="portfolio-info">
                                     <h4>{{ $item->nama_kuliner }}</h4>
-                                    <p>Rp. {{ $item->harga_kuliner }}</p>
-
-                                    {{-- <p> {{ url('deskripsi_kuliner') }}</p> --}}
+                                    <p>@money($item->harga_kuliner, 'IDR')</p>
                                 </div>
                             </div>
                         </div>
@@ -233,7 +230,7 @@
 
                                 <div class="portfolio-info">
                                     <h4>{{ $item->nama_penginapan }}</h4>
-                                    <p>Rp. {{ $item->harga_penginapan }}</p>
+                                    <p>@money($item->harga_penginapan, 'IDR')</p>
                                     {{-- <p> {{ url('deskripsi_penginapan') }}</p> --}}
                                 </div>
                             </div>
@@ -253,24 +250,15 @@
                                     <a href="event/show/{{ $item->id }}" class="link-details"
                                         title="More Details"><i class="bx bx-link"></i></a>
                                 </figure>
-
                                 <div class="portfolio-info">
                                     <h4>{{ $item->nama_event }}</h4>
                                     <p>{{ $item->alamat_event }}</p>
-
                                 </div>
                             </div>
                         </div>
                     @endforeach
-
-
                 </div>
-
-                {{-- <div class="text-center mt-3"><button class="btn btn-primary" type="submit">All</button></div> --}}
-
-
             </div>
-
         </section><!-- End Portfolio Section -->
 
         <!-- ======= About Section ======= -->

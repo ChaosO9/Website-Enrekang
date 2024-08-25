@@ -145,8 +145,6 @@
                         <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
                             <div class="portfolio-wrap">
                                 <figure>
-
-
                                     <img src="{{ asset('images/' . $item->foto_penginapan) }}" class="img-fluid"
                                         alt="">
                                     <a href="{{ asset('images/' . $item->foto_penginapan) }}"

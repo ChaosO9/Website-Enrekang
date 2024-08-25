@@ -381,7 +381,6 @@
                 const reviewTabButton = document.querySelector('#review-tab');
                 reviewTabButton.click();
             }
-            // console.log("Hash:", window.location.hash);
         });
     </script>
 </body>

@@ -12,27 +12,6 @@
     /**
      * Easy selector helper function
      */
-
-    //Togel class active untuk search
-    const searchForm = document.querySelector(".search-form");
-    const searchBox = document.querySelector("#search-box");
-
-    document.querySelector("#search-button").onclick = (e) => {
-        searchForm.classList.toggle("active");
-        searchBox.focus();
-        e.preventDefault();
-    };
-
-    //klik di luar elemen
-
-    const sb = document.querySelector("#search-button");
-
-    document.addEventListener("click", function (e) {
-        if (!sb.contains(e.target) && !searchForm.contains(e.target)) {
-            searchForm.classList.remove("active");
-        }
-    });
-
     const select = (el, all = false) => {
         el = el.trim();
         if (all) {
