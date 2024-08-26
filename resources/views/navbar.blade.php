@@ -7,7 +7,7 @@
             <img src="{{ url('LogoWeb.png') }}" alt="" class="img-fluid">
         </div>
         {{-- <nav id="navbar" class="navbar order-lg-0"> --}}
-        <nav id="navbar" class="navbar order-last order-lg-0 ">
+        <nav id="navbar_2" class="navbar order-last order-lg-0">
             <ul>
                 <li>
                     <a class="nav-link scrollto {{ request()->routeIs('home') ? 'active' : '' }}"
@@ -30,7 +30,7 @@
                         href="{{ route('event') }}">Event</a>
                 </li>
             </ul>
-            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            <i class="bi bi-list mobile-nav-toggle"></i>
             <form action="{{ Auth::check() ? route('login.logout') : route('login.tampil') }}"
                 method="{{ Auth::check() ? 'POST' : 'GET' }}">
                 @csrf
@@ -39,10 +39,10 @@
         </nav><!-- .navbar -->
     </div>
 </header><!-- End Header -->
-<script>
+{{-- <script>
     // Event listener untuk menambahkan atau menghapus kelas "navbar-mobile"
     document.querySelector('.mobile-nav-toggle').addEventListener('click', function() {
         var navbar = document.querySelector('#navbar');
         navbar.classList.toggle('navbar-mobile');
     });
-</script>
+</script> --}}

@@ -50,8 +50,8 @@
                                 <td>
                                     <a href="{{ route('event.edit', $row->id) }}" class="btn btn-warning"
                                         style="color: rgb(255, 255, 255)"> <i class="fas fa-edit"></i></a>
-                                    <a href="{{ route('event.gambar', $row->id) }}" class="btn btn-secondary"> <i
-                                            class="fa-regular fa-image"></i></i></a>
+                                    {{-- <a href="{{ route('event.gambar', $row->id) }}" class="btn btn-secondary"> <i
+                                            class="fa-regular fa-image"></i></i></a> --}}
                                     <a href="{{ route('event.hapus', $row->id) }}" class="btn btn-danger"> <i
                                             class="fas fa-trash"></i></a>
                                 </td>

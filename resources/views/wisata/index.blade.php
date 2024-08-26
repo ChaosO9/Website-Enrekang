@@ -87,8 +87,8 @@
                                             data-feather="trash"></span></a> --}}
                                     <a href="{{ route('wisata.edit', $row->id) }}" class="btn btn-warning"
                                         style="color: rgb(255, 255, 255)"> <i class="fas fa-edit"></i></a>
-                                    <a href="{{ route('wisata.gambar', $row->id) }}" class="btn btn-secondary"> <i
-                                            class="fa-regular fa-image"></i></i></a>
+                                    {{-- <a href="{{ route('wisata.gambar', $row->id) }}" class="btn btn-secondary"> <i
+                                            class="fa-regular fa-image"></i></i></a> --}}
                                     <a href="{{ route('wisata.hapus', $row->id) }}" class="btn btn-danger"> <i
                                             class="fas fa-trash"></i></a>
                                 </td>

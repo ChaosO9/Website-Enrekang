@@ -9,6 +9,45 @@
 (function () {
     "use strict";
 
+    // const searchForm = document.querySelector(".search-form");
+    // const searchBox = document.querySelector("#search-box");
+
+    // document.querySelector("#search-button").onclick = (e) => {
+    //     searchForm.classList.toggle("active");
+    //     searchBox.focus();
+    //     e.preventDefault();
+    // };
+
+    // //klik di luar elemen
+
+    // const sb = document.querySelector("#search-button");
+
+    // document.addEventListener("click", function (e) {
+    //     if (!sb.contains(e.target) && !searchForm.contains(e.target)) {
+    //         searchForm.classList.remove("active");
+    //     }
+    // });
+
+    /**
+     * Apply .scrolled class to the body as the page is scrolled down
+     */
+    function toggleScrolled() {
+        const selectBody = document.querySelector("body");
+        const selectHeader = document.querySelector("#header");
+        if (
+            !selectHeader.classList.contains("scroll-up-sticky") &&
+            !selectHeader.classList.contains("sticky-top") &&
+            !selectHeader.classList.contains("fixed-top")
+        )
+            return;
+        window.scrollY > 100
+            ? selectBody.classList.add("scrolled")
+            : selectBody.classList.remove("scrolled");
+    }
+
+    document.addEventListener("scroll", toggleScrolled);
+    window.addEventListener("load", toggleScrolled);
+
     /**
      * Easy selector helper function
      */
@@ -115,10 +154,22 @@
      * Mobile nav toggle
      */
     on("click", ".mobile-nav-toggle", function (e) {
-        select("#navbar").classList.toggle("navbar-mobile");
+        select("#navbar_2").classList.toggle("navbar-mobile");
+        document.querySelector("body").classList.toggle("mobile-nav-active");
         this.classList.toggle("bi-list");
         this.classList.toggle("bi-x");
     });
+
+    /**
+     * Hide mobile nav on same-page/hash links
+     */
+    // document.querySelectorAll("#navmenu a").forEach((navmenu) => {
+    //     navmenu.addEventListener("click", () => {
+    //         if (document.querySelector(".mobile-nav-active")) {
+    //             mobileNavToogle();
+    //         }
+    //     });
+    // });
 
     /**
      * Mobile nav dropdowns activate

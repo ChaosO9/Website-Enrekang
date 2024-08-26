@@ -47,8 +47,8 @@
                                 <td>
                                     <a href="{{ route('kuliner.edit', $row->id) }}" class="btn btn-warning"
                                         style="color: rgb(255, 255, 255)"> <i class="fas fa-edit"></i></a>
-                                    <a href="{{ route('kuliner.gambar', $row->id) }}" class="btn btn-secondary"> <i
-                                            class="fa-regular fa-image"></i></i></a>
+                                    {{-- <a href="{{ route('kuliner.gambar', $row->id) }}" class="btn btn-secondary"> <i
+                                            class="fa-regular fa-image"></i></i></a> --}}
                                     <a href="{{ route('kuliner.hapus', $row->id) }}" class="btn btn-danger"> <i
                                             class="fas fa-trash"></i></a>
                                 </td>
